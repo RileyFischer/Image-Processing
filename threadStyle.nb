@@ -1,0 +1,62 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      1425,         53]
+NotebookOptionsPosition[       855,         35]
+NotebookOutlinePosition[      1231,         51]
+CellTagsIndexPosition[      1188,         48]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[StyleData[StyleDefinitions -> FrontEnd`FileName[{"Book"}, "Textbook.nb", 
+  CharacterEncoding -> "UTF-8"]]],
+
+Cell[StyleData["Text"],
+ FontSize->14],
+
+Cell[StyleData["Section"],
+ FontSize->22],
+
+Cell[StyleData["Subsection"],
+ FontSize->16],
+
+Cell[StyleData["Subsubsection"],
+ FontSize->14]
+},
+WindowSize->{740, 756},
+WindowMargins->{{Automatic, 244}, {Automatic, 34}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"PrivateStylesheetFormatting.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 112, 1, 35, 112, 1, "StyleData", "StyleDefinitions", ""],
+Cell[672, 23, 38, 1, 37, 23, 0, "StyleData", "Text", "All"],
+Cell[713, 26, 41, 1, 75, 26, 0, "StyleData", "Section", "All"],
+Cell[757, 29, 44, 1, 43, 29, 0, "StyleData", "Subsection", "All"],
+Cell[804, 32, 47, 1, 35, 32, 0, "StyleData", "Subsubsection", "All"]
+}
+]
+*)
+
+(* End of internal cache information *)
