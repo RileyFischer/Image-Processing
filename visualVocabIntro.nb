@@ -1,0 +1,1823 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     83575,       1815]
+NotebookOptionsPosition[     82688,       1787]
+NotebookOutlinePosition[     83239,       1809]
+CellTagsIndexPosition[     83196,       1806]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NotebookEvaluate", "[", 
+   RowBox[{
+    RowBox[{"NotebookDirectory", "[", "]"}], "~~", 
+    "\"\<visualVocabDefs.nb\>\""}], "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.543536686447055*^9, 3.54353669109267*^9}, {
+  3.714731523499613*^9, 3.714731530457171*^9}, {3.714741875063389*^9, 
+  3.7147418755100727`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"6d9df80c-1f43-49bb-9b6f-cf33e7505bff"],
+
+Cell[CellGroupData[{
+
+Cell["Visual Vocabulary", "Section",
+ WholeCellGroupOpener->True,
+ CellChangeTimes->{{3.542846338259186*^9, 
+  3.542846356521001*^9}},ExpressionUUID->"56ee5828-c22e-4a84-b7e2-\
+512cbc07d057"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"To", " ", "add", " ", "new", " ", 
+     RowBox[{"chapters", ":", " ", 
+      RowBox[{"add", " ", "name"}]}]}], ",", 
+    RowBox[{
+     RowBox[{"description", " ", "in", " ", 
+      RowBox[{"chap", "[", 
+       RowBox[{"[", "name", "]"}], "]"}], " ", "pointers", " ", "in", " ", 
+      RowBox[{"connections", ".", " ", "When"}], " ", "drawing", " ", "edges",
+       " ", "the", " ", "color", " ", "indicated", " ", "by", " ", "the", " ",
+       "second", " ", "of", " ", "the", " ", "entries", " ", "in", " ", 
+      "chap1"}], "\[Rule]", 
+     RowBox[{"chap2", " ", "is", " ", "used"}]}]}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"chapNames", ":=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"rep", "=", "1"}], ",", "arrowColVis"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"point", "=", "2"}], ",", "arrowColVis"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"spatial", "=", "3"}], ",", "arrowColVis"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"histo", "=", "4"}], ",", "arrowColVis"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"corr", "=", "5"}], ",", "arrowColVis"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"trans", "=", "6"}], ",", "arrowColVis"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"threadA", "=", "7"}], ",", "arrowColVis"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"threadB", "=", "8"}], ",", "arrowColVis"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"threadC", "=", "9"}], ",", "arrowColVis"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"threadD", "=", "10"}], ",", "arrowColVis"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"filters", "=", "11"}], ",", "arrowColVis"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"morph", "=", "12"}], ",", "arrowColVis"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"innerProd", "=", "13"}], ",", "arrowColMath"}], "}"}], ",", 
+       
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"interp", "=", "14"}], ",", "arrowColMath"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"inMorph", "=", "15"}], ",", "arrowColMath"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"inFourier", "=", "16"}], ",", "arrowColMath"}], "}"}], ",", 
+       
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"filterDesign", "=", "17"}], ",", "arrowColMath"}], "}"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"inFilters", "=", "18"}], ",", "arrowColMath"}], "}"}], ",", 
+       
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"spatFun", "=", "19"}], ",", "arrowColMath"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"usingDFT", "=", "20"}], ",", "arrowColMath"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"distanceTrans", "=", "21"}], ",", "arrowColVis"}], "}"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"radonTrans", "=", "22"}], ",", "arrowColVis"}], "}"}], ",", 
+       
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"nonlinearFilt", "=", "23"}], ",", "arrowColVis"}], "}"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"inNonlinearFilt", "=", "24"}], ",", "arrowColMath"}], "}"}],
+        ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"wavelets", "=", "25"}], ",", "arrowColVis"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"insideWavelets", "=", "26"}], ",", "arrowColMath"}], "}"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"defs", "=", "27"}], ",", "arrowColWhite"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"threadModels", "=", "28"}], ",", "arrowColVis"}], "}"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"angleMapsFourier", "=", "29"}], ",", "arrowColVis"}], "}"}],
+        ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"angleMapsRadon", "=", "30"}], ",", "arrowColVis"}], "}"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"vvTOC", "=", "31"}], ",", "arrowColWhite"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"threadData", "=", "32"}], ",", "arrowColVis"}], "}"}], ",", 
+       
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"insideCorr", "=", "33"}], ",", "arrowColMath"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"fourierTrans", "=", "34"}], ",", "arrowColVis"}], "}"}]}], 
+      "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"connections", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"rep", "\[Rule]", "point"}], ",", 
+       RowBox[{"point", "\[Rule]", "spatial"}], ",", 
+       RowBox[{"point", "\[Rule]", "histo"}], ",", 
+       RowBox[{"trans", "\[Rule]", "filters"}], ",", 
+       RowBox[{"threadModels", "\[Rule]", "threadA"}], ",", 
+       RowBox[{"threadA", "\[Rule]", "threadB"}], ",", 
+       RowBox[{"threadB", "\[Rule]", "threadC"}], ",", 
+       RowBox[{"threadC", "\[Rule]", "threadD"}], ",", 
+       RowBox[{"point", "\[Rule]", "filters"}], ",", 
+       RowBox[{"corr", "->", "filters"}], ",", 
+       RowBox[{"corr", "\[Rule]", "trans"}], ",", 
+       RowBox[{"point", "\[Rule]", "corr"}], ",", 
+       RowBox[{"point", "\[Rule]", "morph"}], ",", 
+       RowBox[{"filters", "\[Rule]", "inFilters"}], ",", 
+       RowBox[{"fourierTrans", "\[Rule]", "inFourier"}], ",", 
+       RowBox[{"spatial", "->", "interp"}], ",", 
+       RowBox[{"morph", "->", "inMorph"}], ",", " ", 
+       RowBox[{"inFourier", "\[Rule]", "innerProd"}], ",", 
+       RowBox[{"inFilters", "\[Rule]", "innerProd"}], ",", 
+       RowBox[{"spatial", "\[Rule]", "spatFun"}], ",", 
+       RowBox[{"inFourier", "\[Rule]", "usingDFT"}], ",", 
+       RowBox[{"trans", "\[Rule]", "distanceTrans"}], ",", 
+       RowBox[{"trans", "\[Rule]", "fourierTrans"}], ",", 
+       RowBox[{"trans", "\[Rule]", "radonTrans"}], ",", 
+       RowBox[{"filters", "->", "nonlinearFilt"}], ",", 
+       RowBox[{"nonlinearFilt", "->", "inNonlinearFilt"}], ",", 
+       RowBox[{"trans", "\[Rule]", "wavelets"}], ",", 
+       RowBox[{"defs", "\[Rule]", "defs"}], ",", 
+       RowBox[{"corr", "\[Rule]", "insideCorr"}], ",", 
+       RowBox[{"insideCorr", "\[Rule]", "innerProd"}], ",", 
+       RowBox[{"wavelets", "\[Rule]", "insideWavelets"}], ",", 
+       RowBox[{"insideWavelets", "\[Rule]", "innerProd"}], ",", 
+       RowBox[{"filters", "->", "filterDesign"}], ",", 
+       RowBox[{"threadModels", "\[Rule]", "angleMapsRadon"}], ",", 
+       RowBox[{"angleMapsRadon", "\[Rule]", "angleMapsFourier"}], ",", 
+       RowBox[{"vvTOC", "\[Rule]", "vvTOC"}], ",", 
+       RowBox[{"threadData", "\[Rule]", "threadModels"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"numChaps", "=", 
+     RowBox[{"Length", "[", "chapNames", "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"edges", ":=", 
+     RowBox[{"chapNames", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "2"}], "]"}], "]"}]}], ";", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"arrowColVis", ",", "arrowColMath", ",", "arrowColWhite"}], 
+      "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{"Green", ",", "Brown", ",", "White"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"toolStyle", "=", 
+     RowBox[{"TooltipStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Background", "\[Rule]", "White"}], ",", 
+        RowBox[{"CellFrameColor", "\[Rule]", "White"}]}], "}"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"linkStyle", "=", 
+     RowBox[{"{", 
+      RowBox[{"FontSize", "\[Rule]", "14"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"vertexGraph", "=", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"Text", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"chap", "[", 
+           RowBox[{"[", "#2", "]"}], "]"}], "]"}], ",", "#1", ",", 
+         RowBox[{"Background", "\[Rule]", "White"}]}], "]"}], "&"}], ")"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"edgeGraph", "=", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"edges", "[", 
+          RowBox[{"[", 
+           RowBox[{"#2", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "]"}], "]"}], ",", 
+         RowBox[{"Thickness", "[", "0.002", "]"}], ",", 
+         RowBox[{"Arrowheads", "[", "Tiny", "]"}], ",", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"#1", ",", "0.2"}], "]"}]}], "}"}], "&"}], ")"}]}], ";"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"opts", "[", 
+      RowBox[{"hVV_", ",", "vVV_"}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"VertexRenderingFunction", "\[Rule]", "vertexGraph"}], ",", 
+         RowBox[{"EdgeRenderingFunction", "\[Rule]", "edgeGraph"}], ",", 
+         RowBox[{"PlotLabel", "\[Rule]", "titleIntro"}], ",", 
+         RowBox[{"VertexCoordinateRules", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"rep", "->", 
+             RowBox[{"{", 
+              RowBox[{"2", ",", "6"}], "}"}]}], ",", 
+            RowBox[{"point", "->", 
+             RowBox[{"{", 
+              RowBox[{"2", ",", "5"}], "}"}]}], ",", 
+            RowBox[{"spatial", "->", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", "4"}], "}"}]}], ",", 
+            RowBox[{"histo", "->", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "4"}], "}"}]}], ",", 
+            RowBox[{"corr", "->", 
+             RowBox[{"{", 
+              RowBox[{"5", ",", "4"}], "}"}]}], ",", 
+            RowBox[{"trans", "->", 
+             RowBox[{"{", 
+              RowBox[{"6", ",", "3"}], "}"}]}], ",", 
+            RowBox[{"threadA", "->", 
+             RowBox[{"{", 
+              RowBox[{"10", ",", "4"}], "}"}]}], ",", 
+            RowBox[{"threadB", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"10", ",", "3"}], "}"}]}], ",", 
+            RowBox[{"threadC", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"10", ",", "2"}], "}"}]}], ",", 
+            RowBox[{"threadD", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"10", ",", "1"}], "}"}]}], ",", 
+            RowBox[{"filters", "->", 
+             RowBox[{"{", 
+              RowBox[{"4", ",", "4"}], "}"}]}], ",", 
+            RowBox[{"morph", "->", 
+             RowBox[{"{", 
+              RowBox[{"2", ",", "4"}], "}"}]}], ",", 
+            RowBox[{"innerProd", "->", 
+             RowBox[{"{", 
+              RowBox[{"4", ",", "0"}], "}"}]}], ",", 
+            RowBox[{"interp", "->", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "2"}], "}"}]}], ",", 
+            RowBox[{"inMorph", "->", 
+             RowBox[{"{", 
+              RowBox[{"2", ",", "2"}], "}"}]}], ",", 
+            RowBox[{"inFourier", "->", 
+             RowBox[{"{", 
+              RowBox[{"6", ",", "1"}], "}"}]}], ",", 
+            RowBox[{"filterDesign", "->", 
+             RowBox[{"{", 
+              RowBox[{"3", ",", "1"}], "}"}]}], ",", 
+            RowBox[{"inFilters", "->", 
+             RowBox[{"{", 
+              RowBox[{"4", ",", "1"}], "}"}]}], ",", 
+            RowBox[{"spatFun", "->", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", "2"}], "}"}]}], ",", 
+            RowBox[{"usingDFT", "->", 
+             RowBox[{"{", 
+              RowBox[{"7", ",", "1"}], "}"}]}], ",", 
+            RowBox[{"distanceTrans", "->", 
+             RowBox[{"{", 
+              RowBox[{"8", ",", "2"}], "}"}]}], ",", 
+            RowBox[{"radonTrans", "->", 
+             RowBox[{"{", 
+              RowBox[{"7", ",", "2"}], "}"}]}], ",", 
+            RowBox[{"nonlinearFilt", "->", 
+             RowBox[{"{", 
+              RowBox[{"3", ",", "3"}], "}"}]}], ",", 
+            RowBox[{"inNonlinearFilt", "->", 
+             RowBox[{"{", 
+              RowBox[{"2", ",", "1"}], "}"}]}], ",", 
+            RowBox[{"wavelets", "->", 
+             RowBox[{"{", 
+              RowBox[{"9", ",", "2"}], "}"}]}], ",", 
+            RowBox[{"insideWavelets", "->", 
+             RowBox[{"{", 
+              RowBox[{"9", ",", "1"}], "}"}]}], ",", 
+            RowBox[{"defs", "->", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "6"}], "}"}]}], ",", 
+            RowBox[{"threadModels", "->", 
+             RowBox[{"{", 
+              RowBox[{"10.5", ",", "5"}], "}"}]}], ",", 
+            RowBox[{"angleMapsRadon", "->", 
+             RowBox[{"{", 
+              RowBox[{"11", ",", "4"}], "}"}]}], ",", 
+            RowBox[{"angleMapsFourier", "->", 
+             RowBox[{"{", 
+              RowBox[{"11", ",", "3"}], "}"}]}], ",", 
+            RowBox[{"vvTOC", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"5.5", ",", "6"}], "}"}]}], ",", 
+            RowBox[{"threadData", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"10.5", ",", "6"}], "}"}]}], ",", 
+            RowBox[{"insideCorr", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"5", ",", "1"}], "}"}]}], ",", 
+            RowBox[{"fourierTrans", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"6", ",", "2"}], "}"}]}]}], "}"}]}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"hVV", ",", "vVV"}], "}"}]}]}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"titleIntro", "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Style", "[", 
+        RowBox[{
+        "\"\<\\n\\nA Visual Vocabulary for Image Processing\>\"", ",", "Bold",
+          ",", 
+         RowBox[{"FontSize", "\[Rule]", "16"}]}], "]"}], ",", 
+       "\"\<Follow the links: blue links lead to visual descriptions, brown \
+links to more mathematical descriptions, black links to applications.\>\"", 
+       ",", "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "infoVisualVocabulary", "=", 
+     "\"\<Whenever you see the bright blue information symbol, click for \
+suggestions of things to explore. \\n\\nTo use this Mathematica Notebook \
+press the Start button. \\n\\nBrowse the interactive table of contents by \
+hovering over terms and clicking on interesting items. \\n\\nWhen a new \
+notebook opens, evaluate it (use the Evaluate button on the setup palette). \
+\\n\\nAfter evaluating, return to Presentation mode by pressing the \
+Presentation button or press the Working button to expand the code.\>\""}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"chap", "=", 
+     RowBox[{"ConstantArray", "[", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", "numChaps"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "rep", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Framed", "@", 
+          RowBox[{"Style", "[", 
+           RowBox[{
+           "\"\<Representation of \\nDigital Images\>\"", ",", "linkStyle"}], 
+           "]"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabRepresentation.nb\>\"", ",", "None"}], 
+          "}"}]}], "]"}], ",", 
+       "\"\<What are digital images made of? Numbers! One and two dimensional \
+data can be represented in many different ways.\>\"", ",", "toolStyle"}], 
+      "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "point", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Point Functions\>\"", ",", "linkStyle"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabPointFunctions.nb\>\"", ",", "None"}], 
+          "}"}]}], "]"}], ",", 
+       "\"\<The simplest form of image manipulation considers neighborhoods \
+of size one, functions that change pixel values based only on the value of a \
+single pixel. Even with this restriction, a variety of effects are \
+possible.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "spatial", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Spatial \\nMappings\>\"", ",", "linkStyle"}], "]"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabSpatialMaps.nb\>\"", ",", "None"}], "}"}]}],
+         "]"}], ",", 
+       "\"\<Spatial mappings can be as simple as a rotation or as complex as \
+a texture mapping onto a 3D surface. Underlying all spatial mappings is the \
+need for interpolation, where the value at an unknown intermediate spatial \
+position must be estimated based on known nearby values.\>\"", ",", 
+       "toolStyle"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "histo", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Histograms\>\"", ",", "linkStyle"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabHistograms.nb\>\"", ",", "None"}], "}"}]}], 
+        "]"}], ",", 
+       "\"\<At heart, digital images are made of collections of numbers. \
+Humans much more easily perceive overall properties of an image: it's too \
+dark, the contrast is too low, the red/green balance is funny. One way to see \
+the relationship between these disparate views is to use a histogram, which \
+plots a graph of the values present in an image and how prevalent those \
+values are.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "corr", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Correlations\>\"", ",", "linkStyle"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabCorrelation.nb\>\"", ",", "None"}], "}"}]}],
+         "]"}], ",", 
+       "\"\<Correlation is a way to find patterns embedded in a large set of \
+data.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "trans", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Transforms\>\"", ",", "linkStyle"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabTransforms.nb\>\"", ",", "None"}], "}"}]}], 
+        "]"}], ",", 
+       "\"\<Several different transforms are useful in image processing \
+including the Fourier, Wavelet, Radon, and Distance transforms.\>\"", ",", 
+       "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "threadA", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Thread Count:\\nThresholding\>\"", ",", "linkStyle"}], 
+          "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<threadsMethodA.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Black"}]}], "]"}], ",", 
+       "\"\<Counting threads by thresholding\>\"", ",", "toolStyle"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "threadB", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Thread Count:\\nFourier\>\"", ",", "linkStyle"}], 
+          "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<threadsMethodB.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Black"}]}], "]"}], ",", 
+       "\"\<Counting threads using the one and two dimensional Fourier \
+Transform.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "threadC", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Thread Count:\\nCorrelation\>\"", ",", "linkStyle"}], 
+          "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<threadsMethodC.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Black"}]}], "]"}], ",", 
+       "\"\<Counting threads using one and two dimensional autocorrelation.\>\
+\"", ",", "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "threadD", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Thread Count:\\nMorphology\>\"", ",", "linkStyle"}], 
+          "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<threadsMethodD.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Black"}]}], "]"}], ",", 
+       "\"\<Counting threads using morphological processes.\>\"", ",", 
+       "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "filters", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Filters\>\"", ",", "linkStyle"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabFilters.nb\>\"", ",", "None"}], "}"}]}], 
+        "]"}], ",", 
+       "\"\<Filters are cool; they can help in a number of simple image \
+processing tasks.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "morph", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Morphological\\nProcessing\>\"", ",", "linkStyle"}], 
+          "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabMorph.nb\>\"", ",", "None"}], "}"}]}], 
+        "]"}], ",", 
+       "\"\<A family of local nonlinear operators for binary images.\>\"", 
+       ",", "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "innerProd", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Framed", "@", 
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<Inner\\nProduct\>\"", ",", "linkStyle"}], "]"}]}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<vvAngles.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Brown"}]}], "]"}], ",", 
+       "\"\<Underlying the ideas of correlation, filtering, and transforms is \
+the idea of the angle (or inner product) between two signals.\>\"", ",", 
+       "toolStyle"}], "]"}]}], ";", 
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "interp", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Interpolation\>\"", ",", "linkStyle"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<vvInterp.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Brown"}]}], "]"}], ",", 
+       "\"\<Underlying all spatial transformations is the need for \
+interpolation.\>\"", ",", "toolStyle"}], "]"}]}], ";", 
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "inMorph", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Inside\\nMorphology\>\"", ",", "linkStyle"}], "]"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<vvMorphology.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Brown"}]}], "]"}], ",", 
+       "\"\<The mathematical underpinings of morphological processing.\>\"", 
+       ",", "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "inFourier", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Inside\\nFourier\\nTransforms\>\"", ",", "linkStyle"}],
+           "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<vvFourierAngles.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Brown"}]}], "]"}], ",", 
+       "\"\<Fourier transforms are a useful tool for exploring the makeup of \
+signals. Here are the details.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "filterDesign", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Filter\\nDesign\>\"", ",", "linkStyle"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<vvFilterDesign.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Brown"}]}], "]"}], ",", 
+       "\"\<How to specify and design one and two dimensional linear filters.\
+\>\"", ",", "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "inFilters", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Inside\\nLinear\\nFilters\>\"", ",", "linkStyle"}], 
+          "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<vvInsideFilters.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Brown"}]}], "]"}], ",", 
+       "\"\<Underlying the ideas of correlation, filtering, and transforms is \
+the idea of the angle (or inner product) between two signals.\>\"", ",", 
+       "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "spatFun", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{
+          "\"\< Representing\\n Spatial\\n Functions\>\"", ",", "linkStyle"}],
+           "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<vvSpatialFunctions.nb\>\"", ",", "None"}], "}"}], ",", 
+         
+         RowBox[{"BaseStyle", "\[Rule]", "Brown"}]}], "]"}], ",", 
+       "\"\<How spatial mappings can be represented as mathematical \
+functions.\>\"", ",", "toolStyle"}], "]"}]}], ";", 
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "defs", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Definitions\>\"", ",", "linkStyle"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabDefs.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Opacity", "[", "0.3", "]"}], ",", "Blue"}], "}"}]}]}], 
+        "]"}], ",", 
+       "\"\<Used for development only. Will be deleted in final version.\>\"",
+        ",", "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "usingDFT", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Using\\nthe DFT\>\"", ",", "linkStyle"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<vvUsingDFT.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Brown"}]}], "]"}], ",", 
+       "\"\<The DFT (Discrete Fourier Transform) is demonstrated in full \
+detail by this 1D example.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "distanceTrans", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Distance\\nTransform\>\"", ",", "linkStyle"}], "]"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabDistance.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Blue"}]}], "]"}], ",", 
+       "\"\<The Distance Transform.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "radonTrans", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Radon\\nTransform\>\"", ",", "linkStyle"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabRadon.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Blue"}]}], "]"}], ",", 
+       "\"\<The Radon Transform as a method of locating lines and \
+orientations.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "nonlinearFilt", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Nonlinear\\nFilters\>\"", ",", "linkStyle"}], "]"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabNonlinearFilters.nb\>\"", ",", "None"}], 
+          "}"}]}], "]"}], ",", 
+       "\"\<Nonlinearities in the filtering process allows more powerful \
+processing; but with more power comes more responsibility\>\"", ",", 
+       "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "inNonlinearFilt", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Inside\\nNonlinear\\nFilters\>\"", ",", "linkStyle"}], 
+          "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<vvNonlinearFilters.nb\>\"", ",", "None"}], "}"}], ",", 
+         
+         RowBox[{"BaseStyle", "\[Rule]", "Brown"}]}], "]"}], ",", 
+       "\"\<Nonlinear filters: easy to implement, hard to predict.\>\"", ",", 
+       "toolStyle"}], "]"}]}], ";", 
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "wavelets", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Wavelet\\nTransforms\>\"", ",", "linkStyle"}], "]"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabWavelets.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Blue"}]}], "]"}], ",", 
+       "\"\<Wavelets operate on \
+\!\(\*StyleBox[\"scale\",FontSlant->\"Italic\"]\) the way that Fourier \
+transforms operate on \
+\!\(\*StyleBox[\"frequency\",FontSlant->\"Italic\"]\).\>\"", ",", 
+       "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "insideWavelets", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Inside\\nWavelet\\nTransforms\>\"", ",", "linkStyle"}],
+           "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<vvInsideWavelets.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Brown"}]}], "]"}], ",", 
+       "\"\<Wavelets apply the inner product to scale invariant \
+functions.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "threadModels", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Thread Models\>\"", ",", "linkStyle"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<threadModel.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Black"}]}], "]"}], ",", 
+       "\"\<Models can be created from physical considerations or from \
+detailed examination of the data. They can be useful for analyzing the images \
+and for improving algorithms.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "angleMapsRadon", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Angle Maps:\\nRadon\>\"", ",", "linkStyle"}], "]"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabAngleMapsRadon.nb\>\"", ",", "None"}], 
+          "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Black"}]}], "]"}], ",", 
+       "\"\<Finding angle maps using the Radon Transform\>\"", ",", 
+       "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "angleMapsFourier", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Angle Maps:\\nFourier\>\"", ",", "linkStyle"}], "]"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabAngleMapsFourier.nb\>\"", ",", "None"}], 
+          "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Black"}]}], "]"}], ",", 
+       "\"\<Finding angle maps using the Fourier Transform\>\"", ",", 
+       "toolStyle"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "vvTOC", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Table of Contents\>\"", ",", "linkStyle"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabTOC.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Black"}]}], "]"}], ",", 
+       "\"\<A concise listing of all the interactive demonstrations in the \
+Visual Vocabulary.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "threadData", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Thread Data\>\"", ",", "linkStyle"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<threadData.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Black"}]}], "]"}], ",", 
+       "\"\<An overview of all the thread data.\>\"", ",", "toolStyle"}], 
+      "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "insideCorr", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Inside\\nCorrelation\>\"", ",", "linkStyle"}], "]"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<vvInsideCorr.nb\>\"", ",", "None"}], "}"}], ",", 
+         RowBox[{"BaseStyle", "\[Rule]", "Brown"}]}], "]"}], ",", 
+       "\"\<Correlations are a useful tool for detecting patterns in signals. \
+Here are the details.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"chap", "[", 
+      RowBox[{"[", "fourierTrans", "]"}], "]"}], "=", 
+     RowBox[{"Tooltip", "[", 
+      RowBox[{
+       RowBox[{"Hyperlink", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<Fourier\\nTransform\>\"", ",", "linkStyle"}], "]"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<visualVocabFourier.nb\>\"", ",", "None"}], "}"}], ",", 
+         
+         RowBox[{"BaseStyle", "\[Rule]", "Blue"}]}], "]"}], ",", 
+       "\"\<The Fourier Transform is a way of detecting periodic \
+patterns.\>\"", ",", "toolStyle"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"evalStart", ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"FrontEndExecute", "[", 
+         RowBox[{"FrontEndToken", "[", 
+          RowBox[{
+           RowBox[{"InputNotebook", "[", "]"}], ",", 
+           "\"\<EvaluateInitialization\>\""}], "]"}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"FrontEndExecute", "[", 
+         RowBox[{"FrontEndToken", "[", 
+          RowBox[{
+           RowBox[{"InputNotebook", "[", "]"}], ",", "\"\<SelectAll\>\""}], 
+          "]"}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"FrontEndExecute", "[", 
+         RowBox[{"FrontEndToken", "[", 
+          RowBox[{
+           RowBox[{"InputNotebook", "[", "]"}], ",", 
+           "\"\<EvaluateCells\>\""}], "]"}], "]"}], ";"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Manipulate", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Which", "[", 
+       RowBox[{
+        RowBox[{"showEdges", "\[Equal]", "\"\<Visual\>\""}], ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"arrowColVis", ",", "arrowColMath"}], "}"}], "=", 
+          RowBox[{"{", 
+           RowBox[{"Green", ",", "LightBrown"}], "}"}]}], ";"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"showEdges", "\[Equal]", "\"\<Math\>\""}], ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"arrowColVis", ",", "arrowColMath"}], "}"}], "=", 
+          RowBox[{"{", 
+           RowBox[{"LightGreen", ",", "Brown"}], "}"}]}], ";"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"showEdges", "\[Equal]", "\"\<Both\>\""}], ",", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"arrowColVis", ",", "arrowColMath"}], "}"}], "=", 
+         RowBox[{"{", 
+          RowBox[{"Green", ",", "Brown"}], "}"}]}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"LayeredGraphPlot", "[", 
+       RowBox[{"connections", ",", 
+        RowBox[{"opts", "[", 
+         RowBox[{"hVV", ",", "vVV"}], "]"}], ",", 
+        RowBox[{"PlotRangePadding", "\[Rule]", "0.2"}]}], "]"}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Row", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Button", "[", 
+         RowBox[{"\"\<Start\>\"", ",", "evalStart"}], "]"}], ",", 
+        RowBox[{"Spacer", "[", "20", "]"}], ",", 
+        RowBox[{"info", "[", "infoVisualVocabulary", "]"}], ",", 
+        RowBox[{"Spacer", "[", "20", "]"}], ",", 
+        RowBox[{"Control", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"showEdges", ",", "\"\<Visual\>\"", ",", "\"\<Show\>\""}],
+             "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "\"\<Visual\>\"", ",", "\"\<Math\>\"", ",", "\"\<Both\>\""}], 
+            "}"}]}], "}"}], "]"}], ",", 
+        RowBox[{"Spacer", "[", "20", "]"}], ",", 
+        RowBox[{"Control", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"hVV", ",", "1100", ",", "\"\<Horizontal Size\>\""}], 
+            "}"}], ",", "300", ",", "1500"}], "}"}], "]"}], ",", 
+        RowBox[{"Spacer", "[", "20", "]"}], ",", 
+        RowBox[{"Control", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"vVV", ",", "630", ",", "\"\<Vertical Size\>\""}], "}"}], 
+           ",", "300", ",", "1500"}], "}"}], "]"}]}], "}"}], "]"}], ",", 
+     RowBox[{"TrackedSymbols", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"hVV", ",", "vVV", ",", "graphMethod", ",", "showEdges"}], 
+       "}"}]}], ",", 
+     RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.543499371376823*^9, 3.5434994498015213`*^9}, {
+   3.543499609169585*^9, 3.5434996295949507`*^9}, 3.543499886619426*^9, {
+   3.543500397982664*^9, 3.5435004586355963`*^9}, {3.5435005042376833`*^9, 
+   3.543500505120076*^9}, {3.5435016153366413`*^9, 3.543501630911292*^9}, 
+   3.543501663569625*^9, 3.543501727814495*^9, {3.543501813387526*^9, 
+   3.543501904360281*^9}, {3.5435022342435827`*^9, 3.543502249903751*^9}, {
+   3.543502336012496*^9, 3.543502445150576*^9}, {3.543502476010784*^9, 
+   3.543502504601438*^9}, {3.543503255436739*^9, 3.543503257506639*^9}, {
+   3.543503325062193*^9, 3.543503357310948*^9}, {3.543503459900363*^9, 
+   3.5435034600241528`*^9}, {3.543503519919565*^9, 3.5435035208445873`*^9}, {
+   3.543503590482398*^9, 3.543503598014645*^9}, {3.543503628064417*^9, 
+   3.543503735962741*^9}, {3.543503835002695*^9, 3.543503877680097*^9}, {
+   3.5435231012247763`*^9, 3.543523131874248*^9}, {3.543523181755691*^9, 
+   3.543523183727062*^9}, {3.543523232220746*^9, 3.543523242289268*^9}, {
+   3.5435233946982527`*^9, 3.543523410738372*^9}, {3.5435234457398252`*^9, 
+   3.543523476482939*^9}, {3.5435235359706383`*^9, 3.5435236438073273`*^9}, {
+   3.543524852786298*^9, 3.543524886595009*^9}, {3.543525002078349*^9, 
+   3.543525030219585*^9}, {3.543525083239571*^9, 3.543525235159932*^9}, {
+   3.543525283175481*^9, 3.543525364443808*^9}, {3.543525411901361*^9, 
+   3.5435255099345217`*^9}, {3.543527571617055*^9, 3.543527584293898*^9}, {
+   3.5435276547198267`*^9, 3.5435276551645727`*^9}, {3.543529308837476*^9, 
+   3.543529337366581*^9}, {3.5435355739522943`*^9, 3.543535606728055*^9}, {
+   3.5435356506292343`*^9, 3.543535733101315*^9}, {3.5435357898532867`*^9, 
+   3.543535801023842*^9}, {3.543535922976348*^9, 3.5435359246512938`*^9}, {
+   3.5435376048805857`*^9, 3.5435376554823017`*^9}, {3.5435377747692423`*^9, 
+   3.543537847197749*^9}, {3.5435379223036737`*^9, 3.543537960988235*^9}, {
+   3.5435413748865643`*^9, 3.543541391125369*^9}, {3.543541439265338*^9, 
+   3.543541439508793*^9}, {3.543541770751299*^9, 3.543541778277894*^9}, {
+   3.543542000273263*^9, 3.543542005887521*^9}, {3.54354204237281*^9, 
+   3.54354204877315*^9}, {3.543542100357665*^9, 3.5435421040925283`*^9}, {
+   3.5435750071813726`*^9, 3.543575007762063*^9}, {3.54357503872639*^9, 
+   3.543575043967187*^9}, {3.543575196433243*^9, 3.5435752331196623`*^9}, {
+   3.5435753263767443`*^9, 3.543575387260481*^9}, {3.543601601828238*^9, 
+   3.543601623066856*^9}, {3.543669473092716*^9, 3.543669493579812*^9}, {
+   3.543669528804412*^9, 3.543669608395101*^9}, {3.543669677612335*^9, 
+   3.543669685649918*^9}, {3.543669752707616*^9, 3.543669760492113*^9}, 
+   3.543669792645582*^9, {3.5436698521746283`*^9, 3.543670168050518*^9}, {
+   3.543670228898817*^9, 3.543670237551*^9}, {3.543670631440894*^9, 
+   3.543670635691135*^9}, {3.543671056565899*^9, 3.543671101069599*^9}, {
+   3.5438492095435133`*^9, 3.543849241511155*^9}, {3.543849305965913*^9, 
+   3.543849422327979*^9}, {3.543849837850553*^9, 3.543849838009075*^9}, {
+   3.543849875323051*^9, 3.543849888169845*^9}, {3.543849925090906*^9, 
+   3.543849935394979*^9}, {3.543849969396284*^9, 3.543849974636841*^9}, {
+   3.543850013421268*^9, 3.543850027108622*^9}, {3.543850092550349*^9, 
+   3.543850196745981*^9}, {3.543850229034267*^9, 3.543850233056528*^9}, {
+   3.543851007642084*^9, 3.543851017942754*^9}, {3.5438510543231697`*^9, 
+   3.5438510553707647`*^9}, {3.5438510957023907`*^9, 
+   3.5438511006537724`*^9}, {3.543851139619686*^9, 3.543851323721965*^9}, {
+   3.543851403054207*^9, 3.543851429994032*^9}, {3.5438519000288153`*^9, 
+   3.5438519359075193`*^9}, 3.5438521353276567`*^9, {3.5438521854039307`*^9, 
+   3.543852193103561*^9}, {3.54385232067108*^9, 3.543852320796521*^9}, {
+   3.54385237845689*^9, 3.543852379593896*^9}, 3.543852416631399*^9, {
+   3.5438816383173313`*^9, 3.543881845469961*^9}, {3.5438819841713142`*^9, 
+   3.5438819881161003`*^9}, {3.543882061593782*^9, 3.543882066025605*^9}, {
+   3.543882107219081*^9, 3.543882139228743*^9}, 3.543882218050384*^9, {
+   3.5438822970251827`*^9, 3.543882299670582*^9}, {3.543882347062502*^9, 
+   3.5438823950448523`*^9}, {3.5441865462391777`*^9, 3.54418655407696*^9}, {
+   3.5441865843215103`*^9, 3.5441869487074833`*^9}, {3.544186989860374*^9, 
+   3.544187017075039*^9}, {3.544187125918407*^9, 3.544187163879781*^9}, {
+   3.544187257676566*^9, 3.544187273464946*^9}, {3.5441873389794283`*^9, 
+   3.5441873416130667`*^9}, {3.544187407246751*^9, 3.5441874080078793`*^9}, {
+   3.544199977270113*^9, 3.544199981465461*^9}, {3.544205814379673*^9, 
+   3.544205910852528*^9}, {3.544206046133366*^9, 3.5442060615644693`*^9}, {
+   3.5442072678458223`*^9, 3.5442072841650352`*^9}, {3.5442324781770287`*^9, 
+   3.544232653365439*^9}, {3.544282295048491*^9, 3.544282297608938*^9}, {
+   3.544289448499073*^9, 3.5442895875997458`*^9}, {3.544289666092063*^9, 
+   3.544289667659004*^9}, {3.544289753971539*^9, 3.544289769147171*^9}, {
+   3.544301973911962*^9, 3.544302058245603*^9}, {3.544302098414735*^9, 
+   3.544302142486573*^9}, {3.544365606231576*^9, 3.5443656533083067`*^9}, {
+   3.544365700781047*^9, 3.544365719477932*^9}, {3.544365789324456*^9, 
+   3.544365911737918*^9}, {3.544366546613435*^9, 3.544366621983336*^9}, {
+   3.544366652287615*^9, 3.544366768081472*^9}, {3.544401397057293*^9, 
+   3.544401422803617*^9}, {3.544442402443728*^9, 3.544442411184389*^9}, {
+   3.544444522000329*^9, 3.544444567641922*^9}, {3.544444645391404*^9, 
+   3.5444447822310467`*^9}, {3.5444579572967587`*^9, 
+   3.5444579845626373`*^9}, {3.5444580259726458`*^9, 3.544458151040922*^9}, {
+   3.54445822561425*^9, 3.544458266675507*^9}, 3.544458367377717*^9, {
+   3.5444778349674377`*^9, 3.544477839143709*^9}, {3.5446548318350782`*^9, 
+   3.544654833852551*^9}, {3.5446554530116787`*^9, 3.5446554622926617`*^9}, {
+   3.544655530094019*^9, 3.544655536391165*^9}, {3.5446556575505466`*^9, 
+   3.544655680021914*^9}, {3.5446557840761414`*^9, 3.54465580348592*^9}, {
+   3.5446560724048977`*^9, 3.544656129708057*^9}, {3.544656159924116*^9, 
+   3.544656239994749*^9}, {3.544656624678286*^9, 3.5446566461157618`*^9}, {
+   3.544656986393094*^9, 3.544657001657387*^9}, {3.544657353599826*^9, 
+   3.544657555688447*^9}, {3.544657599228393*^9, 3.544657610170351*^9}, {
+   3.544657651745975*^9, 3.544657696689514*^9}, {3.5446577811128693`*^9, 
+   3.544657781720825*^9}, {3.544657827403388*^9, 3.544657883066278*^9}, {
+   3.5446580265045853`*^9, 3.544658035348536*^9}, {3.54465808388883*^9, 
+   3.544658088601111*^9}, {3.544717172645109*^9, 3.544717174610188*^9}, 
+   3.54472321880352*^9, {3.544723259666202*^9, 3.544723269686225*^9}, 
+   3.544737503201494*^9, {3.5447376680957403`*^9, 3.544737669124758*^9}, {
+   3.5447377430050783`*^9, 3.544737763567539*^9}, {3.544737794873637*^9, 
+   3.5447377995658283`*^9}, {3.544737964887505*^9, 3.54473797456145*^9}, 
+   3.5447380993619537`*^9, {3.5447382021761007`*^9, 3.544738214674921*^9}, {
+   3.544738272492029*^9, 3.5447382848907413`*^9}, {3.544739375127511*^9, 
+   3.5447394962744226`*^9}, {3.5447920146718483`*^9, 3.544792023237068*^9}, {
+   3.5447920607677917`*^9, 3.544792061067792*^9}, {3.544799050270619*^9, 
+   3.544799085894093*^9}, {3.544801277364972*^9, 3.544801278205315*^9}, {
+   3.5448014904458313`*^9, 3.5448014912550077`*^9}, {3.5448015903008947`*^9, 
+   3.544801603521078*^9}, {3.544801643353806*^9, 3.544801702487761*^9}, {
+   3.544801742207196*^9, 3.544801812726138*^9}, {3.544802028028998*^9, 
+   3.544802054482274*^9}, {3.54481185926518*^9, 3.544811885332717*^9}, {
+   3.544811938552651*^9, 3.544811943550061*^9}, {3.544812021872467*^9, 
+   3.5448120274888697`*^9}, {3.5448120988168583`*^9, 
+   3.5448121033483067`*^9}, {3.544812150535774*^9, 3.544812167666089*^9}, {
+   3.544830306046885*^9, 3.544830347925704*^9}, {3.544873436777927*^9, 
+   3.5448734568688507`*^9}, {3.544873515497161*^9, 3.544873541259142*^9}, {
+   3.544888453517654*^9, 3.544888460410226*^9}, {3.544888508841707*^9, 
+   3.544888612609178*^9}, {3.54532144793283*^9, 3.5453215975223827`*^9}, {
+   3.545321731327786*^9, 3.545321735339422*^9}, {3.545321880688081*^9, 
+   3.545321901761798*^9}, {3.545321942633993*^9, 3.545321946340949*^9}, {
+   3.545322030625968*^9, 3.545322036146995*^9}, {3.545350859484017*^9, 
+   3.545350861668974*^9}, 3.545350909555337*^9, {3.545350963327633*^9, 
+   3.545350969525879*^9}, {3.5500590381280727`*^9, 3.550059060212323*^9}, {
+   3.55005909400988*^9, 3.550059116281601*^9}, {3.550059171848864*^9, 
+   3.550059268590926*^9}, 3.5500593036454153`*^9, {3.550059376279077*^9, 
+   3.5500594217564907`*^9}, {3.550059490186099*^9, 3.5500594910620003`*^9}, {
+   3.5500602682320232`*^9, 3.5500602692887087`*^9}, {3.5500606636700487`*^9, 
+   3.550060696161846*^9}, {3.550147774033194*^9, 3.550147871970971*^9}, {
+   3.550147908704711*^9, 3.5501480911658497`*^9}, 3.5501481599541283`*^9, {
+   3.550154180495344*^9, 3.55015418877059*^9}, {3.550154277498797*^9, 
+   3.550154278033934*^9}, {3.550154357431127*^9, 3.550154382791915*^9}, {
+   3.5501590144949636`*^9, 3.5501590411714563`*^9}, {3.550159642777429*^9, 
+   3.5501596668004427`*^9}, {3.550159850543508*^9, 3.550159868751738*^9}, {
+   3.55015993165665*^9, 3.5501599405929947`*^9}, {3.550160029329925*^9, 
+   3.550160111980956*^9}, {3.550160694052079*^9, 3.5501607811287127`*^9}, {
+   3.551222154201496*^9, 3.5512221604970303`*^9}, {3.551222223422817*^9, 
+   3.55122232193366*^9}, 3.551222373498488*^9, 3.551349270023912*^9, {
+   3.552169437446638*^9, 3.552169441209895*^9}, {3.552169698184407*^9, 
+   3.5521697183667507`*^9}, {3.552169763958802*^9, 3.552169771562278*^9}, 
+   3.5521698323916693`*^9, {3.552169877984406*^9, 3.552169882355071*^9}, {
+   3.5522416009953127`*^9, 3.552241652307024*^9}, {3.55224174162169*^9, 
+   3.5522417853230247`*^9}, {3.552241822710577*^9, 3.552241913133898*^9}, {
+   3.552241989099823*^9, 3.552242025657845*^9}, {3.552242087873869*^9, 
+   3.55224209076514*^9}, {3.5522421423178167`*^9, 3.552242276380582*^9}, {
+   3.552242346276451*^9, 3.5522423528032713`*^9}, {3.552242568121024*^9, 
+   3.5522428218885117`*^9}, {3.552242909538563*^9, 3.552242909983448*^9}, {
+   3.552242959170403*^9, 3.552243032002266*^9}, {3.552244197493478*^9, 
+   3.5522442662137117`*^9}, {3.552246595960734*^9, 3.552246596147622*^9}, {
+   3.552246670843276*^9, 3.552246691709457*^9}, {3.552246749699902*^9, 
+   3.55224681502986*^9}, {3.552246852520894*^9, 3.552246872108863*^9}, {
+   3.5522469083883953`*^9, 3.5522469089382668`*^9}, {3.552247030661674*^9, 
+   3.552247033187293*^9}, {3.552247090037512*^9, 3.5522470901934*^9}, {
+   3.552247171815798*^9, 3.5522471720085287`*^9}, {3.5522472746965017`*^9, 
+   3.55224727865032*^9}, {3.552247314058392*^9, 3.5522473142054443`*^9}, {
+   3.552247364036656*^9, 3.552247365296495*^9}, {3.552247414013111*^9, 
+   3.55224741523102*^9}, {3.552247499717457*^9, 3.552247545276786*^9}, {
+   3.552247593590652*^9, 3.552247594588022*^9}, {3.5522476341972723`*^9, 
+   3.5522476621301537`*^9}, {3.552247705620257*^9, 3.5522477259493437`*^9}, {
+   3.552247779593526*^9, 3.552247781180345*^9}, 3.552247813644805*^9, {
+   3.552247923852947*^9, 3.552247924013672*^9}, {3.552247965703527*^9, 
+   3.552247993092237*^9}, {3.552248034660488*^9, 3.5522480353385878`*^9}, {
+   3.552248978688244*^9, 3.552248984293396*^9}, {3.55224905404508*^9, 
+   3.5522490910096416`*^9}, {3.552249125301482*^9, 3.5522491576520443`*^9}, {
+   3.552249290093801*^9, 3.552249304438143*^9}, {3.552249340594672*^9, 
+   3.552249346459206*^9}, {3.552310303126684*^9, 3.5523103232715673`*^9}, {
+   3.552310415192918*^9, 3.552310425964752*^9}, {3.552310495994368*^9, 
+   3.552310499611959*^9}, {3.5523105462658873`*^9, 3.5523105626531143`*^9}, {
+   3.552310604210326*^9, 3.552310609143712*^9}, 3.552311355255447*^9, {
+   3.5525048490932207`*^9, 3.552504954310313*^9}, {3.552691401209618*^9, 
+   3.552691407846472*^9}, {3.552691510072225*^9, 3.5526915182649813`*^9}, {
+   3.552691552294655*^9, 3.552691564799808*^9}, {3.5526915963181562`*^9, 
+   3.5526917762076674`*^9}, {3.55269182139604*^9, 3.552691833311404*^9}, 
+   3.5526921196288557`*^9, {3.552692217191739*^9, 3.5526922616198997`*^9}, {
+   3.552692302276062*^9, 3.552692334190031*^9}, {3.5526923771929502`*^9, 
+   3.5526924630139027`*^9}, {3.552692503902417*^9, 3.552692508693954*^9}, 
+   3.552692883585535*^9, {3.552744273283218*^9, 3.552744308670918*^9}, {
+   3.552953685925852*^9, 3.5529537632240067`*^9}, {3.552991674125181*^9, 
+   3.552991765622656*^9}, {3.5529918188251877`*^9, 3.552991862108592*^9}, {
+   3.552991895132098*^9, 3.55299194822937*^9}, {3.552992035658506*^9, 
+   3.552992076379549*^9}, 3.5529921211539307`*^9, {3.552992154095401*^9, 
+   3.552992169207823*^9}, {3.552992217219781*^9, 3.552992304388513*^9}, {
+   3.5529923522286263`*^9, 3.5529923875349493`*^9}, {3.552992528735165*^9, 
+   3.5529925864326963`*^9}, {3.553028467149599*^9, 3.5530284789023533`*^9}, {
+   3.553079736395667*^9, 3.553079737697473*^9}, {3.553081005358325*^9, 
+   3.553081008293001*^9}, {3.553360519166246*^9, 3.553360523163148*^9}, {
+   3.553360562296411*^9, 3.553360568331061*^9}, {3.553360957298606*^9, 
+   3.553360958768341*^9}, {3.553366979277781*^9, 3.553367103713674*^9}, {
+   3.5533882057605467`*^9, 3.5533883413057127`*^9}, {3.553388453949613*^9, 
+   3.553388502892578*^9}, {3.5533897439780893`*^9, 3.553389744134087*^9}, {
+   3.553389797329061*^9, 3.553389823158161*^9}, {3.553438469920815*^9, 
+   3.553438509822687*^9}, {3.554327615901306*^9, 3.554327697654256*^9}, {
+   3.554327775038868*^9, 3.554327777051654*^9}, {3.554327827587035*^9, 
+   3.5543278458518887`*^9}, {3.554327899909678*^9, 3.554327969206071*^9}, {
+   3.554328124684527*^9, 3.554328172168477*^9}, {3.554328269083618*^9, 
+   3.554328290215543*^9}, {3.554328345794283*^9, 3.5543283901304083`*^9}, {
+   3.55432852742303*^9, 3.554328531060342*^9}, {3.5543285617596273`*^9, 
+   3.554328609883245*^9}, {3.554328646126631*^9, 3.554328672620091*^9}, {
+   3.554573046004058*^9, 3.554573046218011*^9}, {3.554573097257183*^9, 
+   3.554573124045512*^9}, {3.836061519083456*^9, 3.836061519856967*^9}, {
+   3.836061659408414*^9, 3.836061698768997*^9}, {3.836061736366963*^9, 
+   3.836061739830111*^9}, {3.83606219595396*^9, 3.836062291175544*^9}, {
+   3.8360623393128233`*^9, 3.836062339793648*^9}},
+ CellLabel->"In[46]:=",ExpressionUUID->"6327ca6a-da06-45e6-922b-290b901cab48"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`hVV$$ = 1100, $CellContext`showEdges$$ = 
+    "Visual", $CellContext`vVV$$ = 630, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`showEdges$$], "Visual", "Show"}, {
+      "Visual", "Math", "Both"}}, {{
+       Hold[$CellContext`hVV$$], 1100, "Horizontal Size"}, 300, 1500}, {{
+       Hold[$CellContext`vVV$$], 630, "Vertical Size"}, 300, 1500}, {
+      Hold[
+       Row[{
+         Button["Start", $CellContext`evalStart], 
+         Spacer[20], 
+         Button[
+          Graphics[{
+            RGBColor[0, 0, 1], 
+            Disk[{0, 0}, 10], 
+            GrayLevel[1], 
+            Disk[{0, 6}, 2.2], 
+            Rectangle[{-1, -6.5}, {1.8, 1.8}]}, ImageSize -> 15], 
+          CreateDocument[
+           Internal`PopupWindowNotebook[
+           "Whenever you see the bright blue information symbol, click for \
+suggestions of things to explore. \n\nTo use this Mathematica Notebook press \
+the Start button. \n\nBrowse the interactive table of contents by hovering \
+over terms and clicking on interesting items. \n\nWhen a new notebook opens, \
+evaluate it (use the Evaluate button on the setup palette). \n\nAfter \
+evaluating, return to Presentation mode by pressing the Presentation button \
+or press the Working button to expand the code.", WindowTitle -> "Notes", 
+            WindowFloating -> True]], Appearance -> None, BaseStyle -> {}, 
+          DefaultBaseStyle -> {}], 
+         Spacer[20], 
+         Manipulate`Place[1], 
+         Spacer[20], 
+         Manipulate`Place[2], 
+         Spacer[20], 
+         Manipulate`Place[3]}]], Manipulate`Dump`ThisIsNotAControl}}, 
+    Typeset`size$$ = {990., {281., 286.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`hVV$$ = 1100, $CellContext`showEdges$$ = 
+        "Visual", $CellContext`vVV$$ = 630}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       Which[$CellContext`showEdges$$ == 
+         "Visual", {$CellContext`arrowColVis, $CellContext`arrowColMath} = {
+           Green, LightBrown}; Null, $CellContext`showEdges$$ == 
+         "Math", {$CellContext`arrowColVis, $CellContext`arrowColMath} = {
+           LightGreen, Brown}; Null, $CellContext`showEdges$$ == 
+         "Both", {$CellContext`arrowColVis, $CellContext`arrowColMath} = {
+          Green, Brown}]; LayeredGraphPlot[$CellContext`connections, 
+         $CellContext`opts[$CellContext`hVV$$, $CellContext`vVV$$], 
+         PlotRangePadding -> 0.2]), 
+      "Specifications" :> {{{$CellContext`showEdges$$, "Visual", "Show"}, {
+         "Visual", "Math", "Both"}, ControlPlacement -> 
+         1}, {{$CellContext`hVV$$, 1100, "Horizontal Size"}, 300, 1500, 
+         ControlPlacement -> 2}, {{$CellContext`vVV$$, 630, "Vertical Size"}, 
+         300, 1500, ControlPlacement -> 3}, 
+        Row[{
+          Button["Start", $CellContext`evalStart], 
+          Spacer[20], 
+          Button[
+           Graphics[{
+             RGBColor[0, 0, 1], 
+             Disk[{0, 0}, 10], 
+             GrayLevel[1], 
+             Disk[{0, 6}, 2.2], 
+             Rectangle[{-1, -6.5}, {1.8, 1.8}]}, ImageSize -> 15], 
+           CreateDocument[
+            Internal`PopupWindowNotebook[
+            "Whenever you see the bright blue information symbol, click for \
+suggestions of things to explore. \n\nTo use this Mathematica Notebook press \
+the Start button. \n\nBrowse the interactive table of contents by hovering \
+over terms and clicking on interesting items. \n\nWhen a new notebook opens, \
+evaluate it (use the Evaluate button on the setup palette). \n\nAfter \
+evaluating, return to Presentation mode by pressing the Presentation button \
+or press the Working button to expand the code.", WindowTitle -> "Notes", 
+             WindowFloating -> True]], Appearance -> None, BaseStyle -> {}, 
+           DefaultBaseStyle -> {}], 
+          Spacer[20], 
+          Manipulate`Place[1], 
+          Spacer[20], 
+          Manipulate`Place[2], 
+          Spacer[20], 
+          Manipulate`Place[3]}]}, 
+      "Options" :> {
+       TrackedSymbols -> {$CellContext`hVV$$, $CellContext`vVV$$, \
+$CellContext`graphMethod, $CellContext`showEdges$$}}, "DefaultOptions" :> {}],
+     
+     ImageSizeCache->{1034., {322.9206298828125, 328.0793701171875}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`arrowColVis = 
+       RGBColor[0, 1, 0], $CellContext`arrowColMath = 
+       RGBColor[0.6, 0.4, 0.2], $CellContext`connections = {
+        1 -> 2, 2 -> 3, 2 -> 4, 6 -> 11, 28 -> 7, 7 -> 8, 8 -> 9, 9 -> 10, 2 -> 
+         11, 5 -> 11, 5 -> 6, 2 -> 5, 2 -> 12, 11 -> 18, 34 -> 16, 3 -> 14, 
+         12 -> 15, 16 -> 13, 18 -> 13, 3 -> 19, 16 -> 20, 6 -> 21, 6 -> 34, 6 -> 
+         22, 11 -> 23, 23 -> 24, 6 -> 25, 27 -> 27, 5 -> 33, 33 -> 13, 25 -> 
+         26, 26 -> 13, 11 -> 17, 28 -> 30, 30 -> 29, 31 -> 31, 32 -> 
+         28}, $CellContext`opts[
+         Pattern[$CellContext`hVV, 
+          Blank[]], 
+         Pattern[$CellContext`vVV, 
+          Blank[]]] := 
+       Module[{}, {
+         VertexRenderingFunction -> $CellContext`vertexGraph, 
+          EdgeRenderingFunction -> $CellContext`edgeGraph, 
+          PlotLabel -> $CellContext`titleIntro, 
+          VertexCoordinateRules -> {$CellContext`rep -> {2, 
+             6}, $CellContext`point -> {2, 5}, $CellContext`spatial -> {1, 
+             4}, $CellContext`histo -> {0, 4}, $CellContext`corr -> {5, 
+             4}, $CellContext`trans -> {6, 3}, $CellContext`threadA -> {10, 
+             4}, $CellContext`threadB -> {10, 3}, $CellContext`threadC -> {10,
+              2}, $CellContext`threadD -> {10, 1}, $CellContext`filters -> {4,
+              4}, $CellContext`morph -> {2, 4}, $CellContext`innerProd -> {4, 
+             0}, $CellContext`interp -> {0, 2}, $CellContext`inMorph -> {2, 
+             2}, $CellContext`inFourier -> {6, 
+             1}, $CellContext`filterDesign -> {3, 
+             1}, $CellContext`inFilters -> {4, 1}, $CellContext`spatFun -> {1,
+              2}, $CellContext`usingDFT -> {7, 
+             1}, $CellContext`distanceTrans -> {8, 
+             2}, $CellContext`radonTrans -> {7, 
+             2}, $CellContext`nonlinearFilt -> {3, 
+             3}, $CellContext`inNonlinearFilt -> {2, 
+             1}, $CellContext`wavelets -> {9, 
+             2}, $CellContext`insideWavelets -> {9, 1}, $CellContext`defs -> {
+             0, 6}, $CellContext`threadModels -> {
+             10.5, 5}, $CellContext`angleMapsRadon -> {11, 
+             4}, $CellContext`angleMapsFourier -> {11, 
+             3}, $CellContext`vvTOC -> {5.5, 6}, $CellContext`threadData -> {
+             10.5, 6}, $CellContext`insideCorr -> {5, 
+             1}, $CellContext`fourierTrans -> {6, 2}}, 
+          ImageSize -> {$CellContext`hVV, $CellContext`vVV}}], \
+$CellContext`vertexGraph = Text[
+         Style[
+          Part[$CellContext`chap, #2]], #, Background -> 
+         White]& , $CellContext`chap = {
+         Tooltip[
+          Hyperlink[
+           Framed[
+            Style["Representation of \nDigital Images", {FontSize -> 14}]], {
+           "visualVocabRepresentation.nb", None}], 
+          "What are digital images made of? Numbers! One and two dimensional \
+data can be represented in many different ways.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Point Functions", {FontSize -> 14}], {
+           "visualVocabPointFunctions.nb", None}], 
+          "The simplest form of image manipulation considers neighborhoods of \
+size one, functions that change pixel values based only on the value of a \
+single pixel. Even with this restriction, a variety of effects are possible.",
+           TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Spatial \nMappings", {FontSize -> 14}], {
+           "visualVocabSpatialMaps.nb", None}], 
+          "Spatial mappings can be as simple as a rotation or as complex as a \
+texture mapping onto a 3D surface. Underlying all spatial mappings is the \
+need for interpolation, where the value at an unknown intermediate spatial \
+position must be estimated based on known nearby values.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Histograms", {FontSize -> 14}], {
+           "visualVocabHistograms.nb", None}], 
+          "At heart, digital images are made of collections of numbers. \
+Humans much more easily perceive overall properties of an image: it's too \
+dark, the contrast is too low, the red/green balance is funny. One way to see \
+the relationship between these disparate views is to use a histogram, which \
+plots a graph of the values present in an image and how prevalent those \
+values are.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Correlations", {FontSize -> 14}], {
+           "visualVocabCorrelation.nb", None}], 
+          "Correlation is a way to find patterns embedded in a large set of \
+data.", TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Transforms", {FontSize -> 14}], {
+           "visualVocabTransforms.nb", None}], 
+          "Several different transforms are useful in image processing \
+including the Fourier, Wavelet, Radon, and Distance transforms.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Thread Count:\nThresholding", {FontSize -> 14}], {
+           "threadsMethodA.nb", None}, BaseStyle -> GrayLevel[0]], 
+          "Counting threads by thresholding", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Thread Count:\nFourier", {FontSize -> 14}], {
+           "threadsMethodB.nb", None}, BaseStyle -> GrayLevel[0]], 
+          "Counting threads using the one and two dimensional Fourier \
+Transform.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Thread Count:\nCorrelation", {FontSize -> 14}], {
+           "threadsMethodC.nb", None}, BaseStyle -> GrayLevel[0]], 
+          "Counting threads using one and two dimensional autocorrelation.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Thread Count:\nMorphology", {FontSize -> 14}], {
+           "threadsMethodD.nb", None}, BaseStyle -> GrayLevel[0]], 
+          "Counting threads using morphological processes.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Filters", {FontSize -> 14}], {
+           "visualVocabFilters.nb", None}], 
+          "Filters are cool; they can help in a number of simple image \
+processing tasks.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Morphological\nProcessing", {FontSize -> 14}], {
+           "visualVocabMorph.nb", None}], 
+          "A family of local nonlinear operators for binary images.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Framed[
+            Style["Inner\nProduct", {FontSize -> 14}]], {"vvAngles.nb", None},
+            BaseStyle -> RGBColor[0.6, 0.4, 0.2]], 
+          "Underlying the ideas of correlation, filtering, and transforms is \
+the idea of the angle (or inner product) between two signals.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Interpolation", {FontSize -> 14}], {"vvInterp.nb", None}, 
+           BaseStyle -> RGBColor[0.6, 0.4, 0.2]], 
+          "Underlying all spatial transformations is the need for \
+interpolation.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Inside\nMorphology", {FontSize -> 14}], {
+           "vvMorphology.nb", None}, BaseStyle -> RGBColor[0.6, 0.4, 0.2]], 
+          "The mathematical underpinings of morphological processing.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Inside\nFourier\nTransforms", {FontSize -> 14}], {
+           "vvFourierAngles.nb", None}, BaseStyle -> RGBColor[0.6, 0.4, 0.2]],
+           "Fourier transforms are a useful tool for exploring the makeup of \
+signals. Here are the details.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Filter\nDesign", {FontSize -> 14}], {
+           "vvFilterDesign.nb", None}, BaseStyle -> RGBColor[0.6, 0.4, 0.2]], 
+          "How to specify and design one and two dimensional linear filters.",
+           TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Inside\nLinear\nFilters", {FontSize -> 14}], {
+           "vvInsideFilters.nb", None}, BaseStyle -> RGBColor[0.6, 0.4, 0.2]],
+           "Underlying the ideas of correlation, filtering, and transforms is \
+the idea of the angle (or inner product) between two signals.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style[" Representing\n Spatial\n Functions", {FontSize -> 14}], {
+           "vvSpatialFunctions.nb", None}, BaseStyle -> 
+           RGBColor[0.6, 0.4, 0.2]], 
+          "How spatial mappings can be represented as mathematical \
+functions.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Using\nthe DFT", {FontSize -> 14}], {"vvUsingDFT.nb", None},
+            BaseStyle -> RGBColor[0.6, 0.4, 0.2]], 
+          "The DFT (Discrete Fourier Transform) is demonstrated in full \
+detail by this 1D example.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Distance\nTransform", {FontSize -> 14}], {
+           "visualVocabDistance.nb", None}, BaseStyle -> RGBColor[0, 0, 1]], 
+          "The Distance Transform.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Radon\nTransform", {FontSize -> 14}], {
+           "visualVocabRadon.nb", None}, BaseStyle -> RGBColor[0, 0, 1]], 
+          "The Radon Transform as a method of locating lines and \
+orientations.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Nonlinear\nFilters", {FontSize -> 14}], {
+           "visualVocabNonlinearFilters.nb", None}], 
+          "Nonlinearities in the filtering process allows more powerful \
+processing; but with more power comes more responsibility", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Inside\nNonlinear\nFilters", {FontSize -> 14}], {
+           "vvNonlinearFilters.nb", None}, BaseStyle -> 
+           RGBColor[0.6, 0.4, 0.2]], 
+          "Nonlinear filters: easy to implement, hard to predict.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Wavelet\nTransforms", {FontSize -> 14}], {
+           "visualVocabWavelets.nb", None}, BaseStyle -> RGBColor[0, 0, 1]], 
+          "Wavelets operate on \
+\!\(\*StyleBox[\"scale\",FontSlant->\"Italic\"]\) the way that Fourier \
+transforms operate on \!\(\*StyleBox[\"frequency\",FontSlant->\"Italic\"]\).",
+           TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Inside\nWavelet\nTransforms", {FontSize -> 14}], {
+           "vvInsideWavelets.nb", None}, BaseStyle -> 
+           RGBColor[0.6, 0.4, 0.2]], 
+          "Wavelets apply the inner product to scale invariant functions.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Definitions", {FontSize -> 14}], {
+           "visualVocabDefs.nb", None}, BaseStyle -> {
+             Opacity[0.3], 
+             RGBColor[0, 0, 1]}], 
+          "Used for development only. Will be deleted in final version.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Thread Models", {FontSize -> 14}], {"threadModel.nb", None},
+            BaseStyle -> GrayLevel[0]], 
+          "Models can be created from physical considerations or from \
+detailed examination of the data. They can be useful for analyzing the images \
+and for improving algorithms.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Angle Maps:\nFourier", {FontSize -> 14}], {
+           "visualVocabAngleMapsFourier.nb", None}, BaseStyle -> 
+           GrayLevel[0]], "Finding angle maps using the Fourier Transform", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Angle Maps:\nRadon", {FontSize -> 14}], {
+           "visualVocabAngleMapsRadon.nb", None}, BaseStyle -> GrayLevel[0]], 
+          "Finding angle maps using the Radon Transform", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Table of Contents", {FontSize -> 14}], {
+           "visualVocabTOC.nb", None}, BaseStyle -> GrayLevel[0]], 
+          "A concise listing of all the interactive demonstrations in the \
+Visual Vocabulary.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Thread Data", {FontSize -> 14}], {"threadData.nb", None}, 
+           BaseStyle -> GrayLevel[0]], "An overview of all the thread data.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Inside\nCorrelation", {FontSize -> 14}], {
+           "vvInsideCorr.nb", None}, BaseStyle -> RGBColor[0.6, 0.4, 0.2]], 
+          "Correlations are a useful tool for detecting patterns in signals. \
+Here are the details.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> GrayLevel[1]}], 
+         Tooltip[
+          Hyperlink[
+           Style["Fourier\nTransform", {FontSize -> 14}], {
+           "visualVocabFourier.nb", None}, BaseStyle -> RGBColor[0, 0, 1]], 
+          "The Fourier Transform is a way of detecting periodic patterns.", 
+          TooltipStyle -> {
+           Background -> GrayLevel[1], CellFrameColor -> 
+            GrayLevel[1]}]}, $CellContext`edgeGraph = {
+         Part[$CellContext`edges, 
+          Part[#2, 2]], 
+         Thickness[0.002], 
+         Arrowheads[Tiny], 
+         Arrow[#, 0.2]}& , $CellContext`edges := 
+       Part[$CellContext`chapNames, All, 
+         2], $CellContext`chapNames := {{$CellContext`rep = 
+          1, $CellContext`arrowColVis}, {$CellContext`point = 
+          2, $CellContext`arrowColVis}, {$CellContext`spatial = 
+          3, $CellContext`arrowColVis}, {$CellContext`histo = 
+          4, $CellContext`arrowColVis}, {$CellContext`corr = 
+          5, $CellContext`arrowColVis}, {$CellContext`trans = 
+          6, $CellContext`arrowColVis}, {$CellContext`threadA = 
+          7, $CellContext`arrowColVis}, {$CellContext`threadB = 
+          8, $CellContext`arrowColVis}, {$CellContext`threadC = 
+          9, $CellContext`arrowColVis}, {$CellContext`threadD = 
+          10, $CellContext`arrowColVis}, {$CellContext`filters = 
+          11, $CellContext`arrowColVis}, {$CellContext`morph = 
+          12, $CellContext`arrowColVis}, {$CellContext`innerProd = 
+          13, $CellContext`arrowColMath}, {$CellContext`interp = 
+          14, $CellContext`arrowColMath}, {$CellContext`inMorph = 
+          15, $CellContext`arrowColMath}, {$CellContext`inFourier = 
+          16, $CellContext`arrowColMath}, {$CellContext`filterDesign = 
+          17, $CellContext`arrowColMath}, {$CellContext`inFilters = 
+          18, $CellContext`arrowColMath}, {$CellContext`spatFun = 
+          19, $CellContext`arrowColMath}, {$CellContext`usingDFT = 
+          20, $CellContext`arrowColMath}, {$CellContext`distanceTrans = 
+          21, $CellContext`arrowColVis}, {$CellContext`radonTrans = 
+          22, $CellContext`arrowColVis}, {$CellContext`nonlinearFilt = 
+          23, $CellContext`arrowColVis}, {$CellContext`inNonlinearFilt = 
+          24, $CellContext`arrowColMath}, {$CellContext`wavelets = 
+          25, $CellContext`arrowColVis}, {$CellContext`insideWavelets = 
+          26, $CellContext`arrowColMath}, {$CellContext`defs = 
+          27, $CellContext`arrowColWhite}, {$CellContext`threadModels = 
+          28, $CellContext`arrowColVis}, {$CellContext`angleMapsFourier = 
+          29, $CellContext`arrowColVis}, {$CellContext`angleMapsRadon = 
+          30, $CellContext`arrowColVis}, {$CellContext`vvTOC = 
+          31, $CellContext`arrowColWhite}, {$CellContext`threadData = 
+          32, $CellContext`arrowColVis}, {$CellContext`insideCorr = 
+          33, $CellContext`arrowColMath}, {$CellContext`fourierTrans = 
+          34, $CellContext`arrowColVis}}, $CellContext`rep = 
+       1, $CellContext`point = 2, $CellContext`spatial = 
+       3, $CellContext`histo = 4, $CellContext`corr = 5, $CellContext`trans = 
+       6, $CellContext`threadA = 7, $CellContext`threadB = 
+       8, $CellContext`threadC = 9, $CellContext`threadD = 
+       10, $CellContext`filters = 11, $CellContext`morph = 
+       12, $CellContext`innerProd = 13, $CellContext`interp = 
+       14, $CellContext`inMorph = 15, $CellContext`inFourier = 
+       16, $CellContext`filterDesign = 17, $CellContext`inFilters = 
+       18, $CellContext`spatFun = 19, $CellContext`usingDFT = 
+       20, $CellContext`distanceTrans = 21, $CellContext`radonTrans = 
+       22, $CellContext`nonlinearFilt = 23, $CellContext`inNonlinearFilt = 
+       24, $CellContext`wavelets = 25, $CellContext`insideWavelets = 
+       26, $CellContext`defs = 27, $CellContext`arrowColWhite = 
+       GrayLevel[1], $CellContext`threadModels = 
+       28, $CellContext`angleMapsFourier = 29, $CellContext`angleMapsRadon = 
+       30, $CellContext`vvTOC = 31, $CellContext`threadData = 
+       32, $CellContext`insideCorr = 33, $CellContext`fourierTrans = 
+       34, $CellContext`titleIntro = Tooltip[
+         Style[
+         "\n\nA Visual Vocabulary for Image Processing", Bold, FontSize -> 
+          16], "Follow the links: blue links lead to visual descriptions, \
+brown links to more mathematical descriptions, black links to applications.", 
+         TooltipStyle -> {
+          Background -> GrayLevel[1], CellFrameColor -> 
+           GrayLevel[1]}], $CellContext`evalStart := 
+       Module[{}, FrontEndExecute[
+           FrontEndToken[
+            InputNotebook[], "EvaluateInitialization"]]; FrontEndExecute[
+           FrontEndToken[
+            InputNotebook[], "SelectAll"]]; FrontEndExecute[
+           FrontEndToken[
+            InputNotebook[], "EvaluateCells"]]; Null]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.7147301717257223`*^9, 3.715510926782819*^9, 3.744991876333579*^9, 
+   3.744993534413168*^9, 3.7449966655576572`*^9, 3.8360613658595667`*^9, {
+   3.836061471871708*^9, 3.836061484361977*^9}, {3.836061520227126*^9, 
+   3.836061545726384*^9}, 3.8360615768147373`*^9, 3.8360616168406057`*^9, {
+   3.836061674673544*^9, 3.836061700192205*^9}, 3.8360617403940783`*^9, 
+   3.836062222452999*^9, {3.8360622952842083`*^9, 3.83606234040942*^9}},
+ CellLabel->"Out[89]=",ExpressionUUID->"6caae2eb-2ffd-4398-abf7-27c74ea26688"]
+}, {2}]]
+}, Open  ]]
+},
+ScreenStyleEnvironment->"Working",
+WindowSize->{1141.2, 568.8},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowCellBracket->True,
+ShowSelection->True,
+ShowCellLabel->True,
+ShowCellTags->True,
+Magnification:>0.9 Inherited,
+FrontEndVersion->"13.1 for Microsoft Windows (64-bit) (June 16, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"640263d6-d666-480b-93a2-99af8b681c4e"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 453, 10, 40, "Input",ExpressionUUID->"6d9df80c-1f43-49bb-9b6f-cf33e7505bff",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[1035, 34, 191, 4, 59, "Section",ExpressionUUID->"56ee5828-c22e-4a84-b7e2-512cbc07d057"],
+Cell[CellGroupData[{
+Cell[1251, 42, 55407, 1231, 2239, "Input",ExpressionUUID->"6327ca6a-da06-45e6-922b-290b901cab48"],
+Cell[56661, 1275, 26002, 508, 668, "Output",ExpressionUUID->"6caae2eb-2ffd-4398-abf7-27c74ea26688"]
+}, {2}]]
+}, Open  ]]
+}
+]
+*)
+

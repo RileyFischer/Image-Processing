@@ -1,0 +1,1614 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     71246,       1606]
+NotebookOptionsPosition[     66290,       1521]
+NotebookOutlinePosition[     68777,       1570]
+CellTagsIndexPosition[     68512,       1562]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"!", 
+     RowBox[{"NumberQ", "[", "makePallette", "]"}]}], ",", 
+    RowBox[{"NotebookEvaluate", "[", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "~~", 
+      "\"\<visualVocabDefs.nb\>\""}], "]"}], ",", 
+    RowBox[{"NotebookEvaluate", "[", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "~~", "\"\<vvClear.nb\>\""}], 
+     "]"}]}], "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5428065919380074`*^9, 3.542806591940366*^9}, 
+   3.554467069251801*^9, 3.554546317300252*^9},
+ CellLabel->
+  "In[129]:=",ExpressionUUID->"283ddc32-cf68-4d8a-b91c-66c07c509f1a"],
+
+Cell[CellGroupData[{
+
+Cell["Inner Product: the Angle between Two Signals", "Section",
+ CellChangeTimes->{{3.542459861697914*^9, 3.5424598701430473`*^9}, {
+  3.542501215759635*^9, 3.542501217971826*^9}, {3.5435021583624363`*^9, 
+  3.543502167303217*^9}, {3.543503373549675*^9, 3.543503379090948*^9}, {
+  3.5436706700884123`*^9, 3.543670672739326*^9}, {3.5436711454973497`*^9, 
+  3.543671159625517*^9}},ExpressionUUID->"87e67127-faed-4568-98de-\
+05b37c8a3843"],
+
+Cell[TextData[{
+ "Suppose there are two signals, which may be vectors, sequences of numbers, \
+or images. Are they the same or are they different? Do they have the same \
+orientation or do they point in different directions? Are they periodic? Do \
+they have the same periods? The inner product is one way of quantifying the \
+similarity of (and the dissimilarity between) two signals. It can be used to \
+find properties of an unknown signal by comparing it to one or more known \
+signals, a technique that lies at the heart of many common ",
+ ButtonBox["transform methods",
+  BaseStyle->"Hyperlink",
+  ButtonData->{"visualVocabTransforms.nb", None}],
+ ". The inner product is closely related to (cross) ",
+ ButtonBox["correlation",
+  BaseStyle->"Hyperlink",
+  ButtonData->{"visualVocabCorrelation.nb", None}],
+ ", which is a simple form of pattern matching useful for aligning signals in \
+time. A special case is autocorrelation which is a standard way of searching \
+for repetitions or periodicities. The inner product provides the basic \
+definitions of a variety of transform techniques (such as the Fourier and \
+wavelet transforms) and can also be viewed as the basis of ",
+ ButtonBox["linear filtering",
+  BaseStyle->"Hyperlink",
+  ButtonData->{"visualVocabFilters.nb", None}],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.542459826522653*^9, 3.542459833980781*^9}, {
+  3.5425011012814913`*^9, 3.542501114033049*^9}, {3.5435017634052143`*^9, 
+  3.543501796205658*^9}, {3.543671137706118*^9, 3.543671165033601*^9}, {
+  3.5436712617798157`*^9, 3.5436713546171503`*^9}, {3.5436713909191933`*^9, 
+  3.543671394681006*^9}, {3.543671457511383*^9, 3.543671457518467*^9}, {
+  3.5436714971977577`*^9, 3.543671515664139*^9}, {3.543671654587736*^9, 
+  3.543671669568581*^9}},ExpressionUUID->"4f31f956-1887-49fe-93ec-\
+0a36cd917169"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TableForm", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Hyperlink", "[", 
+       RowBox[{"\"\<InnerProd\>\"", ",", 
+        RowBox[{"{", 
+         RowBox[{"\"\<vvAngles.nb\>\"", ",", "\"\<labelInnerProd\>\""}], 
+         "}"}], ",", 
+        RowBox[{"BaseStyle", "\[Rule]", "mathColor"}]}], "]"}], ",", 
+      "labelInnerProd"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Hyperlink", "[", 
+       RowBox[{"\"\<InnerProd2\>\"", ",", 
+        RowBox[{"{", 
+         RowBox[{"\"\<vvAngles.nb\>\"", ",", "\"\<labelInnerProd2\>\""}], 
+         "}"}], ",", 
+        RowBox[{"BaseStyle", "\[Rule]", "mathColor"}]}], "]"}], ",", 
+      "labelInnerProd2"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Hyperlink", "[", 
+       RowBox[{"\"\<InnerProdFun\>\"", ",", 
+        RowBox[{"{", 
+         RowBox[{"\"\<vvAngles.nb\>\"", ",", "\"\<labelInnerProdFun\>\""}], 
+         "}"}], ",", 
+        RowBox[{"BaseStyle", "\[Rule]", "mathColor"}]}], "]"}], ",", 
+      "labelInnerProdFun"}], "}"}]}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.553080623226203*^9, 3.553080630100977*^9}, {
+   3.553080743250712*^9, 3.553080845412651*^9}, 3.5532866513250923`*^9},
+ CellLabel->
+  "In[130]:=",ExpressionUUID->"01c83bc6-1ccc-4381-b5c7-0113dad2f126"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     TemplateBox[{
+      "\"InnerProd\"", {"vvAngles.nb", "labelInnerProd"}, "vvAngles.nb", 
+       "Hyperlink", {"HyperlinkActive"}, BaseStyle -> {
+         RGBColor[0.6, 0.4, 0.2]}},
+      "HyperlinkTemplate"], "\<\"The angle between two vectors can be \
+calculated using the inner product\"\>"},
+    {
+     TemplateBox[{
+      "\"InnerProd2\"", {"vvAngles.nb", "labelInnerProd2"}, "vvAngles.nb", 
+       "Hyperlink", {"HyperlinkActive"}, BaseStyle -> {
+         RGBColor[0.6, 0.4, 0.2]}},
+      "HyperlinkTemplate"], "\<\"Inner product, correlation, and dot \
+product\\nare equivalent ways of talking about the same thing\"\>"},
+    {
+     TemplateBox[{
+      "\"InnerProdFun\"", {"vvAngles.nb", "labelInnerProdFun"}, "vvAngles.nb",
+        "Hyperlink", {"HyperlinkActive"}, BaseStyle -> {
+         RGBColor[0.6, 0.4, 0.2]}},
+      "HyperlinkTemplate"], "\<\"The inner product can also be generalized to \
+find the 'angle' between two functions\"\>"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.7469166198214197`*^9},
+ CellLabel->
+  "Out[130]//TableForm=",ExpressionUUID->"63896061-a45b-46a9-b521-\
+7d558ad2ad54"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The simplest setting is in two dimensions, where each vector is specified \
+by a pair of numbers. The angle between two vectors gives a good indication \
+of how closely aligned they are: if the angle is small, they point in nearly \
+the same direction; if the angle is near 90\[Degree], they point in \
+completely different directions (they are at right angles). The \
+generalization of these ideas to signals (vectors, sequences and images) uses \
+the inner product to define the \[OpenCurlyDoubleQuote]angle.\
+\[CloseCurlyDoubleQuote] When the inner product is large, the sequences are \
+approximately the same (\[OpenCurlyDoubleQuote]point in the same direction\
+\[CloseCurlyDoubleQuote]) while if the inner product is zero (if the two are ",
+ StyleBox["orthogonal",
+  FontSlant->"Italic"],
+ ") then they are like two vectors at right angles. Grab either the blue or \
+the green arrows and drag. The angle \[Theta] between them changes. When \
+\[Theta] is near zero the two vectors point in the same direction. When \
+\[Theta] is near 90\[Degree] the vectors are at right angles. The box at the \
+right shows how the angle between the vectors x and y can be calculated using \
+the inner product <x,y>. "
+}], "Text",
+ CellChangeTimes->{{3.543671734930224*^9, 3.543671847568721*^9}, {
+  3.543710792428708*^9, 3.543710816715773*^9}, {3.5437124733576727`*^9, 
+  3.543712474316743*^9}, {3.5437932224677877`*^9, 
+  3.543793402162737*^9}},ExpressionUUID->"6aefcfb9-82cb-4db5-96d2-\
+8629b1c33621"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "labelInnerProd", "=", 
+   "\"\<The angle between two vectors can be calculated using the inner \
+product\>\""}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+  "infoInnerProd", "=", 
+   "\"\<Two vectors x (in blue) and y (in green) connect at the \
+origin.\\n\\nUse the mouse to grab these vectors and change their postition. \
+The display updates to show:\\n\\nthe end position of the points\\nthe angle \
+between the vectors\\nthe inner product between the vectors\\nthe norm \
+(length) of blue c\\nthe norm of green y\\nthe calculation of the angle in \
+terms of the inner product.\>\""}], ";"}], "\n", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "xxVec", ",", "yyVec", ",", "\[Theta]Rad", ",", "\[Theta]Deg", ",", 
+       "x1", ",", "x2", ",", "y1", ",", "y2", ",", "sDif", ",", "rad"}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"xxVec", "=", 
+       RowBox[{"vec", "[", 
+        RowBox[{"x", ",", "2"}], "]"}]}], ";", 
+      RowBox[{"yyVec", "=", 
+       RowBox[{"vec", "[", 
+        RowBox[{"y", ",", "2"}], "]"}]}], ";", 
+      RowBox[{"\[Theta]Rad", "=", 
+       RowBox[{"angle", "[", 
+        RowBox[{"p1", ",", "p2"}], "]"}]}], ";", 
+      RowBox[{"\[Theta]Deg", "=", 
+       RowBox[{"N", "[", 
+        RowBox[{"180", " ", 
+         RowBox[{"\[Theta]Rad", "/", "Pi"}]}], "]"}]}], ";", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x1", ",", "x2"}], "}"}], "=", "p1"}], ";", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"y1", ",", "y2"}], "}"}], "=", "p2"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"sDif", "=", 
+       RowBox[{
+        RowBox[{"slope", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0"}], "}"}], ",", "p1"}], "]"}], "-", 
+        RowBox[{"slope", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0"}], "}"}], ",", "p2"}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"rad", " ", "=", 
+       RowBox[{"Min", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Norm", "[", "p1", "]"}], "/", "3"}], ",", 
+         RowBox[{
+          RowBox[{"Norm", "[", "p2", "]"}], "/", "3"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"0", ">", "sDif", ">", 
+           RowBox[{"-", "Pi"}]}], ")"}], "||", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"2", " ", "Pi"}], ">", "sDif", ">", "Pi"}], "&&", 
+           RowBox[{"x1", ">", "0"}]}], ")"}]}], ",", 
+        RowBox[{"p", "=", 
+         RowBox[{"rad", " ", 
+          RowBox[{"p1", "/", 
+           RowBox[{"Norm", "[", "p1", "]"}]}]}]}], ",", 
+        RowBox[{"p", "=", 
+         RowBox[{"rad", " ", 
+          RowBox[{"p2", "/", 
+           RowBox[{"Norm", "[", "p2", "]"}]}]}]}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Row", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Graphics", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"Blue", ",", 
+             RowBox[{"Thickness", "[", "0.005", "]"}], ",", 
+             RowBox[{"Arrowheads", "[", "0.03", "]"}], ",", 
+             RowBox[{"Arrow", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "0"}], "}"}], ",", "p1"}], "}"}], "]"}], 
+             ",", "Green", ",", 
+             RowBox[{"Arrow", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "0"}], "}"}], ",", "p2"}], "}"}], "]"}], 
+             ",", "Black", ",", 
+             RowBox[{"BezierCurve", "[", 
+              RowBox[{"{", 
+               RowBox[{"p", ",", 
+                RowBox[{"mid", "=", 
+                 RowBox[{
+                  RowBox[{"RotationMatrix", "[", 
+                   RowBox[{"\[Theta]Rad", "/", "2"}], "]"}], ".", "p"}]}], 
+                ",", 
+                RowBox[{
+                 RowBox[{"RotationMatrix", "[", "\[Theta]Rad", "]"}], ".", 
+                 "p"}]}], "}"}], "]"}], ",", "Black", ",", 
+             RowBox[{"Text", "[", 
+              RowBox[{
+               RowBox[{"\"\<x =\>\"", "~~", 
+                RowBox[{"ToString", "[", "p1", "]"}]}], ",", "p1", ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"-", 
+                   RowBox[{"Sign", "[", "x1", "]"}]}], " ", "1"}], ",", "0"}],
+                 "}"}]}], "]"}], ",", 
+             RowBox[{"Text", "[", 
+              RowBox[{
+               RowBox[{"\"\<y =\>\"", "~~", 
+                RowBox[{"ToString", "[", "p2", "]"}]}], ",", "p2", ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"-", 
+                   RowBox[{"Sign", "[", "y1", "]"}]}], " ", "1"}], ",", "0"}],
+                 "}"}]}], "]"}], ",", 
+             RowBox[{"Text", "[", 
+              RowBox[{
+               RowBox[{"\"\<\[Theta]=\>\"", "~~", 
+                RowBox[{"ToString", "[", "\[Theta]Deg", "]"}]}], ",", "mid", 
+               ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", 
+                  RowBox[{"Sign", "[", 
+                   RowBox[{"mid", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "]"}]}], ",", 
+                 RowBox[{"-", "1"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+           RowBox[{"PlotRange", "\[Rule]", "3"}], ",", 
+           RowBox[{"ImageSize", "\[Rule]", "400"}]}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Framed", "[", 
+          RowBox[{"Column", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Row", "[", 
+              RowBox[{"{", 
+               RowBox[{
+               "\"\<Vector x = \>\"", ",", "xxVec", ",", "\"\< = \>\"", ",", 
+                "p1", ",", "\"\< and y = \>\"", ",", "yyVec", ",", 
+                "\"\< = \>\"", ",", "p2"}], "}"}], "]"}], ",", 
+             RowBox[{"Row", "[", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Inner Product <x,y> = \>\"", ",", 
+                RowBox[{"Inner", "[", 
+                 RowBox[{"Times", ",", "xxVec", ",", "yyVec", ",", "Plus"}], 
+                 "]"}], ",", "\"\< = \>\"", ",", 
+                RowBox[{"inXY", "=", 
+                 RowBox[{"Inner", "[", 
+                  RowBox[{"Times", ",", "p1", ",", "p2", ",", "Plus"}], 
+                  "]"}]}]}], "}"}], "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"Row", "[", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Norm (length) of x is ||x|| = \>\"", ",", 
+                RowBox[{"Sqrt", "[", "\"\<<x,x>\>\"", "]"}], ",", 
+                "\"\< = \>\"", ",", 
+                RowBox[{"Sqrt", "[", 
+                 RowBox[{"Inner", "[", 
+                  RowBox[{"Times", ",", "xxVec", ",", "xxVec", ",", "Plus"}], 
+                  "]"}], "]"}], ",", "\"\< = \>\"", ",", 
+                RowBox[{"Sqrt", "[", 
+                 RowBox[{"Inner", "[", 
+                  RowBox[{"Times", ",", "p1", ",", "p1", ",", "Plus"}], "]"}],
+                  "]"}]}], "}"}], "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"Row", "[", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Norm (length) of y is ||y|| = \>\"", ",", 
+                RowBox[{"Sqrt", "[", "\"\<<y,y>\>\"", "]"}], ",", 
+                "\"\< = \>\"", ",", 
+                RowBox[{"Sqrt", "[", 
+                 RowBox[{"Inner", "[", 
+                  RowBox[{"Times", ",", "yyVec", ",", "yyVec", ",", "Plus"}], 
+                  "]"}], "]"}], ",", "\"\< = \>\"", ",", 
+                RowBox[{"Sqrt", "[", 
+                 RowBox[{"Inner", "[", 
+                  RowBox[{"Times", ",", "p2", ",", "p2", ",", "Plus"}], "]"}],
+                  "]"}]}], "}"}], "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"Row", "[", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Cosine(\[Theta]) = \>\"", ",", 
+                RowBox[{"\"\<<x,y>\>\"", "/", "\"\<(||x|| ||y||)\>\""}], ",", 
+                "\"\< = \>\"", ",", 
+                RowBox[{
+                 RowBox[{"Inner", "[", 
+                  RowBox[{"Times", ",", "xxVec", ",", "yyVec", ",", "Plus"}], 
+                  "]"}], "/", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"Sqrt", "[", 
+                    RowBox[{"Inner", "[", 
+                    RowBox[{
+                    "Times", ",", "xxVec", ",", "xxVec", ",", "Plus"}], "]"}],
+                     "]"}], " ", 
+                   RowBox[{"Sqrt", "[", 
+                    RowBox[{"Inner", "[", 
+                    RowBox[{
+                    "Times", ",", "yyVec", ",", "yyVec", ",", "Plus"}], "]"}],
+                     "]"}]}], ")"}]}], ",", "\"\< = \>\"", ",", 
+                RowBox[{"inXY", "/", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"Norm", "[", "p1", "]"}], " ", 
+                   RowBox[{"Norm", "[", "p2", "]"}]}], ")"}]}]}], "}"}], 
+              "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"Row", "[", 
+              RowBox[{"{", 
+               RowBox[{"\"\<\[Theta] = \>\"", ",", "\"\<ArcCos[\>\"", ",", 
+                RowBox[{"\"\<<x,y>\>\"", "/", "\"\<(||x|| ||y||)\>\""}], ",", 
+                "\"\<] = \>\"", ",", "\[Theta]Rad", ",", 
+                "\"\< radians = \>\"", ",", "\[Theta]Deg", ",", 
+                "\"\< degrees\>\""}], "}"}], "]"}]}], " ", "}"}], "]"}], 
+          "]"}]}], "}"}], "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Row", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Control", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"p1", ",", 
+           RowBox[{"{", 
+            RowBox[{"2", ",", "2"}], "}"}]}], "}"}], ",", "Locator", ",", 
+         RowBox[{"Appearance", "\[Rule]", "None"}]}], "}"}], "]"}], ",", 
+      RowBox[{"Control", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"p2", ",", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", "0"}], "}"}]}], "}"}], ",", "Locator", ",", 
+         RowBox[{"Appearance", "\[Rule]", "None"}]}], "}"}], "]"}], ",", 
+      RowBox[{"Spacer", "[", "20", "]"}], ",", 
+      RowBox[{"info", "[", "infoInnerProd", "]"}]}], "}"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"Style", "[", 
+     RowBox[{"labelInnerProd", ",", "Medium"}], "]"}]}], ",", 
+   RowBox[{"TrackedSymbols", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"p1", ",", "p2"}], "}"}]}], ",", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.54370844919486*^9, 3.543708718951317*^9}, {
+   3.543708760730673*^9, 3.543708828675871*^9}, {3.543708898758391*^9, 
+   3.543708913861184*^9}, {3.5437089568204737`*^9, 3.543709231162777*^9}, {
+   3.543709268909947*^9, 3.543709412115918*^9}, {3.543709444232523*^9, 
+   3.543709452249888*^9}, {3.543709485920292*^9, 3.5437095128060637`*^9}, {
+   3.543709551979084*^9, 3.543709554360215*^9}, {3.543709590907092*^9, 
+   3.543709636735474*^9}, {3.543709673721243*^9, 3.54370977132228*^9}, {
+   3.543709813561934*^9, 3.54370993375443*^9}, {3.5437100370466557`*^9, 
+   3.543710077210203*^9}, {3.543710109625154*^9, 3.543710115658403*^9}, 
+   3.543710188163107*^9, {3.543710351328865*^9, 3.54371035293473*^9}, {
+   3.5437104250576963`*^9, 3.543710457490637*^9}, {3.5437104939086637`*^9, 
+   3.543710531107263*^9}, {3.543710594278285*^9, 3.543710636754148*^9}, {
+   3.543710743052827*^9, 3.543710758357511*^9}, {3.5437125879996223`*^9, 
+   3.5437126678298597`*^9}, {3.543712770467149*^9, 3.543712804471846*^9}, 
+   3.543712884106539*^9, {3.543713219379809*^9, 3.5437132760252733`*^9}, {
+   3.543747492037168*^9, 3.543747508326487*^9}, {3.543760504554696*^9, 
+   3.543760601892261*^9}, {3.543799455796207*^9, 3.543799463639201*^9}, {
+   3.543799948165807*^9, 3.543799950922995*^9}, {3.54401756195317*^9, 
+   3.5440176189172897`*^9}, 3.544017723687605*^9, {3.544017808718301*^9, 
+   3.544017817933071*^9}, {3.544018472488748*^9, 3.544018507622696*^9}, 
+   3.548627439707559*^9, {3.5513510063499527`*^9, 3.551351015423333*^9}, {
+   3.551351054840578*^9, 3.551351098022522*^9}, {3.551351136765999*^9, 
+   3.551351154247281*^9}, {3.552865852217629*^9, 3.552865928105955*^9}, {
+   3.552904094658223*^9, 3.552904280110133*^9}, {3.552904317969857*^9, 
+   3.5529043190096197`*^9}, {3.5529045161519737`*^9, 3.552904516272756*^9}, {
+   3.553272472327932*^9, 3.5532725294452667`*^9}},
+ CellTags->{
+  "labelInnerProd=\nThe angle between two vectors can be calculated using the \
+inner \\\nproduct;\n", "labelInnerProd"},
+ CellLabel->
+  "In[131]:=",ExpressionUUID->"f7869902-94b2-4bc5-8096-ad9a9a630b9a"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`p1$$ = {2, 2}, $CellContext`p2$$ = {1, 0}, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`p1$$], {2, 2}}, Automatic}, {{
+       Hold[$CellContext`p2$$], {1, 0}}, Automatic}, {
+      Hold[
+       Row[{
+         Manipulate`Place[1], 
+         Manipulate`Place[2], 
+         Spacer[20], 
+         Button[
+          Graphics[{
+            RGBColor[0, 0, 1], 
+            Disk[{0, 0}, 10], 
+            GrayLevel[1], 
+            Disk[{0, 6}, 2.2], 
+            Rectangle[{-1, -6.5}, {1.8, 1.8}]}, ImageSize -> 15], 
+          CreateDocument[
+           Internal`PopupWindowNotebook[
+           "Two vectors x (in blue) and y (in green) connect at the origin.\n\
+\nUse the mouse to grab these vectors and change their postition. The display \
+updates to show:\n\nthe end position of the points\nthe angle between the \
+vectors\nthe inner product between the vectors\nthe norm (length) of blue c\n\
+the norm of green y\nthe calculation of the angle in terms of the inner \
+product.", WindowTitle -> "Notes", WindowFloating -> True]], Appearance -> 
+          None, BaseStyle -> {}, DefaultBaseStyle -> {}]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    1057., {247., 253.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`p1$$ = {2, 2}, $CellContext`p2$$ = {1, 0}},
+       "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`xxVec$, $CellContext`yyVec$, \
+$CellContext`\[Theta]Rad$, $CellContext`\[Theta]Deg$, $CellContext`x1$, \
+$CellContext`x2$, $CellContext`y1$, $CellContext`y2$, $CellContext`sDif$, \
+$CellContext`rad$}, $CellContext`xxVec$ = $CellContext`vec[
+          XMPTools`x, 
+           2]; $CellContext`yyVec$ = $CellContext`vec[$CellContext`y, 
+           2]; $CellContext`\[Theta]Rad$ = \
+$CellContext`angle[$CellContext`p1$$, $CellContext`p2$$]; $CellContext`\
+\[Theta]Deg$ = 
+         N[180 ($CellContext`\[Theta]Rad$/
+            Pi)]; {$CellContext`x1$, $CellContext`x2$} = $CellContext`p1$$; \
+{$CellContext`y1$, $CellContext`y2$} = $CellContext`p2$$; $CellContext`sDif$ = \
+$CellContext`slope[{0, 0}, $CellContext`p1$$] - $CellContext`slope[{0, 
+           0}, $CellContext`p2$$]; $CellContext`rad$ = 
+         Min[Norm[$CellContext`p1$$]/3, Norm[$CellContext`p2$$]/3]; If[
+          Or[0 > $CellContext`sDif$ > -Pi, 
+           And[
+           2 Pi > $CellContext`sDif$ > Pi, $CellContext`x1$ > 
+            0]], $CellContext`p = $CellContext`rad$ ($CellContext`p1$$/
+            Norm[$CellContext`p1$$]), $CellContext`p = $CellContext`rad$ \
+($CellContext`p2$$/Norm[$CellContext`p2$$])]; Row[{
+           Graphics[{Blue, 
+             Thickness[0.005], 
+             Arrowheads[0.03], 
+             Arrow[{{0, 0}, $CellContext`p1$$}], Green, 
+             Arrow[{{0, 0}, $CellContext`p2$$}], Black, 
+             BezierCurve[{$CellContext`p, $CellContext`mid = Dot[
+                 RotationMatrix[$CellContext`\[Theta]Rad$/2], $CellContext`p], 
+               Dot[
+                RotationMatrix[$CellContext`\[Theta]Rad$], $CellContext`p]}], 
+             Black, 
+             Text[
+              StringExpression["x =", 
+               
+               ToString[$CellContext`p1$$]], $CellContext`p1$$, {(-
+                Sign[$CellContext`x1$]) 1, 0}], 
+             Text[
+              StringExpression["y =", 
+               
+               ToString[$CellContext`p2$$]], $CellContext`p2$$, {(-
+                Sign[$CellContext`y1$]) 1, 0}], 
+             Text[
+              StringExpression["\[Theta]=", 
+               ToString[$CellContext`\[Theta]Deg$]], $CellContext`mid, {-
+               Sign[
+                 Part[$CellContext`mid, 1]], -1}]}, PlotRange -> 3, ImageSize -> 
+            400], 
+           Framed[
+            Column[{
+              
+              Row[{"Vector x = ", $CellContext`xxVec$, 
+                " = ", $CellContext`p1$$, " and y = ", $CellContext`yyVec$, 
+                " = ", $CellContext`p2$$}], 
+              Row[{"Inner Product <x,y> = ", 
+                Inner[Times, $CellContext`xxVec$, $CellContext`yyVec$, Plus], 
+                " = ", $CellContext`inXY = 
+                Inner[Times, $CellContext`p1$$, $CellContext`p2$$, Plus]}], 
+              Row[{"Norm (length) of x is ||x|| = ", 
+                Sqrt["<x,x>"], " = ", 
+                Sqrt[
+                 Inner[
+                 Times, $CellContext`xxVec$, $CellContext`xxVec$, Plus]], 
+                " = ", 
+                Sqrt[
+                 Inner[Times, $CellContext`p1$$, $CellContext`p1$$, Plus]]}], 
+              
+              Row[{"Norm (length) of y is ||y|| = ", 
+                Sqrt["<y,y>"], " = ", 
+                Sqrt[
+                 Inner[
+                 Times, $CellContext`yyVec$, $CellContext`yyVec$, Plus]], 
+                " = ", 
+                Sqrt[
+                 Inner[Times, $CellContext`p2$$, $CellContext`p2$$, Plus]]}], 
+              
+              
+              Row[{"Cosine(\[Theta]) = ", "<x,y>"/"(||x|| ||y||)", " = ", 
+                Inner[Times, $CellContext`xxVec$, $CellContext`yyVec$, Plus]/(
+                Sqrt[
+                  Inner[
+                  Times, $CellContext`xxVec$, $CellContext`xxVec$, Plus]] Sqrt[
+                  Inner[
+                  Times, $CellContext`yyVec$, $CellContext`yyVec$, Plus]]), 
+                " = ", $CellContext`inXY/(Norm[$CellContext`p1$$] 
+                Norm[$CellContext`p2$$])}], 
+              
+              Row[{"\[Theta] = ", "ArcCos[", "<x,y>"/"(||x|| ||y||)", 
+                "] = ", $CellContext`\[Theta]Rad$, 
+                " radians = ", $CellContext`\[Theta]Deg$, " degrees"}]}]]}]], 
+      "Specifications" :> {{{$CellContext`p1$$, {2, 2}}, Automatic, 
+         ControlType -> Locator, Appearance -> None, ControlPlacement -> 
+         1}, {{$CellContext`p2$$, {1, 0}}, Automatic, ControlType -> Locator, 
+         Appearance -> None, ControlPlacement -> 2}, 
+        Row[{
+          Manipulate`Place[1], 
+          Manipulate`Place[2], 
+          Spacer[20], 
+          Button[
+           Graphics[{
+             RGBColor[0, 0, 1], 
+             Disk[{0, 0}, 10], 
+             GrayLevel[1], 
+             Disk[{0, 6}, 2.2], 
+             Rectangle[{-1, -6.5}, {1.8, 1.8}]}, ImageSize -> 15], 
+           CreateDocument[
+            Internal`PopupWindowNotebook[
+            "Two vectors x (in blue) and y (in green) connect at the origin.\n\
+\nUse the mouse to grab these vectors and change their postition. The display \
+updates to show:\n\nthe end position of the points\nthe angle between the \
+vectors\nthe inner product between the vectors\nthe norm (length) of blue c\n\
+the norm of green y\nthe calculation of the angle in terms of the inner \
+product.", WindowTitle -> "Notes", WindowFloating -> True]], Appearance -> 
+           None, BaseStyle -> {}, DefaultBaseStyle -> {}]}]}, 
+      "Options" :> {
+       FrameLabel -> 
+        Style["The angle between two vectors can be calculated using the \
+inner product", Medium], 
+        TrackedSymbols -> {$CellContext`p1$$, $CellContext`p2$$}}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{1179., {299.91754141980783`, 307.08245858019217`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`vec[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Array[Subscript[$CellContext`x, #]& , {$CellContext`n}], 
+       TagSet[$CellContext`x, 
+        MessageName[$CellContext`x, "shdw"], 
+        "Symbol `1` appears in multiple contexts `2`; definitions in context \
+`3` may shadow or be shadowed by other definitions."], 
+       Attributes[Subscript] = {NHoldRest}, $CellContext`angle[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`y, 
+          Blank[]]] := 
+       ArcCos[Inner[Times, $CellContext`x, $CellContext`y, Plus]/(
+         Norm[$CellContext`x] Norm[$CellContext`y])], $CellContext`slope[
+         Pattern[$CellContext`s, 
+          Blank[]], 
+         Pattern[$CellContext`e, 
+          Blank[]]] := 
+       N[ArcTan[-Part[$CellContext`e, 2] + Part[$CellContext`s, 2], 
+           Part[$CellContext`e, 1] - Part[$CellContext`s, 1]] - Pi/
+         2], $CellContext`mid = {0.1942950097929863, 
+        0.27085154657238797`}, $CellContext`inXY = -0.8340000000000001}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.746916619896212*^9},
+ CellTags->{
+  "labelInnerProd=\nThe angle between two vectors can be calculated using the \
+inner \\\nproduct;\n", "labelInnerProd"},
+ CellLabel->
+  "Out[133]=",ExpressionUUID->"7e6c5e3e-d208-4804-8403-7e40608e3894"]
+}, Open  ]],
+
+Cell[TextData[{
+ "More generally, the inner product between two ",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ "-dimensional vectors ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      SubscriptBox["x", "1"], ",", 
+      SubscriptBox["x", "2"], ",", "...", ",", " ", 
+      SubscriptBox["x", "n"]}], "}"}]}], TraditionalForm]],ExpressionUUID->
+  "049801dd-4019-460f-9717-2bf2a294c37f"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"y", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      SubscriptBox["y", "1"], ",", 
+      SubscriptBox["y", "2"], ",", " ", "...", " ", ",", " ", 
+      SubscriptBox["y", "n"]}], "}"}]}], TraditionalForm]],ExpressionUUID->
+  "364a7a73-0058-49f7-b824-3b0293d6d65f"],
+ " can be calculated in many ways: as a correlation, using the dot product, \
+and directly as the sum"
+}], "Text",
+ CellChangeTimes->{{3.54379348487007*^9, 3.5437935516285133`*^9}, 
+   3.543793594807198*^9, {3.5437936393741093`*^9, 3.543793667503154*^9}, {
+   3.543793701073542*^9, 3.543793721784812*^9}, {3.543793763502252*^9, 
+   3.543793837453562*^9}, 3.543793976443891*^9, {3.543799980585196*^9, 
+   3.543800113413843*^9}},ExpressionUUID->"56874c8d-a3d1-4756-97ef-\
+ffe7dcc316db"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   UnderoverscriptBox["\[Sum]", 
+    RowBox[{"i", "=", "1"}], "n"], 
+   RowBox[{
+    SubscriptBox["x", "i"], " ", 
+    RowBox[{
+     SubscriptBox["y", "i"], " ", "."}]}]}], TraditionalForm]], "Input",
+ Evaluatable->False,
+ CellChangeTimes->{{3.5437936094916897`*^9, 3.543793627608858*^9}, {
+  3.543800129946566*^9, 
+  3.543800130356217*^9}},ExpressionUUID->"c6871abe-e017-4bf2-98d8-\
+72027182a0b1"],
+
+Cell["\<\
+Several of these equivalent definitions and code appear in the next figure, \
+which allows control of the dimension with the slider. Observe that all the \
+definitions give the same answer, and so these are really just alternative \
+words and functions designed to calculate the same thing.\
+\>", "Text",
+ CellChangeTimes->{{3.543793856763069*^9, 3.543793923849812*^9}, {
+  3.543800138081957*^9, 
+  3.543800148346805*^9}},ExpressionUUID->"e1940825-872f-4cc7-b631-\
+0f957c8a1d32"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "labelInnerProd2", "=", 
+   "\"\<Inner product, correlation, and dot product\\nare equivalent ways of \
+talking about the same thing\>\""}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+  "infoInnerProd2", "=", 
+   "\"\<Terms are used in various scientific and engineering fields that mean \
+the same thing.\\n\\nLet x and y be two vectors of length chosen by the \
+position of the slider.\\n\\nThe presentation shows:\\n\\nthe inner product \
+of x and y\\nthe correlation of x and y\\nthe sum of the element by element \
+product\\ndot product of x and y.\>\""}], ";"}], "\n", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"xxVec", ",", "yyVec"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"xxVec", "=", 
+       RowBox[{"vec", "[", 
+        RowBox[{"x", ",", "2"}], "]"}]}], ";", 
+      RowBox[{"yyVec", "=", 
+       RowBox[{"vec", "[", 
+        RowBox[{"y", ",", "2"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Column", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"\"\<x =\>\"", ",", 
+            RowBox[{"vec", "[", 
+             RowBox[{"x", ",", "n"}], "]"}]}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"\"\<y =\>\"", ",", 
+            RowBox[{"vec", "[", 
+             RowBox[{"y", ",", "n"}], "]"}]}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Inner Product of \>\"", "~~", 
+            RowBox[{"ToString", "[", "n", "]"}], "~~", 
+            "\"\< Terms <x,y> =\>\""}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"Inner", "[", 
+            RowBox[{"Times", ",", 
+             RowBox[{"vec", "[", 
+              RowBox[{"x", ",", "n"}], "]"}], ",", 
+             RowBox[{"vec", "[", 
+              RowBox[{"y", ",", "n"}], "]"}], ",", "Plus"}], "]"}], "}"}], 
+          "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Correlation of \>\"", "~~", 
+            RowBox[{"ToString", "[", "n", "]"}], "~~", "\"\< Terms =\>\""}], 
+           "}"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"ListCorrelate", "[", 
+            RowBox[{
+             RowBox[{"vec", "[", 
+              RowBox[{"x", ",", "n"}], "]"}], ",", 
+             RowBox[{"vec", "[", 
+              RowBox[{"y", ",", "n"}], "]"}]}], "]"}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Sum of \>\"", "~~", 
+            RowBox[{"ToString", "[", "n", "]"}], "~~", "\"\< Terms =\>\""}], 
+           "}"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"Sum", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Subscript", "[", 
+               RowBox[{"x", ",", "i"}], "]"}], " ", 
+              RowBox[{"Subscript", "[", 
+               RowBox[{"y", ",", "i"}], "]"}]}], ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}], "}"}], "]"}],
+          ",", "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Dot product of \>\"", "~~", 
+            RowBox[{"ToString", "[", "n", "]"}], "~~", "\"\< Terms =\>\""}], 
+           "}"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"Dot", "[", 
+            RowBox[{
+             RowBox[{"vec", "[", 
+              RowBox[{"x", ",", "n"}], "]"}], ",", 
+             RowBox[{"vec", "[", 
+              RowBox[{"y", ",", "n"}], "]"}]}], "]"}], "}"}], "]"}]}], 
+        "\[IndentingNewLine]", "}"}], "]"}]}]}], "]"}], " ", ",", 
+   RowBox[{"Row", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Control", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"n", ",", "2", ",", "\"\<size (dimension) of x and y\>\""}],
+           "}"}], ",", "2", ",", "100", ",", "1"}], "}"}], "]"}], ",", 
+      RowBox[{"Spacer", "[", "20", "]"}], ",", 
+      RowBox[{"info", "[", "infoInnerProd2", "]"}]}], "}"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"Style", "[", 
+     RowBox[{"labelInnerProd2", ",", "Medium"}], "]"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"TrackedSymbols", "\[Rule]", 
+    RowBox[{"{", "n", "}"}]}], ",", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "saveDef"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.5437134017791348`*^9, 3.543713565743804*^9}, 
+   3.5437471695552273`*^9, {3.543747233188891*^9, 3.5437473436939087`*^9}, {
+   3.543747380054777*^9, 3.543747410913301*^9}, {3.54376069564765*^9, 
+   3.543760779984928*^9}, {3.54378433215125*^9, 3.543784434877824*^9}, {
+   3.5437844679202347`*^9, 3.5437845550628767`*^9}, {3.543784606378008*^9, 
+   3.5437846738850317`*^9}, {3.54379923478797*^9, 3.543799235569757*^9}, {
+   3.543799818824544*^9, 3.543799826426132*^9}, {3.5440176557278843`*^9, 
+   3.544017715196702*^9}, {3.54401778115201*^9, 3.544017788523115*^9}, {
+   3.544017826821005*^9, 3.544017831231189*^9}, {3.544018478093882*^9, 
+   3.5440184784619503`*^9}, 3.5440185140363817`*^9, 3.5486274411235456`*^9, 
+   3.550338437973977*^9, {3.5513512336961603`*^9, 3.551351300274872*^9}, {
+   3.552865946111699*^9, 3.552866003201346*^9}, {3.5529044116970243`*^9, 
+   3.552904623985805*^9}, {3.55327254187245*^9, 3.5532725474771843`*^9}},
+ CellTags->"labelInnerProd2",
+ CellLabel->
+  "In[134]:=",ExpressionUUID->"98571fcf-df52-4759-82a9-d3b477866f3f"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 18, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 2, "size (dimension) of x and y"}, 2, 100, 1}, {
+      Hold[
+       Row[{
+         Manipulate`Place[1], 
+         Spacer[20], 
+         Button[
+          Graphics[{
+            RGBColor[0, 0, 1], 
+            Disk[{0, 0}, 10], 
+            GrayLevel[1], 
+            Disk[{0, 6}, 2.2], 
+            Rectangle[{-1, -6.5}, {1.8, 1.8}]}, ImageSize -> 15], 
+          CreateDocument[
+           Internal`PopupWindowNotebook[
+           "Terms are used in various scientific and engineering fields that \
+mean the same thing.\n\nLet x and y be two vectors of length chosen by the \
+position of the slider.\n\nThe presentation shows:\n\nthe inner product of x \
+and y\nthe correlation of x and y\nthe sum of the element by element product\n\
+dot product of x and y.", WindowTitle -> "Notes", WindowFloating -> True]], 
+          Appearance -> None, BaseStyle -> {}, DefaultBaseStyle -> {}]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    1172., {107.91754150390625`, 115.08245849609375`}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`n$19506$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, "Variables" :> {$CellContext`n$$ = 2}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$19506$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`xxVec$, $CellContext`yyVec$}, $CellContext`xxVec$ = \
+$CellContext`vec[
+          XMPTools`x, 
+           2]; $CellContext`yyVec$ = $CellContext`vec[$CellContext`y, 2]; 
+        Column[{
+           Row[{"x =", 
+             $CellContext`vec[XMPTools`x, $CellContext`n$$]}], 
+           Row[{"y =", 
+             $CellContext`vec[$CellContext`y, $CellContext`n$$]}], 
+           Row[{
+             StringExpression["Inner Product of ", 
+              ToString[$CellContext`n$$], " Terms <x,y> ="]}], 
+           Row[{
+             Inner[Times, 
+              $CellContext`vec[XMPTools`x, $CellContext`n$$], 
+              $CellContext`vec[$CellContext`y, $CellContext`n$$], Plus]}], 
+           Row[{
+             StringExpression["Correlation of ", 
+              ToString[$CellContext`n$$], " Terms ="]}], 
+           Row[{
+             ListCorrelate[
+              $CellContext`vec[XMPTools`x, $CellContext`n$$], 
+              $CellContext`vec[$CellContext`y, $CellContext`n$$]]}], 
+           Row[{
+             StringExpression["Sum of ", 
+              ToString[$CellContext`n$$], " Terms ="]}], 
+           Row[{
+             Sum[
+             Subscript[XMPTools`x, $CellContext`i] 
+              Subscript[$CellContext`y, $CellContext`i], {$CellContext`i, 
+               1, $CellContext`n$$}]}], 
+           Row[{
+             StringExpression["Dot product of ", 
+              ToString[$CellContext`n$$], " Terms ="]}], 
+           Row[{
+             Dot[
+              $CellContext`vec[XMPTools`x, $CellContext`n$$], 
+              $CellContext`vec[$CellContext`y, $CellContext`n$$]]}]}]], 
+      "Specifications" :> {{{$CellContext`n$$, 2, 
+          "size (dimension) of x and y"}, 2, 100, 1, ControlPlacement -> 1}, 
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[20], 
+          Button[
+           Graphics[{
+             RGBColor[0, 0, 1], 
+             Disk[{0, 0}, 10], 
+             GrayLevel[1], 
+             Disk[{0, 6}, 2.2], 
+             Rectangle[{-1, -6.5}, {1.8, 1.8}]}, ImageSize -> 15], 
+           CreateDocument[
+            Internal`PopupWindowNotebook[
+            "Terms are used in various scientific and engineering fields that \
+mean the same thing.\n\nLet x and y be two vectors of length chosen by the \
+position of the slider.\n\nThe presentation shows:\n\nthe inner product of x \
+and y\nthe correlation of x and y\nthe sum of the element by element product\n\
+dot product of x and y.", WindowTitle -> "Notes", WindowFloating -> True]], 
+           Appearance -> None, BaseStyle -> {}, DefaultBaseStyle -> {}]}]}, 
+      "Options" :> {
+       FrameLabel -> 
+        Style["Inner product, correlation, and dot product\nare equivalent \
+ways of talking about the same thing", Medium], 
+        TrackedSymbols -> {$CellContext`n$$}}, "DefaultOptions" :> {}],
+     ImageSizeCache->{1230., {183.91754141980783`, 191.08245858019217`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.746916620061461*^9},
+ CellTags->"labelInnerProd2",
+ CellLabel->
+  "Out[136]=",ExpressionUUID->"9e75be9a-50e4-4787-89e7-9d6a702b6e04"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The idea of inner product also extends to functions instead of sequences. \
+As often happens in calculus, the sum is replaced by an integral so that the \
+inner product between two functions ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ "(",
+ StyleBox["t",
+  FontSlant->"Italic"],
+ ") and ",
+ StyleBox["g",
+  FontSlant->"Italic"],
+ "(",
+ StyleBox["t",
+  FontSlant->"Italic"],
+ ") is given by "
+}], "Text",
+ CellChangeTimes->{{3.5454731947421*^9, 
+  3.545473228693132*^9}},ExpressionUUID->"428e31f9-c1ff-4276-80ee-\
+e30acbb6590a"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{"<", 
+    RowBox[{"f", 
+     RowBox[{"(", "t", ")"}]}]}], ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"g", "(", "t", ")"}], ">"}], "=", 
+    RowBox[{
+     SubsuperscriptBox["\[Integral]", 
+      RowBox[{"-", "\[Infinity]"}], "\[Infinity]"], 
+     RowBox[{
+      RowBox[{"f", "(", "t", ")"}], 
+      RowBox[{"g", "(", "t", ")"}], 
+      RowBox[{"\[DifferentialD]", "t"}]}]}]}]}], TraditionalForm]], "Text",
+ CellChangeTimes->{{3.545472010328538*^9, 3.5454722023876553`*^9}, {
+   3.545472232740546*^9, 3.545472306460702*^9}, {3.545472816157428*^9, 
+   3.5454728616631823`*^9}, {3.5454730116326313`*^9, 3.5454731761434183`*^9}, 
+   3.545473235624776*^9},ExpressionUUID->"88e881f1-893b-4af8-bee2-\
+fae955602782"],
+
+Cell[TextData[{
+ "The next demonstration directly calculates this integral for a variety of \
+functions. This is based on \[OpenCurlyDoubleQuote]Orthogonality of Two \
+Functions with Weighted Inner Products\[CloseCurlyDoubleQuote] from the \
+Wolfram Demonstrations \
+Project\[NonBreakingSpace]http://demonstrations.wolfram.com/\
+OrthogonalityOfTwoFunctionsWithWeightedInnerProducts/ by Alain Goriely. \
+Observe how Sin[",
+ StyleBox["nx",
+  FontSlant->"Italic"],
+ "] is orthogonal to Sin[",
+ StyleBox["mx",
+  FontSlant->"Italic"],
+ "] except for the special case when ",
+ StyleBox["n=m",
+  FontSlant->"Italic"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.5454732646272097`*^9, 3.5454732889497633`*^9}, {
+  3.545473568457333*^9, 3.545473734163024*^9}, {3.545477116020935*^9, 
+  3.545477117161283*^9}},ExpressionUUID->"3460c651-12b0-49b0-ad60-\
+00f940621b16"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "labelInnerProdFun", "=", 
+   "\"\<The inner product can also be generalized to find the 'angle' between \
+two functions\>\""}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+  "infoInnerProdFun", "=", 
+   "\"\<'Angle' (inner product) is a very general idea.\\n\\nTwo functions f \
+and g have dependence on frequency or mode parameters n and m. Choose f and g \
+from the selection box and the modes from the sliders.\\n\\nChoose an \
+interval over which to examine the functions.\\n\\nThe demonstration then \
+calculates the inner product of f and g over the specified interval, and \
+reports the results: if the inner product is zero, the two functions are \
+orthogonal (at 'right angles').\\n\\nIf the inner product is not zero, they \
+are not orthogonal.\\n\\nTry several different functions and modes. Can you \
+guess from the above demonstration with discrete complex-valued sinusoids \
+which will be orthogonal?\>\""}], ";"}], "\n", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"innerProd", "=", 
+     RowBox[{"Chop", "[", 
+      RowBox[{"NIntegrate", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"func1", "[", 
+          RowBox[{"n1", ",", "x"}], "]"}], "*", 
+         RowBox[{"func2", "[", 
+          RowBox[{"n2", ",", "x"}], "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", 
+          RowBox[{"-", "a"}], ",", "a"}], "}"}], ",", 
+        RowBox[{"AccuracyGoal", "\[Rule]", "2"}]}], "]"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Column", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Row", "[", 
+        RowBox[{"{", "\[IndentingNewLine]", "   ", 
+         RowBox[{
+          RowBox[{"Plot", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"func1", "[", 
+               RowBox[{"n1", ",", "x"}], "]"}], ",", 
+              RowBox[{"func2", "[", 
+               RowBox[{"n2", ",", "x"}], "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"x", ",", 
+              RowBox[{"-", "a"}], ",", "a"}], "}"}], ",", 
+            "\[IndentingNewLine]", "             ", 
+            RowBox[{"PlotLabel", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"func1", "[", 
+                RowBox[{"n1", ",", "x"}], "]"}], ",", 
+               RowBox[{"func2", "[", 
+                RowBox[{"n2", ",", "x"}], "]"}]}], "}"}]}], ",", 
+            "\[IndentingNewLine]", "             ", 
+            RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+            RowBox[{"ImageSize", "\[Rule]", "300"}]}], "]"}], ",", 
+          RowBox[{"Spacer", "[", "20", "]"}], ",", "\[IndentingNewLine]", 
+          "   ", 
+          RowBox[{"Plot", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"func1", "[", 
+              RowBox[{"n1", ",", "x"}], "]"}], "*", 
+             RowBox[{"func2", "[", 
+              RowBox[{"n2", ",", "x"}], "]"}]}], ",", 
+            RowBox[{"{", 
+             RowBox[{"x", ",", 
+              RowBox[{"-", "a"}], ",", "a"}], "}"}], ",", 
+            "\[IndentingNewLine]", "             ", 
+            RowBox[{"PlotLabel", "\[Rule]", 
+             RowBox[{
+              RowBox[{"func1", "[", 
+               RowBox[{"n1", ",", " ", "x"}], "]"}], "*", 
+              RowBox[{"func2", "[", 
+               RowBox[{"n2", ",", "x"}], "]"}]}]}], ",", " ", 
+            "\[IndentingNewLine]", "             ", 
+            RowBox[{"PlotStyle", "\[Rule]", "Green"}], ",", 
+            RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+            RowBox[{"ImageSize", "\[Rule]", "300"}]}], "]"}]}], " ", "}"}], 
+        "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"innerProd", "==", "0"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+         "Text", "@", 
+          "\"\<The inner product is 0, the two functions are \
+orthogonal.\>\""}], ",", 
+         RowBox[{"\"\<The inner product is \>\"", "~~", "\[IndentingNewLine]", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"SetPrecision", "[", 
+            RowBox[{"innerProd", ",", "4"}], "]"}], "]"}], "~~", 
+          "\"\<. The two functions are \
+\!\(\*StyleBox[\"not\",FontSlant->\"Italic\"]\) orthogonal.\>\""}]}], "]"}]}],
+       " ", "}"}], "]"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "func1", ",", "MySin", ",", 
+       "\"\<function \!\(\*SubscriptBox[\(f\), \(n\)]\)(x)\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"MySin", "\[Rule]", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"n", " ", "x"}], "]"}]}], ",", 
+       RowBox[{"MyCos", "\[Rule]", 
+        RowBox[{"Cos", "[", 
+         RowBox[{"n", " ", "x"}], "]"}]}], ",", 
+       RowBox[{"ChebyshevT", "\[Rule]", 
+        RowBox[{"ChebyshevT", "[", 
+         RowBox[{"n", ",", " ", "x"}], "]"}]}], ",", 
+       RowBox[{"LegendreP", "\[Rule]", 
+        RowBox[{"LegendreP", "[", 
+         RowBox[{"n", ",", " ", "x"}], "]"}]}]}], "}"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "func2", ",", "MySin", ",", 
+       "\"\<function \!\(\*SubscriptBox[\(g\), \(m\)]\)(x)\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"MySin", "\[Rule]", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"m", " ", "x"}], "]"}]}], ",", 
+       RowBox[{"MyCos", "\[Rule]", 
+        RowBox[{"Cos", "[", 
+         RowBox[{"m", " ", "x"}], "]"}]}], ",", 
+       RowBox[{"ChebyshevT", "\[Rule]", 
+        RowBox[{"ChebyshevT", "[", 
+         RowBox[{"m", ",", " ", "x"}], "]"}]}], ",", 
+       RowBox[{"LegendreP", "\[Rule]", 
+        RowBox[{"LegendreP", "[", 
+         RowBox[{"m", ",", " ", "x"}], "]"}]}]}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "n1", ",", "1", ",", 
+       "\"\<mode n of \!\(\*SubscriptBox[\(f\), \(n\)]\)(x)\>\""}], "}"}], 
+     ",", "0", ",", "12", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "n2", ",", "2", ",", 
+       "\"\<mode m of \!\(\*SubscriptBox[\(g\), \(m\)]\)(x)\>\""}], "}"}], 
+     ",", "0", ",", "12", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Row", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Control", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"a", ",", "Pi", ",", "\"\<interval\>\""}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Pi", "\[Rule]", "\"\<[-\[Pi],\[Pi]]\>\""}], ",", 
+           RowBox[{"1", "\[Rule]", "\"\<[-1,1]\>\""}]}], "}"}]}], "}"}], 
+       "]"}], ",", 
+      RowBox[{"Spacer", "[", "20", "]"}], ",", 
+      RowBox[{"info", "[", "infoInnerProdFun", "]"}]}], "}"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Initialization", "\[RuleDelayed]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"MySin", "[", 
+         RowBox[{"nn_", ",", "xx_"}], "]"}], ":=", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"nn", " ", "xx"}], "]"}]}], ")"}], ",", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"MyCos", "[", 
+         RowBox[{"nn_", ",", "xx_"}], "]"}], ":=", 
+        RowBox[{"Cos", "[", 
+         RowBox[{"nn", " ", "xx"}], "]"}]}], ")"}]}], "}"}]}], ",", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"Style", "[", 
+     RowBox[{"labelInnerProdFun", ",", "Medium"}], "]"}]}], ",", 
+   RowBox[{"TrackedSymbols", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"func1", ",", "func2", ",", "n1", ",", "n2", ",", "a"}], "}"}]}],
+    ",", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "saveDef"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.5454734003263597`*^9, 3.545473467794126*^9}, {
+   3.545473799388109*^9, 3.5454742096481953`*^9}, {3.545474291740531*^9, 
+   3.545474314153925*^9}, {3.54547436981479*^9, 3.545474399976892*^9}, {
+   3.545474435336339*^9, 3.545474461911846*^9}, 3.54547451630593*^9, {
+   3.545474612832196*^9, 3.545474693999403*^9}, {3.545474725871078*^9, 
+   3.545474731220999*^9}, {3.545476555209095*^9, 3.545476568327244*^9}, {
+   3.545476616369145*^9, 3.545476779088923*^9}, {3.54547681334653*^9, 
+   3.545476856554462*^9}, {3.545476949291349*^9, 3.54547697478638*^9}, 
+   3.5454770066345243`*^9, {3.545477050193219*^9, 3.5454770939445963`*^9}, {
+   3.5454771538428583`*^9, 3.54547718858248*^9}, {3.545477240835115*^9, 
+   3.545477247867194*^9}, {3.54547729378157*^9, 3.5454773553100767`*^9}, {
+   3.545477403658658*^9, 3.5454774111815367`*^9}, {3.545477463064702*^9, 
+   3.5454774698076468`*^9}, {3.54547757610532*^9, 3.545477577630864*^9}, {
+   3.545477841723731*^9, 3.545477842821795*^9}, {3.545477873833688*^9, 
+   3.545477888656568*^9}, {3.545478059946772*^9, 3.545478099729048*^9}, {
+   3.545478172610839*^9, 3.5454781733122673`*^9}, {3.545504831695581*^9, 
+   3.5455048641912823`*^9}, {3.545504924556003*^9, 3.5455049314229403`*^9}, 
+   3.548627442499556*^9, {3.551351326230352*^9, 3.551351389183692*^9}, {
+   3.5513514194204283`*^9, 3.551351419810829*^9}, {3.552866016101935*^9, 
+   3.55286612264896*^9}, {3.5529048296419487`*^9, 3.5529050512163343`*^9}, {
+   3.552905091427006*^9, 3.5529051429898233`*^9}, 3.746916666931881*^9},
+ CellTags->
+  "labelInnerProdFun",ExpressionUUID->"f780fba5-4eb2-4cab-894f-28565dad3a40"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = 
+    Pi, $CellContext`func1$$ = $CellContext`MySin, $CellContext`func2$$ = \
+$CellContext`MySin, $CellContext`n1$$ = 1, $CellContext`n2$$ = 2, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`func1$$], $CellContext`MySin, 
+       "function \!\(\*SubscriptBox[\(f\), \(n\)]\)(x)"}, {$CellContext`MySin -> 
+       Sin[$CellContext`n XMPTools`x], $CellContext`MyCos -> 
+       Cos[$CellContext`n XMPTools`x], ChebyshevT -> 
+       ChebyshevT[$CellContext`n, XMPTools`x], LegendreP -> 
+       LegendreP[$CellContext`n, XMPTools`x]}}, {{
+       Hold[$CellContext`func2$$], $CellContext`MySin, 
+       "function \!\(\*SubscriptBox[\(g\), \(m\)]\)(x)"}, {$CellContext`MySin -> 
+       Sin[$CellContext`m XMPTools`x], $CellContext`MyCos -> 
+       Cos[$CellContext`m XMPTools`x], ChebyshevT -> 
+       ChebyshevT[$CellContext`m, XMPTools`x], LegendreP -> 
+       LegendreP[$CellContext`m, XMPTools`x]}}, {{
+       Hold[$CellContext`n1$$], 1, 
+       "mode n of \!\(\*SubscriptBox[\(f\), \(n\)]\)(x)"}, 0, 12, 1}, {{
+       Hold[$CellContext`n2$$], 2, 
+       "mode m of \!\(\*SubscriptBox[\(g\), \(m\)]\)(x)"}, 0, 12, 1}, {{
+       Hold[$CellContext`a$$], Pi, "interval"}, {
+      Pi -> "[-\[Pi],\[Pi]]", 1 -> "[-1,1]"}}, {
+      Hold[
+       Row[{
+         Manipulate`Place[1], 
+         Spacer[20], 
+         Button[
+          Graphics[{
+            RGBColor[0, 0, 1], 
+            Disk[{0, 0}, 10], 
+            GrayLevel[1], 
+            Disk[{0, 6}, 2.2], 
+            Rectangle[{-1, -6.5}, {1.8, 1.8}]}, ImageSize -> 15], 
+          CreateDocument[
+           Internal`PopupWindowNotebook[
+           "'Angle' (inner product) is a very general idea.\n\nTwo functions \
+f and g have dependence on frequency or mode paraeters n and m. Choose f and \
+g from the selection box and the modes from the sliders.\n\nChoose an \
+interval over which to examine the functions.\n\nThe demonstration then \
+calculates the inner product of f and g over the specified interval, and \
+reports the results: if the inner product is zero, the two functions are \
+orthogonal (at 'right angles').\n\nIf the inner product is not zero, they are \
+not orthogonal.\n\nTry several different functions and modes. Can you guess \
+from the above demonstration with discrete complex-valued sinusoids which \
+will be orthogonal?", WindowTitle -> "Notes", WindowFloating -> True]], 
+          Appearance -> None, BaseStyle -> {}, DefaultBaseStyle -> {}]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    775., {135.41754150390625`, 142.58245849609375`}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`func1$19541$$ = False, $CellContext`func2$19542$$ = 
+    False, $CellContext`n1$19543$$ = 0, $CellContext`n2$19544$$ = 
+    0, $CellContext`a$19545$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = 
+        Pi, $CellContext`func1$$ = $CellContext`MySin, $CellContext`func2$$ = \
+$CellContext`MySin, $CellContext`n1$$ = 1, $CellContext`n2$$ = 2}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`func1$$, $CellContext`func1$19541$$, False], 
+        Hold[$CellContext`func2$$, $CellContext`func2$19542$$, False], 
+        Hold[$CellContext`n1$$, $CellContext`n1$19543$$, 0], 
+        Hold[$CellContext`n2$$, $CellContext`n2$19544$$, 0], 
+        Hold[$CellContext`a$$, $CellContext`a$19545$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ($CellContext`innerProd = Chop[
+          
+          NIntegrate[$CellContext`func1$$[$CellContext`n1$$, 
+             XMPTools`x] $CellContext`func2$$[$CellContext`n2$$, 
+             XMPTools`x], {XMPTools`x, -$CellContext`a$$, $CellContext`a$$}, 
+           AccuracyGoal -> 2]]; Column[{
+          Row[{
+            Plot[{
+              $CellContext`func1$$[$CellContext`n1$$, XMPTools`x], 
+              $CellContext`func2$$[$CellContext`n2$$, XMPTools`x]}, {
+             XMPTools`x, -$CellContext`a$$, $CellContext`a$$}, PlotLabel -> {
+               $CellContext`func1$$[$CellContext`n1$$, XMPTools`x], 
+               $CellContext`func2$$[$CellContext`n2$$, XMPTools`x]}, Filling -> 
+             Axis, ImageSize -> 300], 
+            Spacer[20], 
+            
+            Plot[$CellContext`func1$$[$CellContext`n1$$, 
+               XMPTools`x] $CellContext`func2$$[$CellContext`n2$$, 
+               XMPTools`x], {XMPTools`x, -$CellContext`a$$, $CellContext`a$$},
+              PlotLabel -> $CellContext`func1$$[$CellContext`n1$$, 
+                XMPTools`x] $CellContext`func2$$[$CellContext`n2$$, 
+                XMPTools`x], PlotStyle -> Green, Filling -> Axis, ImageSize -> 
+             300]}], 
+          If[$CellContext`innerProd == 0, 
+           Text["The inner product is 0, the two functions are orthogonal."], 
+           
+           StringExpression["The inner product is ", 
+            ToString[
+             SetPrecision[$CellContext`innerProd, 4]], 
+            ". The two functions are \
+\!\(\*StyleBox[\"not\",FontSlant->\"Italic\"]\) orthogonal."]]}]), 
+      "Specifications" :> {{{$CellContext`func1$$, $CellContext`MySin, 
+          "function \!\(\*SubscriptBox[\(f\), \(n\)]\)(x)"}, \
+{$CellContext`MySin -> Sin[$CellContext`n XMPTools`x], $CellContext`MyCos -> 
+          Cos[$CellContext`n XMPTools`x], ChebyshevT -> 
+          ChebyshevT[$CellContext`n, XMPTools`x], LegendreP -> 
+          LegendreP[$CellContext`n, 
+            XMPTools`x]}}, {{$CellContext`func2$$, $CellContext`MySin, 
+          "function \!\(\*SubscriptBox[\(g\), \(m\)]\)(x)"}, \
+{$CellContext`MySin -> Sin[$CellContext`m XMPTools`x], $CellContext`MyCos -> 
+          Cos[$CellContext`m XMPTools`x], ChebyshevT -> 
+          ChebyshevT[$CellContext`m, XMPTools`x], LegendreP -> 
+          LegendreP[$CellContext`m, XMPTools`x]}}, {{$CellContext`n1$$, 1, 
+          "mode n of \!\(\*SubscriptBox[\(f\), \(n\)]\)(x)"}, 0, 12, 1, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`n2$$, 2, 
+          "mode m of \!\(\*SubscriptBox[\(g\), \(m\)]\)(x)"}, 0, 12, 1, 
+         Appearance -> "Labeled"}, {{$CellContext`a$$, Pi, "interval"}, {
+         Pi -> "[-\[Pi],\[Pi]]", 1 -> "[-1,1]"}, ControlPlacement -> 1}, 
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[20], 
+          Button[
+           Graphics[{
+             RGBColor[0, 0, 1], 
+             Disk[{0, 0}, 10], 
+             GrayLevel[1], 
+             Disk[{0, 6}, 2.2], 
+             Rectangle[{-1, -6.5}, {1.8, 1.8}]}, ImageSize -> 15], 
+           CreateDocument[
+            Internal`PopupWindowNotebook[
+            "'Angle' (inner product) is a very general idea.\n\nTwo functions \
+f and g have dependence on frequency or mode paraeters n and m. Choose f and \
+g from the selection box and the modes from the sliders.\n\nChoose an \
+interval over which to examine the functions.\n\nThe demonstration then \
+calculates the inner product of f and g over the specified interval, and \
+reports the results: if the inner product is zero, the two functions are \
+orthogonal (at 'right angles').\n\nIf the inner product is not zero, they are \
+not orthogonal.\n\nTry several different functions and modes. Can you guess \
+from the above demonstration with discrete complex-valued sinusoids which \
+will be orthogonal?", WindowTitle -> "Notes", WindowFloating -> True]], 
+           Appearance -> None, BaseStyle -> {}, DefaultBaseStyle -> {}]}]}, 
+      "Options" :> {
+       FrameLabel -> 
+        Style["The inner product can also be generalized to find the 'angle' \
+between two functions", Medium], 
+        TrackedSymbols -> {$CellContext`func1$$, $CellContext`func2$$, \
+$CellContext`n1$$, $CellContext`n2$$, $CellContext`a$$}}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{833., {256.91754141980783`, 264.08245858019217`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`MySin[
+         Pattern[$CellContext`nn, 
+          Blank[]], 
+         Pattern[$CellContext`xx, 
+          Blank[]]] := 
+       Sin[$CellContext`nn $CellContext`xx], $CellContext`MyCos[
+         Pattern[$CellContext`nn, 
+          Blank[]], 
+         Pattern[$CellContext`xx, 
+          Blank[]]] := Cos[$CellContext`nn $CellContext`xx]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.7469166202139053`*^9},
+ CellTags->"labelInnerProdFun",
+ CellLabel->
+  "Out[139]=",ExpressionUUID->"9b9435e8-e974-4507-be37-377d8388f5c4"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The inner product unifies several important signal processing tools such as \
+",
+ ButtonBox["correlation and autocorrelation",
+  BaseStyle->"Hyperlink",
+  ButtonData->{"vvCorrAngles.nb", None}],
+ ", the ",
+ ButtonBox["Fourier transform",
+  BaseStyle->"Hyperlink",
+  ButtonData->{"vvFourierAngles.nb", None}],
+ ", ",
+ ButtonBox["wavelet transforms",
+  BaseStyle->"Hyperlink",
+  ButtonData->{"vvInsideWavelets.nb", None}],
+ ", and ",
+ ButtonBox["linear filtering",
+  BaseStyle->"Hyperlink",
+  ButtonData->{"vvFiltersAngles.nb", None}],
+ ". While each of these important signal (image) processing tools is closely \
+related to the inner product (as shown here) there are also important \
+differences. Each of the different tools generalizes the inner product in a \
+slightly different way, and so can be used to accomplish somewhat different \
+tasks."
+}], "Text",
+ CellChangeTimes->{{3.543799666391773*^9, 3.5437997174404583`*^9}, {
+  3.543966148707045*^9, 3.5439662225767317`*^9}, {3.543966302830447*^9, 
+  3.543966312733919*^9}, {3.544192413401482*^9, 3.5441924884107924`*^9}, {
+  3.545438753957984*^9, 
+  3.545438785673427*^9}},ExpressionUUID->"c7638b1e-4e72-483a-9936-\
+bdb3a2939d53"],
+
+Cell["", "Text",
+ CellChangeTimes->{{3.552865930195579*^9, 
+  3.552865930306725*^9}},ExpressionUUID->"06a988e3-410b-470c-9ebf-\
+63a04b939d1f"],
+
+Cell["", "Text",ExpressionUUID->"08f91639-0395-46f9-9192-054228fbdf14"]
+}, Open  ]]
+},
+ScreenStyleEnvironment->"Working",
+WindowSize->{1141.2, 568.8},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowCellBracket->False,
+ShowSelection->True,
+ShowCellLabel->False,
+ShowCellTags->False,
+Magnification:>FEPrivate`If[
+  FEPrivate`Equal[FEPrivate`$VersionNumber, 6.], 1.25, 1.25 Inherited],
+FrontEndVersion->"13.1 for Microsoft Windows (64-bit) (June 16, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"50390a2a-9f6a-4752-92b9-d48c5757f045"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "labelInnerProd=\nThe angle between two vectors can be calculated using the inner \\\nproduct;\n"->{
+  Cell[8038, 192, 12896, 291, 766, "Input",ExpressionUUID->"f7869902-94b2-4bc5-8096-ad9a9a630b9a",
+   CellTags->{"labelInnerProd=\nThe angle between two vectors can be calculated using the inner \\\nproduct;\n", "labelInnerProd"}],
+  Cell[20937, 485, 9566, 203, 656, "Output",ExpressionUUID->"7e6c5e3e-d208-4804-8403-7e40608e3894",
+   CellTags->{"labelInnerProd=\nThe angle between two vectors can be calculated using the inner \\\nproduct;\n", "labelInnerProd"}]},
+ "labelInnerProd"->{
+  Cell[8038, 192, 12896, 291, 766, "Input",ExpressionUUID->"f7869902-94b2-4bc5-8096-ad9a9a630b9a",
+   CellTags->{"labelInnerProd=\nThe angle between two vectors can be calculated using the inner \\\nproduct;\n", "labelInnerProd"}],
+  Cell[20937, 485, 9566, 203, 656, "Output",ExpressionUUID->"7e6c5e3e-d208-4804-8403-7e40608e3894",
+   CellTags->{"labelInnerProd=\nThe angle between two vectors can be calculated using the inner \\\nproduct;\n", "labelInnerProd"}]},
+ "labelInnerProd2"->{
+  Cell[32683, 753, 5859, 136, 506, "Input",ExpressionUUID->"98571fcf-df52-4759-82a9-d3b477866f3f",
+   CellTags->"labelInnerProd2"],
+  Cell[38545, 891, 5370, 117, 396, "Output",ExpressionUUID->"9e75be9a-50e4-4787-89e7-9d6a702b6e04",
+   CellTags->"labelInnerProd2"]},
+ "labelInnerProdFun"->{
+  Cell[46111, 1079, 9479, 222, 740, "Input",ExpressionUUID->"f780fba5-4eb2-4cab-894f-28565dad3a40",
+   CellTags->"labelInnerProdFun"],
+  Cell[55593, 1303, 9244, 176, 556, "Output",ExpressionUUID->"9b9435e8-e974-4507-be37-377d8388f5c4",
+   CellTags->"labelInnerProdFun"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"labelInnerProd=\nThe angle between two vectors can be calculated using the inner \\\nproduct;\n", 66952, 1539},
+ {"labelInnerProd", 67439, 1544},
+ {"labelInnerProd2", 67927, 1549},
+ {"labelInnerProdFun", 68217, 1554}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 686, 18, 80, "Input",ExpressionUUID->"283ddc32-cf68-4d8a-b91c-66c07c509f1a",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[1268, 42, 436, 6, 83, "Section",ExpressionUUID->"87e67127-faed-4568-98de-05b37c8a3843"],
+Cell[1707, 50, 1824, 32, 245, "Text",ExpressionUUID->"4f31f956-1887-49fe-93ec-0a36cd917169"],
+Cell[CellGroupData[{
+Cell[3556, 86, 1326, 34, 83, "Input",ExpressionUUID->"01c83bc6-1ccc-4381-b5c7-0113dad2f126"],
+Cell[4885, 122, 1603, 39, 119, "Output",ExpressionUUID->"63896061-a45b-46a9-b521-7d558ad2ad54"]
+}, Open  ]],
+Cell[6503, 164, 1510, 24, 217, "Text",ExpressionUUID->"6aefcfb9-82cb-4db5-96d2-8629b1c33621"],
+Cell[CellGroupData[{
+Cell[8038, 192, 12896, 291, 766, "Input",ExpressionUUID->"f7869902-94b2-4bc5-8096-ad9a9a630b9a",
+ CellTags->{"labelInnerProd=\nThe angle between two vectors can be calculated using the inner \\\nproduct;\n", "labelInnerProd"}],
+Cell[20937, 485, 9566, 203, 656, "Output",ExpressionUUID->"7e6c5e3e-d208-4804-8403-7e40608e3894",
+ CellTags->{"labelInnerProd=\nThe angle between two vectors can be calculated using the inner \\\nproduct;\n", "labelInnerProd"}]
+}, Open  ]],
+Cell[30518, 691, 1212, 32, 73, "Text",ExpressionUUID->"56874c8d-a3d1-4756-97ef-ffe7dcc316db"],
+Cell[31733, 725, 433, 13, 67, "Input",ExpressionUUID->"c6871abe-e017-4bf2-98d8-72027182a0b1",
+ Evaluatable->False],
+Cell[32169, 740, 489, 9, 73, "Text",ExpressionUUID->"e1940825-872f-4cc7-b631-0f957c8a1d32"],
+Cell[CellGroupData[{
+Cell[32683, 753, 5859, 136, 506, "Input",ExpressionUUID->"98571fcf-df52-4759-82a9-d3b477866f3f",
+ CellTags->"labelInnerProd2"],
+Cell[38545, 891, 5370, 117, 396, "Output",ExpressionUUID->"9e75be9a-50e4-4787-89e7-9d6a702b6e04",
+ CellTags->"labelInnerProd2"]
+}, Open  ]],
+Cell[43930, 1011, 544, 19, 73, "Text",ExpressionUUID->"428e31f9-c1ff-4276-80ee-e30acbb6590a"],
+Cell[44477, 1032, 754, 20, 62, "Text",ExpressionUUID->"88e881f1-893b-4af8-bee2-fae955602782"],
+Cell[45234, 1054, 852, 21, 102, "Text",ExpressionUUID->"3460c651-12b0-49b0-ad60-00f940621b16"],
+Cell[CellGroupData[{
+Cell[46111, 1079, 9479, 222, 740, "Input",ExpressionUUID->"f780fba5-4eb2-4cab-894f-28565dad3a40",
+ CellTags->"labelInnerProdFun"],
+Cell[55593, 1303, 9244, 176, 556, "Output",ExpressionUUID->"9b9435e8-e974-4507-be37-377d8388f5c4",
+ CellTags->"labelInnerProdFun"]
+}, Open  ]],
+Cell[64852, 1482, 1203, 29, 102, "Text",ExpressionUUID->"c7638b1e-4e72-483a-9936-bdb3a2939d53"],
+Cell[66058, 1513, 142, 3, 44, "Text",ExpressionUUID->"06a988e3-410b-470c-9ebf-63a04b939d1f"],
+Cell[66203, 1518, 71, 0, 44, "Text",ExpressionUUID->"08f91639-0395-46f9-9192-054228fbdf14"]
+}, Open  ]]
+}
+]
+*)
+

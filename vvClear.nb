@@ -1,0 +1,93 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      3705,         85]
+NotebookOptionsPosition[      3263,         68]
+NotebookOutlinePosition[      3622,         84]
+CellTagsIndexPosition[      3579,         81]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Variables that are used in multiple notebooks might interfere if not cleared\
+\>", "Subsection",
+ CellChangeTimes->{{3.54428937289323*^9, 3.544289416383011*^9}, {
+  3.552311223687261*^9, 
+  3.552311224431595*^9}},ExpressionUUID->"ab3684eb-0f84-4382-bc66-\
+7560c2fc460b"],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", 
+  RowBox[{
+  "x", ",", "x1", ",", "x2", ",", "x3", ",", "y", ",", "y1", ",", "y2", ",", 
+   "y3", ",", "a", ",", "b", ",", "c", ",", "d", ",", "a11", ",", "a12", ",", 
+   "a21", ",", "a22", ",", "b1", ",", "b2", ",", "d1", ",", "d2", ",", "f", 
+   ",", " ", "g", ",", "h", ",", " ", "m", ",", "n", ",", "p", ",", "r", ",", 
+   "s", ",", "t", ",", "w", ",", "w1", ",", "i", ",", "j", ",", "k", ",", 
+   "c1", ",", "c2", ",", "c3", ",", "c4", ",", "c5", ",", "c6", ",", "xf", 
+   ",", "u", ",", "v", ",", "z", ",", "L", ",", "X", ",", "canvasPatch", ",", 
+   "gBox", ",", "col", ",", "row", ",", "patch", ",", "smallPatch", ",", 
+   "canvasPatch", ",", "canvasPatchEQ", ",", "aSep", ",", "im", ",", "img", 
+   ",", "imgR", ",", "imgG", ",", "imgB", ",", "imgH", ",", " ", "imgS", ",", 
+   "negImg", ",", "rotImg", ",", "binImg", ",", "radImg", ",", "iHSB", ",", 
+   "f1", ",", "f2", ",", "f3", ",", "f4", ",", "f5", ",", "f6", ",", "f7", 
+   ",", "f8", ",", "f9", ",", "f10", ",", "rand01", ",", "count", ",", 
+   "marker", ",", "data", ",", "threadImage", ",", "threadMat", ",", 
+   "threadCorr", ",", "len", ",", "dim", ",", "dims", ",", "seq", ",", 
+   "autoCorr", ",", "hump"}], "]"}]], "Input",
+ CellChangeTimes->{{3.544282588732156*^9, 3.544282669264779*^9}, {
+   3.5442834206542797`*^9, 3.544283425610416*^9}, {3.544286743228343*^9, 
+   3.544286746487319*^9}, {3.5442870421873693`*^9, 3.544287054896611*^9}, {
+   3.544287090522702*^9, 3.5442871265450907`*^9}, {3.544287181088428*^9, 
+   3.544287200531777*^9}, {3.5442873185351048`*^9, 3.544287428536908*^9}, {
+   3.54428751537605*^9, 3.544287518549206*^9}, {3.544287560961226*^9, 
+   3.544287584050048*^9}, {3.5442876665225153`*^9, 3.5442877227765703`*^9}, {
+   3.544287781790886*^9, 3.544287789436729*^9}, {3.544287957761784*^9, 
+   3.544287958053334*^9}, {3.5442880038469143`*^9, 3.544288007734447*^9}, {
+   3.544289346962893*^9, 3.544289358514616*^9}, 3.544363538131769*^9, {
+   3.5444400725872498`*^9, 3.5444400791291428`*^9}, {3.544803637111445*^9, 
+   3.5448036817015247`*^9}, {3.544820079378663*^9, 3.5448200851298027`*^9}, {
+   3.544820140297984*^9, 3.5448201548111887`*^9}, {3.544871583096431*^9, 
+   3.5448715846150837`*^9}, {3.548588309866685*^9, 3.548588312227829*^9}, {
+   3.549971955624525*^9, 
+   3.549971955838274*^9}},ExpressionUUID->"9ecd12d8-8634-434c-84f4-\
+364b494fb559"]
+}, Open  ]]
+},
+WindowSize->{740, 756},
+WindowMargins->{{20, Automatic}, {Automatic, 44}},
+FrontEndVersion->"11.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (September \
+10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 280, 6, 54, "Subsection",ExpressionUUID->"ab3684eb-0f84-4382-bc66-7560c2fc460b"],
+Cell[862, 30, 2385, 35, 157, "Input",ExpressionUUID->"9ecd12d8-8634-434c-84f4-364b494fb559"]
+}, Open  ]]
+}
+]
+*)
+

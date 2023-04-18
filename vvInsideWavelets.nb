@@ -1,0 +1,1223 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     49992,       1215]
+NotebookOptionsPosition[     45993,       1131]
+NotebookOutlinePosition[     47533,       1174]
+CellTagsIndexPosition[     47397,       1167]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"!", 
+     RowBox[{"NumberQ", "[", "makePallette", "]"}]}], ",", 
+    RowBox[{"NotebookEvaluate", "[", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "~~", 
+      "\"\<visualVocabDefs.nb\>\""}], "]"}], ",", 
+    RowBox[{"NotebookEvaluate", "[", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "~~", "\"\<vvClear.nb\>\""}], 
+     "]"}]}], "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5428065919380074`*^9, 3.542806591940366*^9}, 
+   3.5544670613312063`*^9, 
+   3.554546310273068*^9},ExpressionUUID->"e9894607-4fb6-4802-9bdd-\
+e5a506c48488"],
+
+Cell[CellGroupData[{
+
+Cell["Inside Wavelet Transforms", "Section",
+ CellChangeTimes->{{3.543799732963008*^9, 3.543799752000264*^9}, {
+  3.545321657200571*^9, 3.545321659276039*^9}, {3.553080918874825*^9, 
+  3.5530809222860193`*^9}},ExpressionUUID->"efb77c5e-06e1-475b-a3e2-\
+e472aa75794b"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{3.5547655937624273`*^9, 
+  3.8908456338287735`*^9},ExpressionUUID->"60710c5a-4b51-4995-910d-\
+42aa733346e2"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.890845632077199*^9, 
+  3.890845632078248*^9}},ExpressionUUID->"ddfb4572-4ee8-4f6c-bc09-\
+f9e3c42ec10b"],
+
+Cell[TextData[{
+ "The ",
+ ButtonBox["Fourier transform",
+  BaseStyle->"Hyperlink",
+  ButtonData->{"vvFourierAngles.nb", None}],
+ " uses sinusoids as its basis functions, representing any arbitrary waveform \
+as a linear combination of sinusoidal basis functions. Since sinusoids have \
+infinite support (they are defined for all values from -\[Infinity] to \
+\[Infinity]), the Fourier transform gives a single spectrum for the complete \
+wave. If the spectrum changes, that is, that the behavior of the signal is \
+significantly different in one region than in another, the Fourier transform \
+cannot give a good analysis of the changing situation. One common way to \
+approach this is via the Short-Time Fourier Transform (STFT), which windows \
+pieces of the signal and analyzes them separately, and then pastes them back \
+together into a ",
+ ButtonBox["spectrogram",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    FrontEnd`FileName[{"dictionary"}, "specgram.nb", CharacterEncoding -> 
+     "UTF-8"], None}],
+ ". In the wavelet transforms (see ",
+ ButtonBox["here",
+  BaseStyle->"Hyperlink",
+  ButtonData->{"visualVocabWavelets.nb", None}],
+ " for a number of examples of wavelet transforms applied to images) the \
+windowing operation is incorporated directly into the basis functions and a \
+variety of nonsinusoidal shapes are common. "
+}], "Text",
+ CellChangeTimes->{{3.544031960374208*^9, 3.544032013735114*^9}, {
+   3.544305473006855*^9, 3.544305592231551*^9}, {3.545395693598832*^9, 
+   3.545395730968092*^9}, {3.545395906409225*^9, 3.545395927359231*^9}, {
+   3.545395960677835*^9, 3.5453959633578568`*^9}, {3.545395998976892*^9, 
+   3.545396271890197*^9}, {3.5453963210524197`*^9, 3.545396336188011*^9}, {
+   3.545396445709731*^9, 3.54539650097733*^9}, {3.545396641344428*^9, 
+   3.545396641351289*^9}, {3.545396673422724*^9, 3.5453967248862047`*^9}, {
+   3.545396762343631*^9, 3.545396862983273*^9}, {3.5453969445028353`*^9, 
+   3.545396944509536*^9}, {3.545402303082753*^9, 3.5454023440490017`*^9}, {
+   3.5454024538415947`*^9, 3.545402611595531*^9}, {3.5454027247297773`*^9, 
+   3.5454027893023376`*^9}, {3.545403548690909*^9, 3.545403577459058*^9}, {
+   3.5454041773514557`*^9, 3.545404187363941*^9}, {3.553081051203377*^9, 
+   3.5530810512167892`*^9}, 
+   3.55459247248072*^9},ExpressionUUID->"02759654-0871-4402-b271-\
+42511edf3672"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TableForm", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Hyperlink", "[", 
+       RowBox[{"\"\<Mother\>\"", ",", 
+        RowBox[{"{", 
+         RowBox[{"\"\<vvInsideWavelets.nb\>\"", ",", "\"\<labelMother\>\""}], 
+         "}"}], ",", 
+        RowBox[{"BaseStyle", "\[Rule]", "mathColor"}]}], "]"}], ",", 
+      "labelMother"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Hyperlink", "[", 
+       RowBox[{"\"\<CWT\>\"", ",", 
+        RowBox[{"{", 
+         RowBox[{"\"\<vvInsideWavelets.nb\>\"", ",", "\"\<labelCWT\>\""}], 
+         "}"}], ",", 
+        RowBox[{"BaseStyle", "\[Rule]", "mathColor"}]}], "]"}], ",", 
+      "labelCWT"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Hyperlink", "[", 
+       RowBox[{"\"\<CWTOrtho\>\"", ",", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<vvInsideWavelets.nb\>\"", ",", "\"\<labelCWTOrtho\>\""}], "}"}],
+         ",", 
+        RowBox[{"BaseStyle", "\[Rule]", "mathColor"}]}], "]"}], ",", 
+      "labelCWTOrtho"}], "}"}]}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.553081083727478*^9, 3.5530812683804083`*^9}, 
+   3.5532866262886553`*^9},ExpressionUUID->"bed35184-e340-4dde-aa62-\
+37d1a1f20e69"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     TagBox[
+      ButtonBox[
+       PaneSelectorBox[{False->"\<\"Mother\"\>", True->
+        StyleBox["\<\"Mother\"\>", "HyperlinkActive"]}, Dynamic[
+         CurrentValue["MouseOver"]],
+        BaseStyle->{
+          RGBColor[0.6, 0.4, 0.2]},
+        FrameMargins->0,
+        ImageSize->Automatic],
+       BaseStyle->"Hyperlink",
+       ButtonData:>{"vvInsideWavelets.nb", "labelMother"},
+       ButtonNote->"vvInsideWavelets.nb"],
+      Annotation[#, {"vvInsideWavelets.nb", "labelMother"}, 
+       "Hyperlink"]& ], "\<\"A number of different mother wavelets at various \
+shifts and scales\"\>"},
+    {
+     TagBox[
+      ButtonBox[
+       PaneSelectorBox[{False->"\<\"CWT\"\>", True->
+        StyleBox["\<\"CWT\"\>", "HyperlinkActive"]}, Dynamic[
+         CurrentValue["MouseOver"]],
+        BaseStyle->{
+          RGBColor[0.6, 0.4, 0.2]},
+        FrameMargins->0,
+        ImageSize->Automatic],
+       BaseStyle->"Hyperlink",
+       ButtonData:>{"vvInsideWavelets.nb", "labelCWT"},
+       ButtonNote->"vvInsideWavelets.nb"],
+      Annotation[#, {"vvInsideWavelets.nb", "labelCWT"}, 
+       "Hyperlink"]& ], "\<\"The continuous wavelet transform for several \
+different signals\"\>"},
+    {
+     TagBox[
+      ButtonBox[
+       PaneSelectorBox[{False->"\<\"CWTOrtho\"\>", True->
+        StyleBox["\<\"CWTOrtho\"\>", "HyperlinkActive"]}, Dynamic[
+         CurrentValue["MouseOver"]],
+        BaseStyle->{
+          RGBColor[0.6, 0.4, 0.2]},
+        FrameMargins->0,
+        ImageSize->Automatic],
+       BaseStyle->"Hyperlink",
+       ButtonData:>{"vvInsideWavelets.nb", "labelCWTOrtho"},
+       ButtonNote->"vvInsideWavelets.nb"],
+      Annotation[#, {"vvInsideWavelets.nb", "labelCWTOrtho"}, 
+       "Hyperlink"]& ], "\<\"Orthogonality of wavelet functions at various \
+shifts and scales\"\>"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",ExpressionUUID->"6e2f8ab2-8e9a-44e4-\
+a2bb-59a35daf4446"]
+}, {2}]],
+
+Cell[TextData[{
+ "Wavelet shapes ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["\[CapitalPsi]", 
+      RowBox[{"a", ",", "b"}]], "(", "t", ")"}], " "}], TraditionalForm]],
+  ExpressionUUID->"c5dd19cf-2bc6-4e66-87d2-629b71bee9ac"],
+ "called \"mother wavelets\" have two parameters: the ",
+ StyleBox["shift",
+  FontSlant->"Italic"],
+ " parameter ",
+ StyleBox["b",
+  FontSlant->"Italic"],
+ " specifies where in time the wavelet is located (analogous to the windowing \
+of a large waveform in the STFT) and the ",
+ StyleBox["scale",
+  FontSlant->"Italic"],
+ " parameter ",
+ StyleBox["a",
+  FontSlant->"Italic"],
+ " stretches or compresses the waveform (analogous to the frequency of a \
+sinusoidal decomposition). Here are a number of different mother wavelets \
+along with plots at various shift and scale values."
+}], "Text",
+ CellChangeTimes->{{3.544031960374208*^9, 3.544032013735114*^9}, {
+  3.544305473006855*^9, 3.544305592231551*^9}, {3.545395693598832*^9, 
+  3.545395730968092*^9}, {3.545395906409225*^9, 3.545395927359231*^9}, {
+  3.545395960677835*^9, 3.5453959633578568`*^9}, {3.545395998976892*^9, 
+  3.545396271890197*^9}, {3.5453963210524197`*^9, 3.545396336188011*^9}, {
+  3.545396445709731*^9, 3.54539650097733*^9}, {3.545396641344428*^9, 
+  3.545396641351289*^9}, {3.545396673422724*^9, 3.5453967248862047`*^9}, {
+  3.545396762343631*^9, 3.545396862983273*^9}, {3.5453969445028353`*^9, 
+  3.545396944509536*^9}, {3.545402303082753*^9, 3.5454023440490017`*^9}, {
+  3.5454024538415947`*^9, 3.545402611595531*^9}, {3.5454027247297773`*^9, 
+  3.5454027893023376`*^9}, {3.545403548690909*^9, 3.545403577459058*^9}, {
+  3.5454041773514557`*^9, 3.545404187363941*^9}, {3.553081051203377*^9, 
+  3.553081057781291*^9}},ExpressionUUID->"85df25b5-0a82-4e9a-9306-\
+32a47ab695dd"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "labelMother", "=", 
+   "\"\<A number of different mother wavelets at various shifts and \
+scales\>\""}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"infoMother", "=", "\"\<\>\""}], ";"}], "\n", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"psi", "=", 
+     RowBox[{"Re", "[", 
+      RowBox[{
+       RowBox[{"2", "^", 
+        RowBox[{"(", 
+         RowBox[{"j", "/", "2"}], ")"}]}], " ", 
+       RowBox[{"WaveletPsi", "[", 
+        RowBox[{
+         RowBox[{"waveletType", "[", "]"}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"2", "^", 
+            RowBox[{"(", 
+             RowBox[{"j", "/", "2"}], ")"}]}], " ", "t"}], "+", "\[Phi]"}]}], 
+        "]"}]}], "]"}]}], ";", 
+    RowBox[{"Row", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Plot", "[", 
+        RowBox[{"psi", ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", 
+           RowBox[{"-", 
+            RowBox[{"2", "^", 
+             RowBox[{"(", 
+              RowBox[{"j", "/", "2"}], ")"}]}]}], ",", 
+           RowBox[{"2", "^", 
+            RowBox[{"(", 
+             RowBox[{"j", "/", "2"}], ")"}]}]}], "}"}], ",", 
+         RowBox[{"PlotStyle", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"Blue", ",", "Thick"}], "}"}]}], ",", 
+         RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+         RowBox[{"Mesh", "\[Rule]", "None"}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"{", "300", "}"}]}]}], "]"}], ",", 
+       RowBox[{"Spacer", "[", "20", "]"}], ",", 
+       RowBox[{
+       "\"\<\!\(\*SubscriptBox[\(\[CapitalPsi]\), \(a, b\)]\)[t]= \>\"", 
+        RowBox[{"TraditionalForm", "[", "psi", "]"}]}]}], "}"}], "]"}]}], ",", 
+   RowBox[{"Row", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Control", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "waveletType", ",", "GaborWavelet", ",", "\"\<wavelet type\>\""}], 
+          "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "HaarWavelet", ",", "CoifletWavelet", ",", "DaubechiesWavelet", ",",
+            "ShannonWavelet", ",", "SymletWavelet", ",", 
+           "ReverseBiorthogonalSplineWavelet", ",", "MorletWavelet", ",", 
+           "GaborWavelet", ",", "DGaussianWavelet", ",", "MexicanHatWavelet", 
+           ",", "PaulWavelet"}], "}"}]}], "}"}], "]"}], ",", 
+      RowBox[{"Spacer", "[", "20", "]"}], ",", 
+      RowBox[{"info", "[", "infoMother", "]"}]}], "}"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "j", ",", "2", ",", 
+       "\"\<scale \!\(\*StyleBox[\"a\",FontSlant->\"Italic\"]\)\>\""}], "}"}],
+      ",", "0.01", ",", "5", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\[Phi]", ",", "0", ",", 
+       "\"\<shift \!\(\*StyleBox[\"b\",FontSlant->\"Italic\"]\)\>\""}], "}"}],
+      ",", 
+     RowBox[{"-", 
+      RowBox[{"2", "^", "j"}]}], ",", 
+     RowBox[{"2", "^", "j"}]}], "}"}], ",", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"Style", "[", 
+     RowBox[{"labelMother", ",", "Medium"}], "]"}]}], ",", 
+   RowBox[{"TrackedSymbols", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"waveletType", ",", "j", ",", "\[Phi]"}], "}"}]}], ",", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "saveDef"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.544031960374208*^9, 3.544032013735114*^9}, {
+   3.544305473006855*^9, 3.544305592231551*^9}, {3.545395693598832*^9, 
+   3.545395730968092*^9}, {3.545395906409225*^9, 3.545395927359231*^9}, {
+   3.545395960677835*^9, 3.5453959633578568`*^9}, {3.545395998976892*^9, 
+   3.545396271890197*^9}, {3.5453963210524197`*^9, 3.545396336188011*^9}, {
+   3.545396445709731*^9, 3.54539650097733*^9}, {3.545396641344428*^9, 
+   3.545396641351289*^9}, {3.545396673422724*^9, 3.5453967248862047`*^9}, {
+   3.545396762343631*^9, 3.545396862983273*^9}, {3.5453969445028353`*^9, 
+   3.545397086867035*^9}, {3.545401828295377*^9, 3.54540182884585*^9}, {
+   3.545401861023757*^9, 3.545401890422525*^9}, {3.545401964782373*^9, 
+   3.5454019734139013`*^9}, {3.545402018049715*^9, 3.545402039582428*^9}, {
+   3.545402073761709*^9, 3.545402074137576*^9}, {3.54540210918902*^9, 
+   3.545402122117169*^9}, {3.545402170876603*^9, 3.545402181795396*^9}, {
+   3.545402253096106*^9, 3.5454022623021317`*^9}, {3.545402383787588*^9, 
+   3.545402392592822*^9}, {3.545402620182425*^9, 3.5454026513410263`*^9}, {
+   3.545402875687026*^9, 3.545402984557694*^9}, {3.545403025195765*^9, 
+   3.545403029338805*^9}, {3.545403100960579*^9, 3.5454031658361177`*^9}, {
+   3.5454032110573807`*^9, 3.5454032182799664`*^9}, {3.545403297067521*^9, 
+   3.5454033776905107`*^9}, {3.545403429313032*^9, 3.5454034943021517`*^9}, 
+   3.548627357227501*^9, {3.550338369715301*^9, 3.5503383850442877`*^9}, 
+   3.5513138892801943`*^9, {3.551314180745007*^9, 3.5513142129584827`*^9}, {
+   3.552865590047681*^9, 3.552865650163782*^9}},
+ CellTags->
+  "labelMother",ExpressionUUID->"eb5fbeba-0de5-4a6e-b53b-60bc45a05635"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`j$$ = 2, $CellContext`waveletType$$ = 
+    GaborWavelet, $CellContext`\[Phi]$$ = 0, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`waveletType$$], GaborWavelet, "wavelet type"}, {
+      HaarWavelet, CoifletWavelet, DaubechiesWavelet, ShannonWavelet, 
+       SymletWavelet, ReverseBiorthogonalSplineWavelet, MorletWavelet, 
+       GaborWavelet, DGaussianWavelet, MexicanHatWavelet, PaulWavelet}}, {
+      Hold[
+       Row[{
+         Manipulate`Place[1], 
+         Spacer[20], Null}]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`j$$], 2, 
+       "scale \!\(\*\nStyleBox[\"a\",\nFontSlant->\"Italic\"]\)"}, 0.01, 5}, {{
+       Hold[$CellContext`\[Phi]$$], 0, 
+       "shift \!\(\*\nStyleBox[\"b\",\nFontSlant->\"Italic\"]\)"}, 
+      Dynamic[-2^$CellContext`j$$], 
+      Dynamic[2^$CellContext`j$$]}}, Typeset`size$$ = {631.85, {113., 120.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`waveletType$28117$$ = 0, $CellContext`j$28118$$ = 
+    0, $CellContext`\[Phi]$28119$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`j$$ = 2, $CellContext`waveletType$$ = 
+        GaborWavelet, $CellContext`\[Phi]$$ = 0}, "ControllerVariables" :> {
+        Hold[$CellContext`waveletType$$, $CellContext`waveletType$28117$$, 0], 
+        Hold[$CellContext`j$$, $CellContext`j$28118$$, 0], 
+        Hold[$CellContext`\[Phi]$$, $CellContext`\[Phi]$28119$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`psi = Re[2^($CellContext`j$$/2) WaveletPsi[
+            $CellContext`waveletType$$[], 
+            2^($CellContext`j$$/2) $CellContext`t + $CellContext`\[Phi]$$]]; 
+       Row[{
+          
+          Plot[$CellContext`psi, {$CellContext`t, -2^($CellContext`j$$/2), 
+            2^($CellContext`j$$/2)}, PlotStyle -> {Blue, Thick}, PlotRange -> 
+           All, Mesh -> None, ImageSize -> {300}], 
+          Spacer[20], 
+          "\!\(\*SubscriptBox[\(\[CapitalPsi]\), \(a, b\)]\)[t]= " 
+          TraditionalForm[$CellContext`psi]}]), 
+      "Specifications" :> {{{$CellContext`waveletType$$, GaborWavelet, 
+          "wavelet type"}, {
+         HaarWavelet, CoifletWavelet, DaubechiesWavelet, ShannonWavelet, 
+          SymletWavelet, ReverseBiorthogonalSplineWavelet, MorletWavelet, 
+          GaborWavelet, DGaussianWavelet, MexicanHatWavelet, PaulWavelet}, 
+         ControlPlacement -> 1}, 
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[20], Null}], {{$CellContext`j$$, 2, 
+          "scale \!\(\*\nStyleBox[\"a\",\nFontSlant->\"Italic\"]\)"}, 0.01, 5,
+          Appearance -> 
+         "Labeled"}, {{$CellContext`\[Phi]$$, 0, 
+          "shift \!\(\*\nStyleBox[\"b\",\nFontSlant->\"Italic\"]\)"}, 
+         Dynamic[-2^$CellContext`j$$], 
+         Dynamic[2^$CellContext`j$$]}}, 
+      "Options" :> {
+       FrameLabel -> 
+        Style["A number of different mother wavelets at various shifts and \
+scales", Medium], 
+        TrackedSymbols -> {$CellContext`waveletType$$, $CellContext`j$$, \
+$CellContext`\[Phi]$$}}, "DefaultOptions" :> {}],
+     ImageSizeCache->{690., {207.91754141980783`, 215.08245858019217`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellTags->
+  "labelMother",ExpressionUUID->"9ddcb629-6931-4d68-a448-3c3a185ea81f"]
+}, {2}]],
+
+Cell[TextData[{
+ "Given a signal ",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["t",
+  FontSlant->"Italic"],
+ "] and a mother wavelet ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["\[CapitalPsi]", 
+      RowBox[{"a", ",", "b"}]], "(", "t", ")"}], "."}], TraditionalForm]],
+  ExpressionUUID->"aaee153d-ca0b-4af0-894c-20ebe0d590e5"],
+ " The continuous wavelet transform uses shifted and scaled versions of the \
+mother wavelet functions as a basis for the signal by the inner product ",
+ StyleBox["W",
+  FontSlant->"Italic"],
+ "(",
+ StyleBox["a",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["b",
+  FontSlant->"Italic"],
+ ") = <",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ "(",
+ StyleBox["t",
+  FontSlant->"Italic"],
+ "), ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox[
+      SuperscriptBox["\[CapitalPsi]", "*"], 
+      RowBox[{"a", ",", "b"}]], "(", "t", ")"}], " "}], TraditionalForm]],
+  ExpressionUUID->"7b5e9aaf-0971-4151-818c-380b68f5f0bb"],
+ "> where the * indicates the complex conjugate. Thus for every (",
+ StyleBox["a,b",
+  FontSlant->"Italic"],
+ ") pair, the coefficient ",
+ StyleBox["W",
+  FontSlant->"Italic"],
+ "(",
+ StyleBox["a",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["b",
+  FontSlant->"Italic"],
+ ") is the inner product of the signal with the appropriately scaled and \
+shifted basis function ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["\[CapitalPsi]", 
+      RowBox[{"a", ",", "b"}]], "(", "t", ")"}], "."}], TraditionalForm]],
+  ExpressionUUID->"cf2e9797-13b7-4c3d-bb7d-38f6fba6954a"],
+ " This can be interpreted much as any ",
+ ButtonBox["inner product",
+  BaseStyle->"Hyperlink",
+  ButtonData->{"vvAngles.nb", None}],
+ ". Where the signal is aligned with the basis function (when ",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ "(",
+ StyleBox["t",
+  FontSlant->"Italic"],
+ ") locally looks like the basis function), the coefficient is large. Where \
+the signal is very different from the basis function (the extreme being \
+orthogonal), the coefficient is small. As ",
+ StyleBox["a",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["b",
+  FontSlant->"Italic"],
+ " change, the inner product scans through the signal looking for places (in ",
+ StyleBox["t",
+  FontSlant->"Italic"],
+ ", which represents time or space) and values (in scale) where the signal \
+correlates well with the wavelet. This suggests that prior information about \
+the shape or general character of the signal can be usefully exploited by the \
+wavelet transform by tailoring the wavelet to the signal. When the \
+information is correct, the set of parameters ",
+ StyleBox["W",
+  FontSlant->"Italic"],
+ "(",
+ StyleBox["a,b",
+  FontSlant->"Italic"],
+ ") can provide a concise and informative representation of the signal. When \
+the information is incorrect, the wavelet representation may be less useful.\n"
+}], "Text",
+ CellChangeTimes->{{3.545404209155588*^9, 3.545404473772298*^9}, {
+  3.54540708760191*^9, 3.545407121127686*^9}, {3.5454071668733387`*^9, 
+  3.545407289573588*^9}, {3.545407424777853*^9, 3.545407533559783*^9}, {
+  3.5454265384932947`*^9, 
+  3.545426540410117*^9}},ExpressionUUID->"a75a3de9-1dcf-48a0-8fbb-\
+985d9937168a"],
+
+Cell["\<\
+The following demonstration shows the continuous wavelet transform of a \
+number of different signals, calculated using any of the common mother \
+wavelets. Wavelet transforms can locate discontinuities in time, and can \
+respond to different scales.\
+\>", "Text",
+ CellChangeTimes->{{3.545411160023697*^9, 3.545411165268208*^9}, {
+   3.545411211217627*^9, 3.545411260398862*^9}, 3.54541904723182*^9, {
+   3.5454265642653837`*^9, 
+   3.545426610954307*^9}},ExpressionUUID->"d64983ba-436b-43b3-9af7-\
+911a3902095d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "labelCWT", "=", 
+   "\"\<The continuous wavelet transform for several different signals\>\""}],
+   ";"}], "\n", 
+ RowBox[{
+  RowBox[{"infoCWT", "=", "\"\<\>\""}], ";"}], "\n", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"cwt", "=", 
+     RowBox[{"ContinuousWaveletTransform", "[", 
+      RowBox[{
+       RowBox[{"s", "=", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{"Outer", "[", 
+          RowBox[{"Times", ",", 
+           RowBox[{"ConstantArray", "[", 
+            RowBox[{"1", ",", "5"}], "]"}], ",", 
+           RowBox[{"allSigs", "[", 
+            RowBox[{"[", "signal", "]"}], "]"}]}], "]"}], "]"}]}], ",", 
+       "waveletType"}], "]"}]}], ";", 
+    RowBox[{"GraphicsRow", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ListLinePlot", "[", 
+         RowBox[{"s", ",", 
+          RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+          RowBox[{"PlotLabel", "\[Rule]", 
+           RowBox[{"\"\<Signal: \>\"", "~~", 
+            RowBox[{"sigNames", "[", 
+             RowBox[{"[", "signal", "]"}], "]"}]}]}]}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"WaveletScalogram", "[", "cwt", "]"}]}], "}"}], ",", 
+      RowBox[{"ImageSize", "\[Rule]", "700"}]}], "]"}]}], ",", 
+   RowBox[{"Row", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Control", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"signal", ",", "5", ",", "\"\<\>\""}], "}"}], ",", 
+         RowBox[{"Thread", "[", 
+          RowBox[{
+           RowBox[{"Range", "[", "numSigs", "]"}], "\[Rule]", "sigNames"}], 
+          "]"}], ",", 
+         RowBox[{"ControlType", "\[Rule]", "SetterBar"}]}], "}"}], "]"}], ",", 
+      RowBox[{"Spacer", "[", "20", "]"}], ",", 
+      RowBox[{"Control", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"waveletType", ",", 
+           RowBox[{"DGaussianWavelet", "[", "]"}], ",", 
+           "\"\<wavelet type\>\""}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"MorletWavelet", "[", "]"}], ",", 
+           RowBox[{"GaborWavelet", "[", "10", "]"}], ",", 
+           RowBox[{"DGaussianWavelet", "[", "]"}], ",", 
+           RowBox[{"PaulWavelet", "[", "]"}]}], "}"}], ",", 
+         RowBox[{"ControlType", "\[Rule]", "PopupMenu"}]}], "}"}], "]"}], ",", 
+      RowBox[{"Spacer", "[", "20", "]"}], ",", 
+      RowBox[{"info", "[", "infoCWT", "]"}]}], "}"}], "]"}], ",", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"Style", "[", 
+     RowBox[{"labelCWT", ",", "Medium"}], "]"}]}], ",", 
+   RowBox[{"TrackedSymbols", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"signal", ",", "waveletType"}], "}"}]}], ",", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "saveDef"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.545408170714985*^9, 3.5454082750708513`*^9}, {
+   3.5454083112312307`*^9, 3.545408352690874*^9}, {3.545408422802247*^9, 
+   3.54540843607983*^9}, {3.545408473403318*^9, 3.545408490602058*^9}, {
+   3.5454087568715677`*^9, 3.545408789380226*^9}, {3.545409466605692*^9, 
+   3.545409516455715*^9}, {3.545409604689684*^9, 3.545409633585332*^9}, {
+   3.545409809554291*^9, 3.5454098137732363`*^9}, {3.545409965607081*^9, 
+   3.545410044646461*^9}, {3.545411191612509*^9, 3.5454112020713654`*^9}, 
+   3.545419107107386*^9, {3.5454258275474367`*^9, 3.545425877788897*^9}, 
+   3.545425928286586*^9, {3.545427350045576*^9, 3.545427358456181*^9}, 
+   3.5486273593092546`*^9, {3.550338398978757*^9, 3.550338400554708*^9}, {
+   3.551314277710524*^9, 3.551314326617173*^9}, {3.55286566586975*^9, 
+   3.552865707794464*^9}, {3.5528657616637697`*^9, 3.552865771159697*^9}},
+ CellTags->"labelCWT",ExpressionUUID->"32b09e19-0af4-4aee-b707-9d7b30f4d5cd"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`signal$$ = 5, $CellContext`waveletType$$ = 
+    DGaussianWavelet[2], Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`signal$$], 5, ""}, {
+      1 -> "Sine", 2 -> "Square", 3 -> "Triangle", 4 -> "Sawtooth", 5 -> 
+       "Pulse", 6 -> "Double Bump", 7 -> "Pulse Train", 8 -> "Noise1", 9 -> 
+       "Noise2"}}, {{
+       Hold[$CellContext`waveletType$$], 
+       DGaussianWavelet[2], "wavelet type"}, {
+       MorletWavelet[], 
+       GaborWavelet[10], 
+       DGaussianWavelet[2], 
+       PaulWavelet[4]}}, {
+      Hold[
+       Row[{
+         Manipulate`Place[1], 
+         Spacer[20], 
+         Manipulate`Place[2], 
+         Spacer[20], Null}]], Manipulate`Dump`ThisIsNotAControl}}, 
+    Typeset`size$$ = {875., {141., 146.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`signal$28198$$ = 
+    False, $CellContext`waveletType$28199$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`signal$$ = 5, $CellContext`waveletType$$ = 
+        DGaussianWavelet[2]}, "ControllerVariables" :> {
+        Hold[$CellContext`signal$$, $CellContext`signal$28198$$, False], 
+        Hold[$CellContext`waveletType$$, $CellContext`waveletType$28199$$, 
+         0]}, "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`cwt = 
+        ContinuousWaveletTransform[$CellContext`s = Flatten[
+            Outer[Times, 
+             ConstantArray[1, 5], 
+             
+             Part[$CellContext`allSigs, $CellContext`signal$$]]], \
+$CellContext`waveletType$$]; GraphicsRow[{
+          
+          ListLinePlot[$CellContext`s, Filling -> Axis, PlotLabel -> 
+           StringExpression["Signal: ", 
+             Part[$CellContext`sigNames, $CellContext`signal$$]]], 
+          WaveletScalogram[$CellContext`cwt]}, ImageSize -> 700]), 
+      "Specifications" :> {{{$CellContext`signal$$, 5, ""}, {
+         1 -> "Sine", 2 -> "Square", 3 -> "Triangle", 4 -> "Sawtooth", 5 -> 
+          "Pulse", 6 -> "Double Bump", 7 -> "Pulse Train", 8 -> "Noise1", 9 -> 
+          "Noise2"}, ControlType -> SetterBar, ControlPlacement -> 
+         1}, {{$CellContext`waveletType$$, 
+          DGaussianWavelet[2], "wavelet type"}, {
+          MorletWavelet[], 
+          GaborWavelet[10], 
+          DGaussianWavelet[2], 
+          PaulWavelet[4]}, ControlType -> PopupMenu, ControlPlacement -> 2}, 
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[20], 
+          Manipulate`Place[2], 
+          Spacer[20], Null}]}, 
+      "Options" :> {
+       FrameLabel -> 
+        Style["The continuous wavelet transform for several different \
+signals", Medium], 
+        TrackedSymbols -> {$CellContext`signal$$, \
+$CellContext`waveletType$$}}, "DefaultOptions" :> {}],
+     ImageSizeCache->{933., {206.91754141980783`, 214.08245858019217`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellTags->"labelCWT",ExpressionUUID->"92c7aa59-5e7f-4c4b-9d1d-d3d9a2590b40"]
+}, {2}]],
+
+Cell[TextData[{
+ "Generally, as shown above, wavelets start at zero, oscillate briefly, and \
+then die away to zero again. Formally, a wavelet function has the scaling \
+property that ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["\[CapitalPsi]", 
+      RowBox[{"a", ",", "b"}]], "(", "t", ")"}], " ", "=", " ", 
+    RowBox[{
+     RowBox[{"1", "/", 
+      RowBox[{"Sqrt", "[", "a", "]"}]}], " ", 
+     RowBox[{"\[CapitalPsi]", "(", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"t", "-", "b"}], ")"}], "/", "a"}], ")"}]}]}], 
+   TraditionalForm]],ExpressionUUID->"df0fc5bc-26ca-4b84-81bc-b0cb23a2c2f5"],
+ ". "
+}], "Text",
+ CellChangeTimes->{{3.5454267323581448`*^9, 3.545426912779999*^9}, {
+  3.545427243803632*^9, 3.545427270122059*^9}, {3.545431688835224*^9, 
+  3.545431708752462*^9}, {3.545431743010704*^9, 
+  3.545431762178619*^9}},ExpressionUUID->"d9057452-b682-44b1-afa2-\
+77277f4fa6f8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "labelCWTOrtho", "=", 
+   "\"\<Orthogonality of wavelet functions at various shifts and \
+scales\>\""}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"infoCWTOrtho", "=", "\"\<\>\""}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"psi1", "[", 
+    RowBox[{"t_", ",", "j_", ",", "\[Phi]_"}], "]"}], ":=", 
+   RowBox[{"Re", "[", 
+    RowBox[{
+     RowBox[{"2", "^", 
+      RowBox[{"(", 
+       RowBox[{"j", "/", "2"}], ")"}]}], " ", 
+     RowBox[{"WaveletPsi", "[", 
+      RowBox[{
+       RowBox[{"DaubechiesWavelet", "[", "]"}], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"2", "^", 
+          RowBox[{"(", 
+           RowBox[{"j", "/", "2"}], ")"}]}], " ", "t"}], "+", "\[Phi]"}]}], 
+      "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"psi2", "[", 
+    RowBox[{"t_", ",", "j_", ",", "\[Phi]_"}], "]"}], ":=", 
+   RowBox[{"Re", "[", 
+    RowBox[{
+     RowBox[{"2", "^", 
+      RowBox[{"(", 
+       RowBox[{"j", "/", "2"}], ")"}]}], " ", 
+     RowBox[{"WaveletPsi", "[", 
+      RowBox[{
+       RowBox[{"DaubechiesWavelet", "[", "]"}], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"2", "^", 
+          RowBox[{"(", 
+           RowBox[{"j", "/", "2"}], ")"}]}], " ", "t"}], "+", "\[Phi]"}]}], 
+      "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"innerProd", "=", 
+     RowBox[{"Chop", "[", 
+      RowBox[{"NIntegrate", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"psi1", "[", 
+          RowBox[{"t", ",", "j1", ",", "phi1"}], "]"}], " ", 
+         RowBox[{"psi2", "[", 
+          RowBox[{"t", ",", "j2", ",", "phi2"}], "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"t", ",", 
+          RowBox[{"-", "a"}], ",", "a"}], "}"}], ",", 
+        RowBox[{"AccuracyGoal", "\[Rule]", "2"}]}], "]"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Column", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Row", "[", 
+        RowBox[{"{", "\[IndentingNewLine]", "   ", 
+         RowBox[{
+          RowBox[{"Plot", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"psi1", "[", 
+               RowBox[{"t", ",", "j1", ",", "phi1"}], "]"}], ",", 
+              RowBox[{"psi2", "[", 
+               RowBox[{"t", ",", "j2", ",", "phi2"}], "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"t", ",", 
+              RowBox[{"-", "a"}], ",", "a"}], "}"}], ",", 
+            "\[IndentingNewLine]", "             ", 
+            RowBox[{"PlotLabel", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"psi1", "[", 
+                RowBox[{"t", ",", "j1", ",", "phi1"}], "]"}], ",", 
+               RowBox[{"psi2", "[", 
+                RowBox[{"t", ",", "j2", ",", "phi2"}], "]"}]}], "}"}]}], ",", 
+            "\[IndentingNewLine]", "             ", 
+            RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+            RowBox[{"ImageSize", "\[Rule]", "300"}], ",", 
+            RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], ",", 
+          RowBox[{"Spacer", "[", "20", "]"}], ",", "\[IndentingNewLine]", 
+          "   ", 
+          RowBox[{"Plot", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"psi1", "[", 
+              RowBox[{"t", ",", "j1", ",", "phi1"}], "]"}], " ", 
+             RowBox[{"psi2", "[", 
+              RowBox[{"t", ",", "j2", ",", "phi2"}], "]"}]}], ",", 
+            RowBox[{"{", 
+             RowBox[{"t", ",", 
+              RowBox[{"-", "a"}], ",", "a"}], "}"}], ",", 
+            "\[IndentingNewLine]", "             ", 
+            RowBox[{"PlotLabel", "\[Rule]", 
+             RowBox[{
+              RowBox[{"psi1", "[", 
+               RowBox[{"t", ",", "j1", ",", "phi1"}], "]"}], " ", 
+              RowBox[{"psi2", "[", 
+               RowBox[{"t", ",", "j2", ",", "phi2"}], "]"}]}]}], ",", " ", 
+            "\[IndentingNewLine]", "             ", 
+            RowBox[{"PlotStyle", "\[Rule]", "Green"}], ",", 
+            RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+            RowBox[{"ImageSize", "\[Rule]", "300"}], ",", 
+            RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], " ", "}"}], 
+        "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"innerProd", "==", "0"}], ",", "\[IndentingNewLine]", 
+         "\"\<The inner product is 0, the two functions are orthogonal.\>\"", 
+         ",", 
+         RowBox[{"\"\<The inner product is \>\"", "~~", "\[IndentingNewLine]", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"SetPrecision", "[", 
+            RowBox[{"innerProd", ",", "4"}], "]"}], "]"}], "~~", 
+          "\"\<. The two functions are NOT orthogonal.\>\""}]}], "]"}]}], " ",
+       "}"}], "]"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"j1", ",", "1", ",", "\"\<scale of f\>\""}], "}"}], ",", "0", 
+     ",", "12", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"j2", ",", "2", ",", "\"\<scale of g\>\""}], "}"}], ",", "0", 
+     ",", "12", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"phi1", ",", "1", ",", "\"\<shift of f\>\""}], "}"}], ",", 
+     RowBox[{"-", "3"}], ",", "3", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"phi2", ",", "2", ",", "\"\<shift of g\>\""}], "}"}], ",", 
+     RowBox[{"-", "3"}], ",", "3", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "Pi", ",", "\"\<interval\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Pi", "\[Rule]", "\"\<[-\[Pi],\[Pi]]\>\""}], ",", 
+       RowBox[{"1", "\[Rule]", "\"\<[-1,1]\>\""}]}], "}"}]}], "}"}], ",", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"Style", "[", 
+     RowBox[{"labelCWTOrtho", ",", "Medium"}], "]"}]}], ",", 
+   RowBox[{"TrackedSymbols", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"j1", ",", "j2", ",", "phi1", ",", "phi2", ",", "a"}], "}"}]}], 
+   ",", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.545478645669536*^9, 3.5454786635726843`*^9}, {
+   3.545478695410643*^9, 3.5454787560217333`*^9}, 3.545478867605063*^9, {
+   3.5454790499196243`*^9, 3.545479104986103*^9}, {3.545479142091505*^9, 
+   3.545479190433951*^9}, {3.545479260277062*^9, 3.545479395920414*^9}, {
+   3.5454794270749397`*^9, 3.5454794326915607`*^9}, {3.545479489232894*^9, 
+   3.5454794966908817`*^9}, {3.545479527993932*^9, 3.545479528728014*^9}, {
+   3.545479683919333*^9, 3.5454796955306177`*^9}, {3.551314381500553*^9, 
+   3.551314410599082*^9}, {3.552865718081318*^9, 3.552865738447744*^9}, {
+   3.552865785180468*^9, 3.552865811386346*^9}},
+ CellTags->
+  "labelCWTOrtho",ExpressionUUID->"2bc9335b-aa52-432e-9982-d8a6a3227aba"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = Pi, $CellContext`j1$$ = 
+    1, $CellContext`j2$$ = 2, $CellContext`phi1$$ = 1, $CellContext`phi2$$ = 
+    2, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`j1$$], 1, "scale of f"}, 0, 12, 1}, {{
+       Hold[$CellContext`j2$$], 2, "scale of g"}, 0, 12, 1}, {{
+       Hold[$CellContext`phi1$$], 1, "shift of f"}, -3, 3, 1}, {{
+       Hold[$CellContext`phi2$$], 2, "shift of g"}, -3, 3}, {{
+       Hold[$CellContext`a$$], Pi, "interval"}, {
+      Pi -> "[-\[Pi],\[Pi]]", 1 -> "[-1,1]"}}}, Typeset`size$$ = {
+    775., {164.693115234375, 171.306884765625}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`j1$28347$$ = 0, $CellContext`j2$28348$$ = 
+    0, $CellContext`phi1$28349$$ = 0, $CellContext`phi2$28350$$ = 
+    0, $CellContext`a$28351$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = Pi, $CellContext`j1$$ = 
+        1, $CellContext`j2$$ = 2, $CellContext`phi1$$ = 
+        1, $CellContext`phi2$$ = 2}, "ControllerVariables" :> {
+        Hold[$CellContext`j1$$, $CellContext`j1$28347$$, 0], 
+        Hold[$CellContext`j2$$, $CellContext`j2$28348$$, 0], 
+        Hold[$CellContext`phi1$$, $CellContext`phi1$28349$$, 0], 
+        Hold[$CellContext`phi2$$, $CellContext`phi2$28350$$, 0], 
+        Hold[$CellContext`a$$, $CellContext`a$28351$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ($CellContext`innerProd = Chop[
+          
+          NIntegrate[$CellContext`psi1[$CellContext`t, $CellContext`j1$$, \
+$CellContext`phi1$$] $CellContext`psi2[$CellContext`t, $CellContext`j2$$, \
+$CellContext`phi2$$], {$CellContext`t, -$CellContext`a$$, $CellContext`a$$}, 
+           AccuracyGoal -> 2]]; Column[{
+          Row[{
+            Plot[{
+              $CellContext`psi1[$CellContext`t, $CellContext`j1$$, \
+$CellContext`phi1$$], 
+              $CellContext`psi2[$CellContext`t, $CellContext`j2$$, \
+$CellContext`phi2$$]}, {$CellContext`t, -$CellContext`a$$, $CellContext`a$$}, 
+             PlotLabel -> {
+               $CellContext`psi1[$CellContext`t, $CellContext`j1$$, \
+$CellContext`phi1$$], 
+               $CellContext`psi2[$CellContext`t, $CellContext`j2$$, \
+$CellContext`phi2$$]}, Filling -> Axis, ImageSize -> 300, PlotRange -> All], 
+            Spacer[20], 
+            
+            Plot[$CellContext`psi1[$CellContext`t, $CellContext`j1$$, \
+$CellContext`phi1$$] $CellContext`psi2[$CellContext`t, $CellContext`j2$$, \
+$CellContext`phi2$$], {$CellContext`t, -$CellContext`a$$, $CellContext`a$$}, 
+             PlotLabel -> $CellContext`psi1[$CellContext`t, \
+$CellContext`j1$$, $CellContext`phi1$$] $CellContext`psi2[$CellContext`t, \
+$CellContext`j2$$, $CellContext`phi2$$], PlotStyle -> Green, Filling -> Axis, 
+             ImageSize -> 300, PlotRange -> All]}], 
+          
+          If[$CellContext`innerProd == 0, 
+           "The inner product is 0, the two functions are orthogonal.", 
+           StringExpression["The inner product is ", 
+            ToString[
+             SetPrecision[$CellContext`innerProd, 4]], 
+            ". The two functions are NOT orthogonal."]]}]), 
+      "Specifications" :> {{{$CellContext`j1$$, 1, "scale of f"}, 0, 12, 1, 
+         Appearance -> "Labeled"}, {{$CellContext`j2$$, 2, "scale of g"}, 0, 
+         12, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`phi1$$, 1, "shift of f"}, -3, 3, 1, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`phi2$$, 2, "shift of g"}, -3, 3, 
+         Appearance -> "Labeled"}, {{$CellContext`a$$, Pi, "interval"}, {
+         Pi -> "[-\[Pi],\[Pi]]", 1 -> "[-1,1]"}}}, 
+      "Options" :> {
+       FrameLabel -> 
+        Style["Orthogonality of wavelet functions at various shifts and \
+scales", Medium], 
+        TrackedSymbols -> {$CellContext`j1$$, $CellContext`j2$$, \
+$CellContext`phi1$$, $CellContext`phi2$$, $CellContext`a$$}}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{1202., {213.91754141980783`, 221.08245858019217`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`innerProd = 13, $CellContext`psi1[
+         Pattern[$CellContext`t, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`\[Phi], 
+          Blank[]]] := Re[2^($CellContext`j/2) WaveletPsi[
+           DaubechiesWavelet[], 
+           2^($CellContext`j/
+              2) $CellContext`t + $CellContext`\[Phi]]], $CellContext`psi2[
+         Pattern[$CellContext`t, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`\[Phi], 
+          Blank[]]] := Re[2^($CellContext`j/2) WaveletPsi[
+           DaubechiesWavelet[], 
+           2^($CellContext`j/2) $CellContext`t + $CellContext`\[Phi]]]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellTags->
+  "labelCWTOrtho",ExpressionUUID->"ee62759c-923a-4c68-8978-257b7b37679d"]
+}, {2}]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "psi", "]"}], ";", 
+  RowBox[{
+   RowBox[{"psi", "[", 
+    RowBox[{"t_", ",", "j_", ",", "\[Phi]_"}], "]"}], ":=", 
+   RowBox[{"Re", "[", 
+    RowBox[{
+     RowBox[{"2", "^", 
+      RowBox[{"(", 
+       RowBox[{"j", "/", "2"}], ")"}]}], " ", 
+     RowBox[{"WaveletPsi", "[", 
+      RowBox[{
+       RowBox[{"GaborWavelet", "[", "]"}], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"2", "^", 
+          RowBox[{"(", 
+           RowBox[{"j", "/", "2"}], ")"}]}], " ", "t"}], "+", "\[Phi]"}]}], 
+      "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"psi", "[", 
+  RowBox[{"t", ",", "2", ",", "0"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.5454789320197287`*^9, 
+  3.545478971709215*^9}},ExpressionUUID->"d3f82c17-f64b-4083-8144-\
+222b43b3651b"],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"2", " ", 
+   RowBox[{"Re", "[", 
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{
+      RowBox[{"12", " ", "\[ImaginaryI]", " ", "t"}], "-", 
+      RowBox[{"2", " ", 
+       SuperscriptBox["t", "2"]}]}]], "]"}]}], 
+  SuperscriptBox["\[Pi]", 
+   RowBox[{"1", "/", "4"}]]]], "Output",ExpressionUUID->"50570738-43c4-479b-\
+9451-707042dc41af"]
+}, {2}]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Pi", "/", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.545479633053402*^9, 
+  3.54547964874037*^9}},ExpressionUUID->"4be7bc13-363f-4584-835f-\
+89f7f0402233"],
+
+Cell[BoxData["1.5707963267948966`"], "Output",ExpressionUUID->"fd3447f6-a463-4b1e-b203-a7bfecc405ed"]
+}, {2}]],
+
+Cell["", "Text",
+ CellChangeTimes->{{3.54547895111351*^9, 
+  3.545478953593943*^9}},ExpressionUUID->"f502a993-177b-475b-afdd-\
+a6d14f56bcf5"],
+
+Cell["", "Text",
+ CellChangeTimes->{{3.545478941680647*^9, 
+  3.545478942377594*^9}},ExpressionUUID->"12bf6c0d-d96d-4b4f-8739-\
+21ebda780597"]
+}, Open  ]]
+},
+ScreenStyleEnvironment->"Working",
+WindowSize->{1141.2, 568.8},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowCellBracket->False,
+ShowSelection->True,
+ShowCellLabel->False,
+ShowCellTags->False,
+Magnification:>FEPrivate`If[
+  FEPrivate`Equal[FEPrivate`$VersionNumber, 6.], 1.25, 1.25 Inherited],
+FrontEndVersion->"13.1 for Microsoft Windows (64-bit) (June 16, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"e3518259-824b-436b-9d8f-3d110b2a9ad2"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "labelMother"->{
+  Cell[9665, 249, 5079, 118, 331, "Input",ExpressionUUID->"eb5fbeba-0de5-4a6e-b53b-60bc45a05635",
+   CellTags->"labelMother"],
+  Cell[14747, 369, 4139, 81, 446, "Output",ExpressionUUID->"9ddcb629-6931-4d68-a448-3c3a185ea81f",
+   CellTags->"labelMother"]},
+ "labelCWT"->{
+  Cell[22660, 569, 3763, 86, 287, "Input",ExpressionUUID->"32b09e19-0af4-4aee-b707-9d7b30f4d5cd",
+   CellTags->"labelCWT"],
+  Cell[26426, 657, 3770, 82, 548, "Output",ExpressionUUID->"92c7aa59-5e7f-4c4b-9d1d-d3d9a2590b40",
+   CellTags->"labelCWT"]},
+ "labelCWTOrtho"->{
+  Cell[31164, 770, 7234, 179, 617, "Input",ExpressionUUID->"2bc9335b-aa52-432e-9982-d8a6a3227aba",
+   CellTags->"labelCWTOrtho"],
+  Cell[38401, 951, 5708, 112, 753, "Output",ExpressionUUID->"ee62759c-923a-4c68-8978-257b7b37679d",
+   CellTags->"labelCWTOrtho"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"labelMother", 46571, 1149},
+ {"labelCWT", 46842, 1154},
+ {"labelCWTOrtho", 47112, 1159}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 666, 18, 80, "Input",ExpressionUUID->"e9894607-4fb6-4802-9bdd-e5a506c48488",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[1248, 42, 267, 4, 83, "Section",ExpressionUUID->"efb77c5e-06e1-475b-a3e2-e472aa75794b"],
+Cell[1518, 48, 154, 3, 35, "Input",ExpressionUUID->"60710c5a-4b51-4995-910d-42aa733346e2"],
+Cell[1675, 53, 152, 3, 35, InheritFromParent,ExpressionUUID->"ddfb4572-4ee8-4f6c-bc09-f9e3c42ec10b"],
+Cell[1830, 58, 2350, 42, 245, "Text",ExpressionUUID->"02759654-0871-4402-b271-42511edf3672"],
+Cell[CellGroupData[{
+Cell[4205, 104, 1247, 34, 107, "Input",ExpressionUUID->"bed35184-e340-4dde-aa62-37d1a1f20e69"],
+Cell[5455, 140, 2366, 63, 96, "Output",ExpressionUUID->"6e2f8ab2-8e9a-44e4-a2bb-59a35daf4446"]
+}, {2}]],
+Cell[7833, 206, 1807, 39, 131, "Text",ExpressionUUID->"85df25b5-0a82-4e9a-9306-32a47ab695dd"],
+Cell[CellGroupData[{
+Cell[9665, 249, 5079, 118, 331, "Input",ExpressionUUID->"eb5fbeba-0de5-4a6e-b53b-60bc45a05635",
+ CellTags->"labelMother"],
+Cell[14747, 369, 4139, 81, 446, "Output",ExpressionUUID->"9ddcb629-6931-4d68-a448-3c3a185ea81f",
+ CellTags->"labelMother"]
+}, {2}]],
+Cell[18898, 453, 3210, 100, 243, "Text",ExpressionUUID->"a75a3de9-1dcf-48a0-8fbb-985d9937168a"],
+Cell[22111, 555, 524, 10, 65, "Text",ExpressionUUID->"d64983ba-436b-43b3-9af7-911a3902095d"],
+Cell[CellGroupData[{
+Cell[22660, 569, 3763, 86, 287, "Input",ExpressionUUID->"32b09e19-0af4-4aee-b707-9d7b30f4d5cd",
+ CellTags->"labelCWT"],
+Cell[26426, 657, 3770, 82, 548, "Output",ExpressionUUID->"92c7aa59-5e7f-4c4b-9d1d-d3d9a2590b40",
+ CellTags->"labelCWT"]
+}, {2}]],
+Cell[30208, 742, 931, 24, 38, "Text",ExpressionUUID->"d9057452-b682-44b1-afa2-77277f4fa6f8"],
+Cell[CellGroupData[{
+Cell[31164, 770, 7234, 179, 617, "Input",ExpressionUUID->"2bc9335b-aa52-432e-9982-d8a6a3227aba",
+ CellTags->"labelCWTOrtho"],
+Cell[38401, 951, 5708, 112, 753, "Output",ExpressionUUID->"ee62759c-923a-4c68-8978-257b7b37679d",
+ CellTags->"labelCWTOrtho"]
+}, {2}]],
+Cell[CellGroupData[{
+Cell[44143, 1068, 810, 24, 77, "Input",ExpressionUUID->"d3f82c17-f64b-4083-8144-222b43b3651b"],
+Cell[44956, 1094, 382, 11, 85, "Output",ExpressionUUID->"50570738-43c4-479b-9451-707042dc41af"]
+}, {2}]],
+Cell[CellGroupData[{
+Cell[45372, 1110, 203, 5, 46, "Input",ExpressionUUID->"4be7bc13-363f-4584-835f-89f7f0402233"],
+Cell[45578, 1117, 101, 0, 46, "Output",ExpressionUUID->"fd3447f6-a463-4b1e-b203-a7bfecc405ed"]
+}, {2}]],
+Cell[45691, 1120, 141, 3, 36, "Text",ExpressionUUID->"f502a993-177b-475b-afdd-a6d14f56bcf5"],
+Cell[45835, 1125, 142, 3, 36, "Text",ExpressionUUID->"12bf6c0d-d96d-4b4f-8739-21ebda780597"]
+}, Open  ]]
+}
+]
+*)
+
